@@ -1,0 +1,185 @@
+$primary-color: #38B0E3;
+
+.cart-page {
+    .wao-breadcrumb {
+        background: white;
+        a {
+            font-size: 18px;
+            font-weight: 500;
+            margin: 0 8px;
+            color: $primary-color;
+            text-decoration: underline;
+            &:hover {
+                color: #0d6efd;
+                text-decoration: none;
+            }
+            &:first-child {
+                margin-left: 0;
+            }
+        } 
+    }
+    h1 {
+        font-size: 22px;
+        font-weight: normal;
+        margin: 0 0 20px;
+    }
+    .cart-info {
+        table {
+            width: 100%;
+            margin-bottom: 15px;
+            border-collapse: collapse;
+            border-top: 1px solid $primary-color;
+            border-left: 1px solid $primary-color;
+            border-right: 1px solid $primary-color;
+        }
+        
+        thead {
+            td {
+                color: #4D4D4D;
+                font-weight: bold;
+                background-color: $primary-color;
+                border-bottom: 1px solid #DDDDDD;
+                padding: 10px;
+            }
+            .image {
+                text-align: center;
+            }
+        }
+        tbody {
+            td {
+                vertical-align: middle;
+                border-bottom: 1px solid $primary-color;
+            }
+            .quantity input[type="text"] {
+                width: 50px;
+                height: 35px;
+                border-radius: 4px;
+                padding: 8px;
+                border: solid 1px #797979;
+            }              
+        }
+        td {
+            padding: 7px;
+        }
+        td.image {
+                img {
+                display: block;
+                margin: 0 auto;
+            }
+        }
+        td.name {
+            a {
+                color: $primary-color;
+                text-decoration:underline;
+                &:hover {
+                    color: #0d6efd;
+                    text-decoration: none;
+                }
+            }            
+        }
+        td.price, td.total {
+            text-align:right;
+        }
+    }
+    h2 {
+        font-size: 2rem;
+        font-weight: bold;
+    }
+    table.radio {
+        display:block;
+        width:100%;
+        tbody {
+            width:100%;
+        }
+        label {
+            margin-bottom: 0;
+            margin-left: 5px;
+        }     
+        tr {
+            
+            td {
+                padding: 5px;
+                padding-bottom: 10px;
+            }
+        }
+    }
+    .cart-total {
+        border-top: 1px solid #DDDDDD;
+        overflow: auto;
+        padding-top: 8px;
+        margin-bottom: 15px;
+        clear: both;
+        table {
+            float:right;
+            margin-top:20px;
+            tr {
+                td {
+                    padding-bottom:10px;
+                }
+            }
+        }
+    }
+    .buttons {
+        overflow: auto;
+        padding: 6px;
+        margin-bottom: 20px;
+        clear: both;
+        .right {
+            float: right;
+            text-align: right;
+        }
+        .center {
+            text-align: center;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        a.button {
+            cursor: pointer;
+            color: #FFFFFF;
+            font-family: Arial, Helvetica, sans-serif;
+            font-size: 14px;
+            font-weight: bold;
+            background: $primary-color;
+            -webkit-box-shadow: 0 2px 2px #dddddd;
+            box-shadow: 0 2px 2px #dddddd;
+            text-transform: uppercase;
+            padding: 8px 15px;
+            height: 30px;
+            line-height: 30px;
+            border-radius: 30px;
+        }
+    }
+    #shipping {
+        margin-top: 20px;
+        
+        span.required {
+            color:red;
+            font-weight: bold;
+        }
+        select, input[type="text"] {
+            background-color:  #F8F8F8;
+            width: 300px;
+            height: 40px;
+            border-radius: 4px;
+            padding: 8px;
+            border: 1px solid;
+            margin-bottom: 10px;
+        }
+        input#button-quote {
+            cursor: pointer;
+            color: #FFFFFF;
+            font-family: Arial, Helvetica, sans-serif;
+            font-size: 14px;
+            font-weight: bold;
+            background: $primary-color;
+            -webkit-box-shadow: 0 2px 2px #dddddd;
+            box-shadow: 0 2px 2px #dddddd;
+            text-transform: uppercase;
+            line-height: 30px;
+            border-radius: 30px;
+            border:none;
+            margin-bottom: 10px;
+            margin-top:20px;
+        }
+    }
+}

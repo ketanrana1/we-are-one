@@ -1,0 +1,104 @@
+$primary-color: #39aadf;
+
+.register-page {
+    .common-account-form-wrapper-main {
+        h1 {
+            font-size: 28px;
+            font-weight: 600;
+            margin-bottom: 15px;
+            color: $primary-color;
+        }
+        p {
+            font-size: 16px;
+            margin-bottom: 15px;
+            a {
+                color: $primary-color;
+                text-decoration: underline;
+                font-weight:600;
+            }
+        }
+        
+    }
+    h2.sec-sub-title {
+        font-size: 18px;
+        font-weight: 600;
+        color: $primary-color;
+        letter-spacing: 0.3px;
+        margin-bottom: 20px;
+        margin-top: 25px;
+        border-bottom: solid 2px $primary-color;
+        padding-bottom: 10px;
+        display: inline-flex;
+    }
+
+    .common-input-field-wrapper {
+        
+        .required {
+            color:red;
+            font-size: 14px;
+            margin-right: 5px;
+            font-weight:bold;
+
+        }
+        label {
+            display: flex;
+            font-weight: 600;
+            font-size: 14px;
+            margin-bottom: 6px;
+            color: #444444;
+        }
+        input[type='text'], input[type='password'], textarea {
+            background: #F8F8F8;
+            border: 1px solid #CCCCCC;
+            padding: 3px;
+            margin-left: 0px;
+            margin-right: 0px;
+            width: 100%;
+            display: flex;
+            height: 40px;
+            border-radius: 4px;
+            padding: 8px;
+            margin-bottom: 15px;
+        }
+        select {
+            border: solid 1px #797979;
+            width: 100%;
+            display: flex;
+            height: 40px;
+            border-radius: 4px;
+            padding: 8px;
+            background: #f5f5f5e0;
+            margin-bottom: 15px;
+        }
+        input[type="radio"] {
+            width: 20px;
+            height: 20px;
+        }
+        p.radio-text {
+            display: inline-block;
+            margin: 5px 10px 10px 10px;
+        }
+    }
+    a.colorbox.cboxElement {
+        text-decoration: underline;
+        color: $primary-color;
+        margin-right: 5px;
+    }
+    input[type="submit"] {
+        cursor: pointer;
+        color: #FFFFFF;
+        font-family: Arial, Helvetica, sans-serif;
+        font-size: 14px;
+        font-weight: bold;
+        background: $primary-color;
+        -webkit-box-shadow: 0 2px 2px #dddddd;
+        -moz-box-shadow: 0 2px 2px #DDDDDD;
+        box-shadow: 0 2px 2px #dddddd;
+        text-transform: uppercase;
+        padding: 0 15px !important;
+        height: 30px;
+        line-height: 30px;
+        border-radius: 30px;
+        bordeR: none;
+    }
+}

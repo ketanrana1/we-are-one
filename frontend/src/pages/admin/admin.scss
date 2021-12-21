@@ -1,0 +1,76 @@
+.admin-page-cont {
+    .admin-sidebar-cont {
+        height: 100%;
+        background-color: #262b2f;
+        position: fixed;
+        width:286px;
+
+        .collapsed::after {
+            content: '\002B' !important;
+            float: right;
+            /*+*/
+        }
+
+        .nav-link.collpse-menu::after {
+            content: '\2212';
+            float: right;
+            /*-*/
+        }       
+
+        .collapse.show .nav-link.text-white {
+            background-color: #434343;
+            border-radius: 0;
+        }      
+    }
+}
+
+.all-books-cont {
+    .link-items {
+        span {
+            display: inline-block;
+            margin-right:10px;
+            a {
+                color: #66afff;
+                cursor: pointer;
+            }
+            a:hover {
+                text-decoration: underline;
+                color: #66afff;
+            }
+            &.link-item-red {
+                a {
+                    color:#f45353;
+                }
+            }
+        }
+    }
+}
+
+.login-page-cont {
+
+    background: #f2f2f2;
+
+    .login-form-cont {
+        display:flex;
+        height:100vh;
+        justify-content: center;
+        align-items: center;
+        .form-signin {
+            width: 100%;
+        }
+    }  
+
+}
+
+
+
+
+
+@media only screen and (max-width:850px) {
+
+    .admin-page-cont .admin-sidebar-cont {
+        position:relative;
+        width:100%;
+    }
+    
+} 

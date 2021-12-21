@@ -1,0 +1,52 @@
+$primary-color: #1f429b;
+
+.awards-page {
+
+    p.para-blw-bnr {
+        text-align:center;
+        color: $primary-color;
+        font-size: 32px;
+        margin-top:25px;
+        line-height:39px;
+        display: block;
+        padding: 0 10px;
+    }
+
+    img.awardImage {
+        max-width: 190px;
+        height: auto;
+        display: block;
+        margin: 0 auto;
+    }
+
+    h2, h3 {
+        text-align: center;
+    }
+    h2 {
+        color: $primary-color;
+        font-size: 28px;
+        font-family: 'Lucida Calligraphy New', sans-serif;
+        margin-top: 15px;                                         
+
+    }
+    h3 {
+        color: $primary-color;
+        font-size: 20px;
+        font-family: 'Century Gothic';
+    }
+
+    @media only screen and (max-width:768px) {
+        p.para-blw-bnr {
+            font-size: 23px;
+            line-height:28px;
+        }
+        h2 {
+            font-size:18px;
+            line-height:24px;
+        }
+        h3 {
+            font-size: 14px;
+            line-height:20px;
+        }
+    }
+}

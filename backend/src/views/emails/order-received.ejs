@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>CandyCoin</title>
+</head>
+
+<style>
+    html,body {
+        height: 100%;
+    }
+    body {
+        padding: 0;
+        margin: 0;
+        font-family: sans-serif;
+    }
+     .cc-contact-info-table td {
+        border: solid 1px #f55564;
+        border-top-width: 0;
+        border-left-width: 0;
+    }
+    .cc-contact-info-table tr td:last-child {
+        border-right: none;
+    }
+    .cc-contact-info-table tbody tr:last-child td {
+        border-bottom: none;
+    }
+</style>
+
+<body>
+    <table
+        style="background-image:url('https://candycoin.com/assets/images/order-email-bg.png'); background-repeat: no-repeat;width: 1000px; height: 100%; margin: 0 auto;background-size: cover;padding-bottom: 15px;">
+        <tr>
+            <td>
+                <table style="width: 100%;min-width: 100%; margin: auto; text-align: center;">
+                    <tr>
+                        <td style="text-align: center">
+                            <img src="https://candycoin.com/assets/images/logo.png"
+                                style="width: 165px;margin-top: 20px;" alt="" />
+                        </td>
+                    </tr>
+                </table>
+    <table style="width: 100%;">
+        <tr>
+            <td style="text-align: center">
+                <h1 style="color: #ff5564;font-size: 34px;margin-top: 27px;margin-bottom: 15px;">
+                    Hi <%= order.shippingAddress.firstName %>
+                </h1>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align: center">
+                <p style="margin: 0 0 20px; font-size: 22px; margin-bottom: 40px; line-height: 24px; color: #252525;">
+                    Thank you for your interest in Candy Coin! <br />
+                    Your order has been received.</p>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align: center">
+                <p style="font-size: 18px; margin-bottom: 40px; line-height: 24px; color: #252525;max-width: 90%; margin: 0 auto 20px auto;">
+                    If you need to check the status of your order or make changes, please visit
+                    our home page at CandyCoin.com and click on the Contact Us link.
+                </p>
+            </td>
+        </tr>
+    </table>
+
+    <table style="width: 100%;min-width: 100%; border-collapse: collapse;margin: 0 auto 30px auto;">
+        <tr>
+            <th style="color: #ff5564;font-weight: 600;text-align: center;padding-bottom: 10px;">
+                Order Details
+            </th>
+            <th style="color: #ff5564;font-weight: 600;text-align: center;padding-bottom: 10px;">
+                Billing Address
+            </th>
+            <th style="color: #ff5564;font-weight: 600;text-align: center;padding-bottom: 10px;">
+                Shipping Address
+            </th>
+        </tr>
+        <tr>
+            <td style="border: solid 1px #f55564;padding:10px;vertical-align: top;">
+                <p style="color: #252525;font-size: 16px;margin: 0 0 5px">
+                    <span style="display: inline-block; color: #ff5564;font-weight: 400;margin: 0 10px 0 0;">Order
+                        ID</span>
+                    <%= order.orderId %>
+                </p>
+                <p style="color: #252525;font-size: 16px;margin: 0 0 5px">
+                    <span style="display: inline-block; color: #ff5564;font-weight: 400;margin: 0 10px 0 0;">Order
+                        Date</span>
+                    <%= dayjs(order.createdAt).format('MMMM, DD, YYYY') %>
+                </p>
+                <p style="color: #252525;font-size: 16px;margin: 0 0 5px">
+                    <span style="display: inline-block; color: #ff5564;font-weight: 400;margin: 0 10px 0 0;">Payment
+                        Method</span>
+                    <%= !order.isCheckOP ? transaction.paymentMethod : 'Check/PO' %>
+                </p>
+            </td>
+            <td style="border: solid 1px #f55564;padding:10px;vertical-align: top;">
+                <p style="color: #252525;font-size: 16px;margin: 0 0 5px">
+                    <%= order.billingAddress.firstName %>
+                    <%= order.billingAddress.lastName %> <br />
+                    <%= order.billingAddress.addressLine1 %><br />
+                    <%= order.billingAddress.addressLine2 %><br />
+                    <%= order.billingAddress.state %>, <%= order.billingAddress.country %> - <%= order.billingAddress.postalCode %>
+                </p>
+                <p style="color: #252525;font-size: 16px;margin: 0 0 5px">
+                    <span
+                        style="display: inline-block; color: #ff5564;font-weight: 400;margin: 0 10px 0 0;">Email</span>
+                    <%= order.billingAddress.emailAddress %>
+                </p>
+                <p style="color: #252525;font-size: 16px;margin: 0 0 5px">
+                    <span
+                        style="display: inline-block; color: #ff5564;font-weight: 400;margin: 0 10px 0 0;">Mobile</span>
+                    <%= order.billingAddress.phoneNumber %>
+                </p>
+            </td>
+
+            <td style="border: solid 1px #f55564;padding:10px;vertical-align: top;">
+                <p style="color: #252525;font-size: 16px;margin: 0 0 5px">
+                    <%= order.shippingAddress.firstName %>
+                    <%= order.shippingAddress.lastName %> <br />
+                    <%= order.shippingAddress.addressLine1 %><br />
+                    <%= order.shippingAddress.addressLine2 %><br />
+                    <%= order.shippingAddress.state %>, <%= order.shippingAddress.country %> - <%= order.shippingAddress.postalCode %>
+                </p>
+                <p style="color: #252525;font-size: 16px;margin: 0 0 5px">
+                    <span
+                        style="display: inline-block; color: #ff5564;font-weight: 400;margin: 0 10px 0 0;">Email</span>
+                    <%= order.shippingAddress.emailAddress %>
+                </p>
+                <p style="color: #252525;font-size: 16px;margin: 0 0 5px">
+                    <span
+                        style="display: inline-block; color: #ff5564;font-weight: 400;margin: 0 10px 0 0;">Mobile</span>
+                    <%= order.shippingAddress.phoneNumber %>
+                </p>
+            </td>
+        </tr>
+    </table>
+
+    <table style="width: 100%;min-width: 100%; border-collapse: collapse;margin: 0 auto 30px auto;">
+        <tr>
+            <th style="color: #ff5564;font-weight: 600;text-align: center;padding-bottom: 10px;">
+                Product
+            </th>
+            <th style="color: #ff5564;font-weight: 600;text-align: center;padding-bottom: 10px;">
+                Quantity
+            </th>
+            <th style="color: #ff5564;font-weight: 600;text-align: center;padding-bottom: 10px;">
+                Price
+            </th>
+            <th style="color: #ff5564;font-weight: 600;text-align: center;padding-bottom: 10px;">
+                Total
+            </th>
+        </tr>
+        <% order.items.forEach(function(item) { %>
+            <tr style="border: solid 1px #f55564;text-align: center;padding: 10px;font-size: 15px;">
+                <td style="border-right: solid 1px #f55564;">
+                    <%= item.product.title %> <%= item.variant ? `- ${item.variant}` : '' %>
+                </td>
+                <td style="border-right: solid 1px #f55564;">
+                    <%= item.quantity %>
+                </td>
+                <td style="border-right: solid 1px #f55564;">
+                    $<%= parseFloat(item.price).toFixed(2) %>
+                </td>
+                <td style="padding: 10px;">
+                    $<%= parseFloat(item.totalAmount).toFixed(2) %>
+                </td>
+            </tr>
+            <% }) %>
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td style="border: solid 1px #f55564;border-left: solid 1px #f55564;text-align: center;">
+                        <span style="display: inline-block; color: #ff5564;font-weight: 600">Subtotal</span>
+                    </td>
+                    <td style="border: solid 1px #f55564;border-left: solid 1px #f55564;text-align: center;">
+                        <p style="display: inline-block; color: #252525;font-size: 16px;margin: 0; padding: 10px;">
+                            $<%= parseFloat(order.subTotalAmount).toFixed(2) %>
+                        </p>
+                    </td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td style="border: solid 1px #f55564;border-left: solid 1px #f55564;text-align: center;">
+                        <span style="display: inline-block; color: #ff5564;font-weight: 600">
+                            <%= dayjs(order.deliveryDate).format('ddd MMM DD, YYYY') %>
+                        </span>
+                    </td>
+                    <td style="border: solid 1px #f55564;border-left: solid 1px #f55564;text-align: center;">
+                        <p style="display: inline-block; color: #252525;font-size: 16px;margin: 0; padding: 10px;">
+                            <% if (totalShippingCost > 0) { %>
+                                $<%= parseFloat(totalShippingCost).toFixed(2) %>
+                            <% } else { %>
+                                Free
+                            <% } %>
+                        </p>
+                    </td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td style="border: solid 1px #f55564;border-left: solid 1px #f55564;text-align: center;">
+                        <span style="display: inline-block; color: #ff5564;font-weight: 600">Order Total</span>
+                    </td>
+                    <td style="border: solid 1px #f55564;border-left: solid 1px #f55564;text-align: center;">
+                        <p style="display: inline-block; color: #252525;font-size: 16px;margin: 0; padding: 10px;">
+                            $<%= parseFloat(order.totalAmount).toFixed(2) %>
+                        </p>
+                    </td>
+                </tr>
+    </table>
+    <p style="margin: 0;text-align: center;color: #252525;font-size: 22px;margin-bottom: 20px;">
+        For questions or to reorder, please contact us at anytime by emailing<br /> sales@candycoin.com, calling
+        +1855-474-1507, or<br /> speaking to us via our live chat.
+    </p>
+    <p style="text-align: center;color: #252525;font-size: 18px;margin-bottom: 20px; max-width: 90%; margin: auto;">
+        Note: There will be a $14.95 charge incurred for ANY shipping address revision
+        done to the address after the order has been shipped out and is in transit.
+        The charge will automatically be incurred on the payment method
+        we have on file for that particular order.
+    </p>
+    <%- include('./common/footer.ejs') %>

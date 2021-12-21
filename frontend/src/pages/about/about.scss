@@ -1,0 +1,44 @@
+.about-page {
+
+    .clearfix {
+        content: "";
+        clear: both;
+        display: table;
+    }
+
+    img.clearfix-img{
+        float: right;
+        max-width:320px;
+        height: auto;
+        display: block;
+        padding: 0 0 20px 20px;
+    }
+
+    h2 {
+        font-family: 'Great Vibes', cursive;
+        font-weight: 400;
+        color: #0b3595;
+        font-size: 30px;
+        margin:40px 0;
+    }
+
+    p {
+        font-size: 14px;
+        line-height: 18px;
+        font-family: 'Nunito', sans-serif;
+        font-weight: 600;
+    }
+}
+
+@media only screen and (max-width:600px) {
+    .about-page {
+        img.clearfix-img {
+            float: none;
+            margin:0 auto;
+            max-width:80%;
+        }
+       img.clearfix-img {
+           padding-left: 0;
+       }
+    }
+}

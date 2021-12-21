@@ -1,0 +1,46 @@
+.sec-all-books-page {
+    .top-image {
+        width:100%;
+        height: auto;
+    }    
+    .book-page-images {
+        margin-top:20px;
+        h3 {
+            font-size: 35px;
+            letter-spacing: 2px;
+            line-height: 38px;
+            color: #1f429b;
+            font-weight: bold;
+            font-family: "Arial Rounded MT Bold";
+            text-align: center;
+            margin-bottom:20px;
+        }
+        p.descp {
+            font-size: 28px;
+            letter-spacing: 1px;
+            line-height: 35px;
+            color: #1f429b;
+            font-family: "Century Gothic";
+            text-align: center;
+            margin-bottom: 50px;
+        }
+    }
+
+}
+
+@media only screen and (max-width:768px){
+    .sec-all-books-page {
+        .book-page-images {
+            h3 {
+                font-size: 30px;
+                line-height:34px;
+                margin-top:20px;
+            }
+            p.descp {
+                font-size: 22px;
+                line-height: 26px;
+            }
+        }
+        
+    }
+}

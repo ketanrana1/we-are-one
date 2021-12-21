@@ -1,0 +1,734 @@
+$p-color: #1a3692;
+
+/*section banner*/
+.sectionBanner img {
+    // max-height: 600px;
+    width: 100%;
+    // object-fit:cover;
+    // object-position: top;
+}
+/*section banner*/
+
+/*Section New Banner*/
+
+.section-new-banner {
+    .banner-container {
+        position: relative;
+    }
+    img {
+        width:100%;
+        height: auto;
+        animation: fadeInAnimation ease 1s;
+        animation-iteration-count: 1;
+        animation-fill-mode: forwards;
+    }
+    h2 {
+        font-size: 39px;
+        letter-spacing: 4px;
+        line-height: 42px;
+        color: #1f429b;
+        font-weight: bold;
+        font-family: "Arial Rounded MT Bold";
+        max-width:290px;
+        position: absolute;
+        bottom: 75px;
+        right: 150px;
+        filter: drop-shadow(0 0 20px white);
+        text-shadow: 2px 2px 4px white;
+        filter: drop-shadow(0.087px 4.999px 3px rgba(255, 255, 255, 0.58));
+        animation: fadeInAnimation ease 6s;
+        animation-iteration-count: 1;
+        animation-fill-mode: forwards;
+    }
+
+}
+/*Section New Banner*/
+
+
+/*Rainbow sec*/
+.rain-bow-sec {
+    img {
+        max-width:100%;
+        height:auto;
+    }
+    p {
+        font-size: 31px;
+        letter-spacing: 3px;
+        line-height: 35px;
+        color: #1f429b;
+        font-style: italic;
+        font-family: "Century Gothic";
+        text-align: center;
+        span {
+            font-weight: bold;
+        }
+    }
+
+}
+/*Rainbow sec*/
+
+/*Books Section*/
+.txt-on-img-cont {
+    position:relative;
+    margin-top:60px;
+
+    &:hover  {
+        img {
+        opacity: .4;
+        transition: all .3s ease-in;
+        }
+        .text-cont a {
+        visibility: visible;
+        transition: all .3s ease-in;
+        }
+    }
+
+    img {
+        max-width:100%;
+        height:auto;
+        transition: all .3s ease-in;
+    }
+    .text-cont {
+        position:absolute;
+        top:0;
+        bottom: 0;
+        left:0;
+        right:0;
+        text-align:center;
+        transition: all .3s ease-in;
+        margin-top:0px; 
+        a {
+           visibility: hidden;
+            transition: all .3s ease-in;
+        }
+    }
+    h2 {
+        text-align:center;
+        font-size: 60px;
+        letter-spacing: 3px;
+        line-height: 65px;
+        color: #1f429b;
+        font-weight: bold;
+        font-family: "Arial Rounded MT Bold";
+        margin-top:50px;
+        margin-bottom: 40px;
+        width:100%;
+    
+    }
+
+}
+/*books Section*/
+/* art ptints section*/
+.section-art-prints.txt-on-img-cont {
+
+    .text-cont {
+        display:flex;
+        flex-wrap:wrap;
+        flex-direction: column;
+        justify-content: center;
+        margin-top:120px; 
+
+        h2 {
+            width:100%;
+            margin-bottom: 25px;
+            color: #0086c4;
+
+        }
+        a {
+            display: inline-block;
+            max-width: 200px;
+            margin: 0 auto;
+        }
+        
+    }
+    
+}
+/* art prints section*/
+
+/*child bookshelfs*/
+
+.sec-childs-bookshelf {
+    margin-top: 50px;
+    margin-bottom:50px;
+    h2 {
+        font-size: 50px;
+        line-height: 55px;
+        color: #1f429b;
+        font-weight: bold;
+        font-family: "Arial Rounded MT Bold";
+        text-align: center;
+        margin-bottom: 15px;
+    }
+    .image-with-button {
+        position:relative;
+        &:hover {
+            .btn-cont {
+                visibility: visible;
+                transition: all .3s ease-in;
+            }
+            img.book-img     {
+                opacity: .3;
+                transition: all .3s ease-in;
+            }
+        }
+    }
+    img {
+        max-width:100%;
+        height: auto;
+        transition: all .3s ease-in;
+    }
+    .btn-cont {
+        visibility:hidden;
+        position: absolute;
+        top:0;
+        bottom: 0;
+        left:0;
+        right:0;
+        display:flex;
+        flex-direction: column;
+        text-align: center;
+        justify-content: center;
+        img {
+        max-width:100%;
+        height:auto;
+        display:block;
+        margin: 0 auto;
+        }
+        .button-common-new {
+            margin-top: 20px;
+            max-width:200px;
+            display:block;
+            margin: 20px auto 0 auto;
+        }
+
+    }
+
+    .btmCont {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-top: 10px;
+        img {
+            max-width:100%;
+            height: auto;
+            display: inline-block;
+            padding-right:10px;
+        }
+        p {
+            font-size: 44px;
+            line-height: 49px;
+            color: #1f429b;
+            font-weight: bold;
+            font-family: "Arial Rounded MT Bold";
+            text-align: center;
+            margin-bottom: 0;
+        }
+    }
+}
+
+/*child bookshelf*/
+
+/* sec app image*/
+.sec-app-image {
+    img {
+        max-width:100%;
+        height:auto;
+    }
+    margin: 50px auto;
+}
+/*sec app image*/
+
+/*follow sec*/
+.sectionFollow {
+        transition: all .3s ease-in;
+        &:hover img.topImg{
+            opacity: .3;
+            transition: all .3s ease-in;
+        }
+        img.topImg{
+            transition: all .3s ease-in;
+        }
+}
+/*follow sec*/
+
+
+
+
+/*section two*/
+section.sectionTwoMain, section.sectionCardVideo {
+
+    overflow: hidden;
+
+    .sectionTopCont img {
+        width:100%;
+        height:auto;
+    }
+
+    .bottomLeftOverlayCont h3 {
+        color:$p-color;
+        text-align: center;
+    }
+
+    .bottomLeftOverlayCont {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        right: 0;
+        left: 0;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        align-content: center;
+        width: 100%;
+        visibility: hidden;
+        transition: all .3s ease-in-out;
+    }
+
+    .topImgCont:hover .bottomLeftOverlayCont, .topImgCont:hover .bottomLeftOverlayCont{
+        visibility:visible;   
+        background:#ffffff99;
+        transition: all .3s ease-in-out;
+    }
+
+    .topImgCont, .bottomLeftOverlayCont:hover{
+        transition: all .3s ease-in-out;
+    }
+    .leftOverlayCont{
+        position:relative;
+        transition: all .3s ease-in-out;
+    }
+    .btnImgLnk img {
+        max-width: 150px;
+        height:auto;
+        margin-top: 25px;
+    }
+    .overlayCont p {
+        font-size: 28px;
+        line-height: 36px;
+        color: $p-color;
+    }
+    .contRight a.btnImg img {
+        max-width: 150px;
+        height: auto;
+        margin-top: 25px;
+    }
+    .contRight .overlayCont{
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        right: 0;
+        left: 0;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-end;
+        align-items: center;
+        align-content: center;
+        width: 100%;
+        padding-bottom: 8%;
+
+    }
+
+    img.mainImg {
+        width: 100%;
+        height: auto;
+        overflow:hidden;
+    }
+    .contRight{
+        position: relative;
+    }
+    .contRight .topImg{
+        width:100%;
+        height: auto
+    }
+}
+/*section two*/
+
+
+
+/*Section CardVideo*/
+section.sectionCardVideo {
+
+    margin-bottom: -10px;
+    .contRight .overlayCont {
+        justify-content: center;
+    }
+
+    .overlayCont p {
+        color: #053303;
+        font-weight: bold;
+    }
+} 
+/*Section CardVideo*/
+
+
+
+/*Section Color*/
+.sectionColor{
+    position:relative;
+    width:100%;
+    padding:0;
+    .topImg {
+        width:100%;  
+    }
+    .sectionBtmCont{
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;  
+    }
+    .btnImg img {
+        max-width:70% !important;
+        display: block;
+        margin:0 auto;
+        transition: all .3s ease-in;
+    }
+}
+/*Section Color*/
+
+
+/*Section follow*/
+.sectionFollow {
+    position:relative;
+    margin-top:50px;
+    margin-bottom: 50px;
+    
+    .folllow-icons {
+        display:flex;
+    }
+
+    .topImg{
+        width:100%;
+    }
+    
+    .sectionBtmCont {
+        padding-left: 0;
+        display: flex;
+        flex-direction:column;
+        position:absolute;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        right: 0;
+        align-items: center;
+        h4 {
+            font-size: 60px;
+            letter-spacing: 1px;
+            line-height:55px;
+            color: #2e3192;
+            font-style: italic;
+            font-family: "Lucida Calligraphy";
+            filter: drop-shadow(0.087px 4.999px 3px rgba(8,81,41,0.58));
+            margin-top:85px;
+        }
+        .folllow-icons { 
+            margin-left:0;
+            padding-left:0;
+            position: absolute;
+            bottom: 31%;
+            transition: all .3s ease-in;
+        }
+    }
+
+    .sectionBtmCont img {
+       max-width:45px;
+       height:auto;
+    }
+    
+    .sectionBtmCont li {
+    list-style-type:none;  
+    padding: 0 10px;
+    font-size: 44px;
+    color:white;
+    }
+    .sectionFollow { 
+        width:100%;
+    }    
+}
+/*Section follow*/
+
+
+
+/*Section Video*/
+.sectionVideo {
+
+    padding: 3% 5%;
+    width:100%;
+
+    .btnImg img {
+        width:100%;
+    }
+
+    video#audioplayer {
+        margin-top: -5px;
+    }
+}
+/*Section video*/
+
+/*section appimage*/
+
+.app-image-hover figure {
+	position: relative;
+}
+.app-image-hover figure::before {
+	position: absolute;
+	top: 0;
+	left: -75%;
+	z-index: 2;
+	display: block;
+	content: '';
+	width: 50%;
+	height: 100%;
+	background: -webkit-linear-gradient(left, rgba(255,255,255,0) 0%, rgba(255,255,255,.3) 100%);
+	background: linear-gradient(to right, rgba(255,255,255,0) 0%, rgba(255,255,255,.3) 100%);
+	-webkit-transform: skewX(-25deg);
+	transform: skewX(-25deg);
+}
+.app-image-hover figure:hover::before {
+	-webkit-animation: shine .75s;
+	animation: shine .75s;
+}
+@-webkit-keyframes shine {
+	100% {
+		left: 125%;
+	}
+}
+@keyframes shine {
+	100% {
+		left: 125%;
+	}
+}
+
+
+.app-image-hover figure {
+	position: relative;
+}
+.app-image-hover figure::before {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	z-index: 2;
+	display: block;
+	content: '';
+	width: 0;
+	height: 0;
+	background: rgba(255,255,255,.2);
+	border-radius: 100%;
+	-webkit-transform: translate(-50%, -50%);
+	transform: translate(-50%, -50%);
+	opacity: 0;
+}
+.app-image-hover figure:hover::before {
+	-webkit-animation: circle .75s;
+	animation: circle .75s;
+}
+@-webkit-keyframes circle {
+	0% {
+		opacity: 1;
+	}
+	40% {
+		opacity: 1;
+	}
+	100% {
+		width: 200%;
+		height: 200%;
+		opacity: 0;
+	}
+}
+@keyframes circle {
+	0% {
+		opacity: 1;
+	}
+	40% {
+		opacity: 1;
+	}
+	100% {
+		width: 200%;
+		height: 200%;
+		opacity: 0;
+	}
+}
+
+/*section appimage*/
+
+@keyframes fadeInAnimation {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+     }
+}
+
+@media only screen and (min-width: 992px) {
+    .sectionFollow {
+        .sectionBtmCont {
+            &:hover {
+                transition: all .3s ease-in;
+                 .folllow-icons {
+                    transition: all .3s ease-in;
+                    bottom: 62%;
+                }
+            }
+        }
+    }
+}
+ 
+@media only screen and (max-width:991px){
+    section.sectionTwoMain .overlayCont p, section.sectionCardVideo .overlayCont p {
+        font-size: 16px;
+        line-height: 16px;
+    }
+    section.sectionTwoMain .bottomLeftOverlayCont h3, section.sectionCardVideo .bottomLeftOverlayCont h3 {
+        font-weight: 600;
+        font-size: 28px;
+        span {
+            font-size: 20px;
+            font-weight: normal;
+            display: block;
+        }
+    }
+}
+
+@media only screen and (max-width:767px) {
+    .sectionColor .btnImg img {
+        width: 110px;
+    }
+    .sectionCardVideo .sectionBtmCont .overlayCont p {
+        font-size: 18px;
+        line-height: 22px;
+    }
+    .sectionTwoMain {
+        .overlayCont {
+            padding: 20px;
+        }
+        .sectionBtmCont .overlayCont p {
+            font-size: 20px;
+            line-height: 24px;
+            text-align: center;
+        }
+    }
+    .sectionCardVideo {
+        .sectionBtmCont .overlayCont p {
+            font-size: 20px;
+            line-height: 24px;
+        }
+    }
+    .sectionFollow {
+        .sectionBtmCont img {
+            max-width: 25px;
+            height: auto;
+        }
+        .sectionBtmCont li {
+            font-size: 19px;
+            padding: 0 2px;
+        }
+    } 
+    .sectionFollow {
+        .sectionBtmCont {
+            h4 {
+                margin-top:20px;
+                font-size:32px;
+            }
+            .folllow-icons {
+                bottom: 25%;
+            }
+        }
+    }
+    .sec-childs-bookshelf {
+        h2 {
+            font-size: 26px;
+            line-height: 30px;
+        }
+        .image-with-button {
+            &:hover {
+                img.book-img     {
+                    opacity: 1;
+                    transition: all .3s ease-in;
+                }
+            }
+        }
+        .btn-cont {
+            visibility: visible;
+            position: relative;
+            margin-bottom:40px;
+            .button-common-new {
+                margin-top: 5px;
+            }
+        }
+        .btmCont {
+            p {
+                font-size: 22px;
+                line-height: 26px;
+            }
+        }
+    }
+    .section-art-prints.txt-on-img-cont {
+        .text-cont {
+            margin-top:0;
+        }
+    }
+    .section-new-banner {
+        h2 {
+            max-width: 100%;
+            margin: 0 auto;
+            display: block;
+            padding: 20px 20px 20px 20px;
+            display: flex;
+            top: 0;
+            bottom: 0;
+            right: 0;
+            left: 0;
+            justify-content: center;
+            align-items: end;
+            text-align: center;
+            font-size: 20px;
+            line-height: 24px;
+            letter-spacing: 1px;
+        }
+    }
+    .rain-bow-sec {
+        p {
+            font-size: 22px;
+            letter-spacing: 1px;
+            line-height: 30px;
+        }
+    }
+    .txt-on-img-cont {
+        h2 {
+            font-size: 30px;
+            line-height: 30px;
+            margin-top: 20px;
+            }
+            .text-cont {
+                a {
+                visibility: visible;
+                }
+            }
+    }
+    .sectionColor {
+        padding: 0 15px;
+        border: none;
+    }
+}
+
+
+
+
+@media only screen and (min-width: 992px) {
+
+    .sectionColor {
+        .btnImg {
+            img {
+                &:hover {
+                    max-width: 55% !important;
+                    transition: all .3s ease;
+                }
+            }
+        }
+    }
+}

@@ -1,0 +1,93 @@
+/*single card*/
+.cardCont {
+    position: relative;
+    overflow:hidden;
+
+    .cardImg {
+        max-width:100%;
+        height:auto;
+        display:block;
+        margin: 0 auto;
+        transition: all .3s ease-out;
+        z-index:-1;
+    }
+
+    .btmCont {
+        position:absolute;
+        bottom: 3px;
+        background-color: #000000a8;
+        left: 4px;
+        right: 4px;
+       opacity:0;
+        z-index:999999999999;
+        display:flex;
+        justify-content:center;
+        align-items:center;
+        transition: .3s ease-in-out;
+        height:0;
+
+    }
+    .btmCont:hover {
+       opacity:1;
+       height: 55px;
+       
+    }
+
+    .btmButton {
+        border: none;
+        background-color: #2caadf;
+        color: #ffffff;
+        padding: 0 15px;
+        border-radius: 35px;
+        height: 35px;
+        line-height: 35px;
+        font-size: 15px;
+        display: block;
+        margin: 0 auto;
+    }
+    .cardImg:hover + .btmCont{
+        opacity:1;
+        transition: .3s ease-in-out;
+        height: 55px;
+
+
+    }
+
+}
+/*single card*/
+
+
+
+/*section top*/
+.topCont {
+
+    width:100%;
+
+    .banner , .btmImg {
+        width:100%;
+    }
+
+}
+/*section top*/
+
+/*Section five cards*/
+.secFiveCards {
+
+    .new-bottm-cont {
+        height:100%;
+        align-content: space-between;
+    }
+
+    .cardCont .btmCont {
+        bottom: 0;
+        left: 0;
+        right: 0;    
+    }
+}
+
+/*Section five cards*/
+
+
+.last-img-cont img {
+    width:55%;
+}

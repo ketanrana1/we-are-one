@@ -1,0 +1,46 @@
+$primary-color: #38B0E3;
+
+.logout-page {
+    .breadcrumb {
+        background-color: white;
+        a {
+            font-size: 18px;
+            font-weight: 500;
+            margin: 0 8px;
+            color: $primary-color;
+            &:first-child {
+                margin-left: 0;
+            }
+        }
+    }
+    h1 {
+        font-size: 22px;
+        font-weight: 500;
+        margin: 0 0 20px;
+    }
+    .buttons {
+        overflow: auto;
+        padding: 6px;
+        margin-bottom: 20px;
+        clear: both;
+        .right {
+            float: right;
+            text-align: right;
+        }
+        a.btn-btm {
+            color: #FFFFFF;
+            font-family: Arial, Helvetica, sans-serif;
+            font-size: 14px;
+            font-weight: bold;
+            background: #3aabe8;
+            box-shadow: 0 2px 2px #dddddd;
+            text-transform: uppercase;
+            border-radius: 30px;
+            margin-right: 5px;
+            border: none;
+            padding: 8px 15px;
+            line-height: 14px;
+    
+        }
+    }
+}

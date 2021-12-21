@@ -1,0 +1,36 @@
+.contact-page {
+
+    label {
+        display: block;
+        font-weight: bold;
+        font-size: 14px;
+        font-family: 'Nunito';
+    }
+    input, textarea {
+        width: 100%;
+        border: solid 1px #1f429b;
+        background-color: #ffffff;
+        padding:5px;
+        border-radius: 4px;
+    }
+    input.button {
+        width: 115px;
+        background: #1f429b;
+        color: white;
+        border-radius: 50px;
+    }
+    h2 {
+        font-size: 28px;
+        font-weight: bold;
+        margin-bottom: 15px;
+        color: #1f429b;
+        font-family: 'Nunito';
+    }
+    .inline-capture {
+        display: flex;
+    }
+    .inline-capture input {
+        margin-right: 20px;
+    }
+        
+}

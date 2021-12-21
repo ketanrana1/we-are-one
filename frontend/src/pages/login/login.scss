@@ -1,0 +1,107 @@
+.login-page {
+    
+    padding:40px 0 70px 0;
+
+    .new-user-register-account-wrapper {
+
+        h2 {
+            font-size: 28px;
+            font-weight: 900;
+            margin-bottom: 15px;
+            color: #39aadf;
+        }
+        .content {
+            .sub-title {
+                line-height: 30px;
+                font-weight: bold;
+
+            }
+            .description {
+                max-width: 70%;
+            }          
+        }
+        .submit-input-field-wrapper {
+            a {
+                cursor: pointer;
+                color: #FFFFFF;
+                font-family: Arial, Helvetica, sans-serif;
+                font-size: 14px;
+                font-weight: bold;
+                background: #3aabe8;
+                -webkit-box-shadow: 0 2px 2px #dddddd;
+                -moz-box-shadow: 0 2px 2px #DDDDDD;
+                box-shadow: 0 2px 2px #dddddd;
+                text-transform: uppercase;
+                padding: 8px 15px;
+                height: 30px;
+                line-height: 30px;
+                border-radius: 30px;
+            }
+        }
+    }
+    .common-account-form-wrapper-main {
+        h2 {
+            font-size: 28px;
+            font-weight: 600;
+            margin-bottom: 10px;
+            color: #39aadf;
+        }
+        .description {
+            font-size: 16px;
+            margin-bottom: 15px;
+        }
+        .common-input-field-wrapper {
+            label {
+                display: flex;
+                font-weight: 600;
+                font-size: 14px;
+                margin-bottom: 6px;
+            }
+            input {
+                background: #F8F8F8;
+                border: 1px solid #CCCCCC;
+                padding: 3px;
+                margin-left: 0px;
+                margin-right: 0px;
+                width: 100%;
+                display: flex;
+                height: 40px;
+                border-radius: 4px;
+                margin-bottom: 15px;
+            }
+            a {
+                color: #38B0E3;
+                text-decoration: underline;
+            }           
+        }
+
+        .submit-input-field-wrapper {
+            input.button {
+                cursor: pointer;
+                color: #FFFFFF;
+                font-family: Arial, Helvetica, sans-serif;
+                font-size: 14px;
+                font-weight: bold;
+                background: #3aabe8;
+                -webkit-box-shadow: 0 2px 2px #dddddd;
+                box-shadow: 0 2px 2px #dddddd;
+                text-transform: uppercase;
+                padding: 8px 15px;
+                height: auto;
+                line-height: 14px;
+                border-radius: 30px;
+                width: auto;
+                margin-top: 15px;
+                border: none;
+            }
+        }
+    }
+}
+
+
+
+@media only screen and (max-width: 768px) {
+    .login-page .new-user-register-account-wrapper .content .description {
+        max-width: 100%;
+    }
+}

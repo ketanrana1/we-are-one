@@ -1,0 +1,35 @@
+.channelPage {
+
+
+    padding: 10px 0 50px 0;
+    p.channelPara {
+        color: #1f429b;
+        margin-top: 25px;
+        font-size: 22px;
+        text-align:center;
+    }
+
+    @media only screen and (max-width:991px) {
+
+        p.channelPara {
+
+            font-size: 22px;
+        }
+        iframe {
+            height:350px;
+        }
+
+
+    }
+    @media only screen and (max-width: 768px) {
+        iframe {
+            height:280px;
+        }
+    }
+
+    .video-container { position: relative; padding-bottom: 56.25%; padding-top: 30px; height: 0; overflow: hidden; }
+
+.video-container iframe, .video-container object, .video-container embed { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }
+    
+}
+
