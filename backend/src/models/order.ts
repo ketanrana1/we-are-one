@@ -10,10 +10,15 @@ const orderSchema = new Schema({
       type: String,
       ref: 'User'
    }],
+   transactionId:{
+     type: String,
+     ref: 'Transaction'
+   },
    orderId: {
      type: String,
      default: uuidv4
    },
+  
    orderStatus: String,
    shipping_firstname: String,
    shipping_lastname: String,
@@ -35,9 +40,12 @@ const orderSchema = new Schema({
    billing_country: String,
    billing_telephone: String,
    billing_email: String,
-   ordered_items: String,
-   payment_mehtod: String,
+   ordered_items: [Object],
+   payment_method: String,
    paypal_transaction_details: String,
+   total_amount: Number,
+   shipping_cost: Number,
+   sub_amount: Number,
   });
   
 export default mongoose.model('Order', orderSchema);

@@ -1,12 +1,12 @@
 // @ts-ignore
 import paypal from '@paypal/checkout-server-sdk';
-//import Order from 'models/order';
-
-
+// import Order from '../entity/Order';
+// import Transaction from '../entity/Transaction';
+import Order from 'models/order';
 
 class PayPalService {
 
-  private client: any;    
+  private client: any;
 
   constructor() {
 
@@ -16,59 +16,37 @@ class PayPalService {
     this.client = new paypal.core.PayPalHttpClient(environment);
   }
 
-  async createPayment( returnUrl: any, cancelUrl: any) {
-
-    const order = {
-
-      totalAmount: 25,
-      subTotalAmount: 25,
-      shippingCost: 0,
-      internationalShippingCost: 0,
-      discountAmount: 0
-
-
-    
-    }
-
+  async createPayment(order:typeof Order,  return_url: string, cancel_url: string) {
+    console.log(`djfwkfl`,order);
     const request = new paypal.orders.OrdersCreateRequest();
     // const orderItems = await this.filterOrderItems(order.items);
     request.requestBody({
       intent: 'CAPTURE',
+      application_context: {
+        return_url,
+        cancel_url,
+      },
       purchase_units: [
         {
           amount: {
             currency_code: 'USD',
-            value: `${order.totalAmount}`,
+            value: '25',
             breakdown: {
               item_total: {
                 currency_code: 'USD',
-                value: `${order.subTotalAmount}`,
+                value: '25',
               },
               shipping: {
                 currency_code: 'USD',
-                value: parseFloat(`${order.shippingCost}`) + parseFloat(`${order.internationalShippingCost}`),
+                value: '0',
               },
               discount: {
                 currency_code: 'USD',
-                value: `${order.discountAmount}`,
+                value: '0',
               }
               ,
             },
           },
-          // items: orderItems,
-          // shipping: {
-          //   name: {
-          //     full_name: `${order.shippingAddress.firstName} ${order.shippingAddress.firstName}`,
-          //   },
-          //   address: {
-          //     address_line_1: order.shippingAddress.addressLine1,
-          //     address_line_2: order.shippingAddress.addressLine2,
-          //     admin_area_2: order.shippingAddress.state,
-          //     admin_area_1: order.shippingAddress.city,
-          //     postal_code: order.shippingAddress.postalCode,
-          //     country_code: order.shippingAddress.country,
-          //   },
-          // },
         },
       ],
     });
@@ -92,18 +70,18 @@ class PayPalService {
   //   return this.client.execute(request);
   // }
 
-  // async filterOrderItems(items: any) {
-  //   return items.map((item: any) => ({
-  //     name: item.product.title,
-  //     sku: item.product.sku,
-  //     unit_amount: {
-  //       currency_code: 'USD',
-  //       value: item.price,
-  //     },
-  //     quantity: item.quantity,
-  //     category: 'PHYSICAL_GOODS',
-  //   }));
-  // }
+  async filterOrderItems(items: any) {
+    return items.map((item: any) => ({
+      name: item.product.title,
+      sku: item.product.sku,
+      unit_amount: {
+        currency_code: 'USD',
+        value: item.price,
+      },
+      quantity: item.quantity,
+      category: 'PHYSICAL_GOODS',
+    }));
+  }
 
 }
 

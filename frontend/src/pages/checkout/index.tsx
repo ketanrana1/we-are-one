@@ -90,7 +90,7 @@ export default function Checkout() {
         if( (typeof validate() === 'undefined') ) {
 
         try {
-            const request : any = await axios({
+            const response : any = await axios({
             method: 'post',    
             url: 'http://localhost:4000/api/checkout',
             data: form,
@@ -98,11 +98,13 @@ export default function Checkout() {
                 'Content-Type': 'multipart/form-data'
                 }            
             });
-            window.location.href = request?.data.url;
+            if (response.data.data.approvalUrl) {
+                window.location.href = response.data.data.approvalUrl;
+            } 
         } catch (error) {
             console.log(error)  
         }
-        console.log(responseState);
+      
        
 
     }
