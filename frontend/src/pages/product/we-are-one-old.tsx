@@ -88,18 +88,6 @@ const [counter, setCounter] = useState(1)
             <div id="content" className="container pt-3"> 
 
                
-                
-
-
-    
-
-
-
-
-
-
-
-
 
 
                 <h1>We Are One book (Hardcover)</h1>
@@ -131,13 +119,11 @@ const [counter, setCounter] = useState(1)
                     </div>
                 </div>
                 <div id="tab-description" className="tab-content py-5">
-                    <p>
-                        <strong>AWARDED GOLD in MOM’S CHOICE AWARDS</strong>
-                        <br/>‘We Are One’ is a rhythmic poem accompanied by vibrant illustrations that speaks to children and the child within us all of unity. It is a gentle reminder that no matter what our nationality, gender, faith, species, shape, size, color, or that we make different sounds and see things individually, we are all essentially the same.<br/>
-                        ‘We are all one but different. Different but the same. Created by the one light, we are each given a name.’<br/>
-                        In remembrance of our unity we respect and love each other to establish peace and harmony in our lives and on the planet.<br/>
-                        <strong>AVAILABLE in E-BOOK, PAPERBACK and HARDCOVER</strong>
-                    </p>
+                    <p><strong>AWARDED GOLD in MOM’S CHOICE AWARDS</strong>
+                    <br/>‘We Are One’ is a rhythmic poem accompanied by vibrant illustrations that speaks to children and the child within us all of unity. It is a gentle reminder that no matter what our nationality, gender, faith, species, shape, size, color, or that we make different sounds and see things individually, we are all essentially the same.<br/>
+                    ‘We are all one but different. Different but the same. Created by the one light, we are each given a name.’<br/>
+                    In remembrance of our unity we respect and love each other to establish peace and harmony in our lives and on the planet.<br/>
+                    <strong>AVAILABLE in E-BOOK, PAPERBACK and HARDCOVER</strong></p>
                 </div>     
             </div>
         </div>

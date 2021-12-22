@@ -16,6 +16,7 @@ import AppImage from './AppImage';
 import LayoutNew from 'components/common/LayoutNew';
 
 
+
 export default function Index() {
 
     const weAreOneData = [                
@@ -108,6 +109,7 @@ export default function Index() {
     )
 }
 
+
 Index.getLayout = function getLayout(page: any) {
     return (
         <LayoutNew>
@@ -115,3 +117,6 @@ Index.getLayout = function getLayout(page: any) {
         </LayoutNew>
     )
   }
+
+
+  

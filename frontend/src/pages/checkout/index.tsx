@@ -3,6 +3,8 @@ import LayoutNew from 'components/common/LayoutNew'
 import Joi from "joi-browser";
 import axios from 'axios';   
 import { useRouter } from 'next/router';
+import { useSelector } from 'react-redux';
+import { cartReducer } from 'redux/cart.slice';
 
 const initialShippingState = { shipping_firstname: "", shipping_lastname: "", shipping_address_1: "", shipping_address_2: "", shipping_city: "", shipping_state: "", shipping_zip: "", shipping_country:'', shipping_telephone: "", shipping_email: "", billing_firstname: "", billing_lastname: "", billing_address_1: "", billing_address_2: "", billing_city: "", billing_state: "", billing_zip: "", billing_country:'', billing_telephone: "", billing_email: "" };
 
@@ -39,6 +41,7 @@ const schema = {
 
 
 export default function Checkout() {
+    const cart = useSelector((state: any) => state.cart);
 
     const router = useRouter();
 
@@ -63,29 +66,41 @@ export default function Checkout() {
         e.preventDefault();
         setErrors(validate());
 
-        let form = new FormData();
+        // let form = new FormData();
 
-        form.append('shipping_firstname', shippingState.shipping_firstname);
-        form.append('shipping_lastname', shippingState.shipping_lastname);
-        form.append('shipping_address_1', shippingState.shipping_address_1);
-        form.append('shipping_address_2', shippingState.shipping_address_2);
-        form.append('shipping_city', shippingState.shipping_city);
-        form.append('shipping_state', shippingState.shipping_state);
-        form.append('shipping_zip', shippingState.shipping_zip);
-        form.append('shipping_country',shippingState.shipping_country)
-        form.append('shipping_telephone', shippingState.shipping_telephone);
-        form.append('shipping_email', shippingState.shipping_email);
+       const formBody = {
+            items: cart.map((item: any) => ({
+                productId: item.productId,
+                variant: item.variant ? item.variant : null,
+                quantity: item.quantity,
+                orderRepeat: item.orderRepeat,
+                orderRepeatValue: item.orderRepeatValue,
+    
+            })),
+            shipping_firstname:shippingState.shipping_firstname,
+            shipping_lastname : shippingState.shipping_lastname,
+            shipping_address_1 : shippingState.shipping_address_1,
+            shipping_address_2: shippingState.shipping_address_2,
+            shipping_city: shippingState.shipping_city,
+            shipping_state: shippingState.shipping_state,
+            shipping_zip: shippingState.shipping_zip,
+            shipping_country:shippingState.shipping_country,
+            shipping_telephone: shippingState.shipping_telephone,
+            shipping_email: shippingState.shipping_email,
+    
+            billing_firstname: shippingState.billing_firstname,
+            billing_lastname: shippingState.billing_lastname,
+            billing_address_1: shippingState.billing_address_1,
+            billing_address_2: shippingState.billing_address_2,
+            billing_city: shippingState.billing_city,
+            billing_state: shippingState.billing_state,
+            billing_zip: shippingState.billing_zip,
+            billing_country:shippingState.billing_country,
+            billing_telephone: shippingState.billing_telephone,
+            billing_email: shippingState.billing_email,
+       }
 
-        form.append('billing_firstname', shippingState.billing_firstname);
-        form.append('billing_lastname', shippingState.billing_lastname);
-        form.append('billing_address_1', shippingState.billing_address_1);
-        form.append('billing_address_2', shippingState.billing_address_2);
-        form.append('billing_city', shippingState.billing_city);
-        form.append('billing_state', shippingState.billing_state);
-        form.append('billing_zip', shippingState.billing_zip);
-        form.append('billing_country',shippingState.billing_country)
-        form.append('billing_telephone', shippingState.billing_telephone);
-        form.append('billing_email', shippingState.billing_email);
+      
 
         if( (typeof validate() === 'undefined') ) {
 
@@ -93,10 +108,10 @@ export default function Checkout() {
             const response : any = await axios({
             method: 'post',    
             url: 'http://localhost:4000/api/checkout',
-            data: form,
-            headers: {
-                'Content-Type': 'multipart/form-data'
-                }            
+            data: formBody,
+            // headers: {
+            //     // 'Content-Type': 'multipart/form-data'
+            //     }            
             });
             if (response.data.data.approvalUrl) {
                 window.location.href = response.data.data.approvalUrl;
@@ -144,7 +159,7 @@ export default function Checkout() {
        
         <div className="container checkout-page py-4 py-md-5">
             <div className="checkout-content">
-                <form onSubmit={handleSubmit} encType="multipart/form-data">
+                <form onSubmit={handleSubmit} >
                     <div className="response-cont col-12 px-md-5 mb-3">
                         <h6>{responseState?.data?.message}</h6>
                     </div>   
@@ -263,7 +278,7 @@ export default function Checkout() {
                                 <span className="required">*</span> E-Mail:<br/>
                                 <input onChange={handleShippingChange} type="text" name="billing_email" value={shippingState.billing_email} className="large-field" />
                                 {errors && <small>{errors.billing_email}</small>}
-                                </div>                               
+                                </div>                            
                             </div>
                         </div>
                         <div className="col-12 px-md-5 mt-3 response-cont">
