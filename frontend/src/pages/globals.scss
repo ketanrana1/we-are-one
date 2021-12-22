@@ -1,5 +1,9 @@
 $p-color: #2caadf; 
 
+.product-info #image {
+    max-width: 350px;
+}
+
 /*child bookshelfs*/
 
 .sec-childs-bookshelf {
@@ -31,6 +35,8 @@ $p-color: #2caadf;
         max-width:100%;
         height: auto;
         transition: all .3s ease-in;
+        display:block;
+        margin:0 auto;
     }
     .btn-cont {
         visibility:hidden;
@@ -68,6 +74,7 @@ $p-color: #2caadf;
             height: auto;
             display: inline-block;
             padding-right:10px;
+            margin:0;
         }
         p {
             font-size: 44px;
@@ -1033,4 +1040,17 @@ display: inline-block;
     .mainFooter.footer-new .social-text-cont h3 {
         padding-right: 8px;
     }
+}
+
+
+.image-product-cart img {
+    max-width: 30px;
+height: auto;
+display: block;
+margin: 0 auto;
+}
+
+
+.cart-page .cart-info tbody td p {
+    margin-bottom: 0;
 }

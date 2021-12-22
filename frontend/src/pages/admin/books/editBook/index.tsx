@@ -2,15 +2,21 @@ import React, { useState, useEffect } from 'react'
 import AdminLayout from 'components/admin/common/AdminLayout'
 import Joi from "joi-browser";
 import axios from 'axios';
-const baseUrl = process.env.BASE_URL;
+import getConfig from 'next/config'
+const { publicRuntimeConfig } = getConfig()
+
+const baseUrl = process.env.BACKEND_BASE_URL;
+
 
 export async function getServerSideProps(context) {
+
+    const baseUrl = process.env.BACKEND_BASE_URL;
 
     let res: any;
     const { id } = context.query;
 
     try { 
-     res = await axios.get(`${baseUrl}/api/books/singleBook/?id=${id}`);       
+     res = await axios.get(`${publicRuntimeConfig.backendBaseUrl}api/books/singleBook/?id=${id}`);       
     } catch (error) {
         console.log(error);
     }   
@@ -102,7 +108,7 @@ export default function AddBook(props) {
         try {
             const request : any = await axios({
             method: 'post',    
-            url: `http://localhost:4000/api/books/editBook/?id=${ID}`,
+            url: `${publicRuntimeConfig.backendBaseUrl}api/books/editBook/?id=${ID}`,
             data: form,
             headers: {
                 'Content-Type': 'multipart/form-data'

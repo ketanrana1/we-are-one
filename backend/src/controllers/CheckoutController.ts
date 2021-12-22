@@ -32,13 +32,13 @@ let requestt = new paypal.orders.OrdersCreateRequest();
 requestt.requestBody({
     "intent": "CAPTURE",
     "purchase_units": [
-        {
-            "amount": {
-                "currency_code": "USD",
-                "value": "100.00"
-            }
+      {
+        "amount": {
+          "currency_code": "USD",
+          "value": "100.00"
         }
-     ]
+      }
+    ]
 });
 
 // Call API with your client and get a response for your call
@@ -52,17 +52,17 @@ let createOrder  = async function() {
 }
 createOrder();
 
-let captureOrder =  async function(response.result.id: any) {
-  request = new paypal.orders.OrdersCaptureRequest(orderId);
-  request.requestBody({});
-  // Call API with your client and get a response for your call
-  let response = await client.execute(request);
-  console.log(`Response: ${JSON.stringify(response)}`);
-  // If call returns body in response, you can get the deserialized version from the result attribute of the response.
-  console.log(`Capture: ${JSON.stringify(response.result)}`);
-}
 
-let capture = captureOrder('REPLACE-WITH-APPROVED-ORDER-ID'); 
+
+// let captureOrder =  async function(response.result.id: any) {
+//   request = new paypal.orders.OrdersCaptureRequest(orderId);
+//   request.requestBody({});
+//   let response = await client.execute(request);
+//   console.log(`Response: ${JSON.stringify(response)}`);
+//   console.log(`Capture: ${JSON.stringify(response.result)}`);
+// }
+
+// let capture = captureOrder('REPLACE-WITH-APPROVED-ORDER-ID'); 
 
 
 

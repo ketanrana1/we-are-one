@@ -2,11 +2,13 @@ import React, { useState, useEffect} from 'react'
 import AdminLayout from 'components/admin/common/AdminLayout'
 import { useRouter } from 'next/router';
 import axios from 'axios';
-const baseUrl = process.env.BASE_URL; 
+import getConfig from 'next/config'
+const { publicRuntimeConfig } = getConfig()
 
 const initialResponseState: any = [];
 
 export default function AllBooks(props) {
+
     const router = useRouter();
     const { AllBooks } = props;
 
@@ -15,10 +17,10 @@ export default function AllBooks(props) {
     async function handleDeleteClick(id: any) {
 
         try { 
-        const response = await axios.post(`http://localhost:4000/api/books/delete/${id}`);
-        setResponseState(response);
-        return router.push(router.asPath)
-        } catch (error) {
+        const response = await axios.post(`${publicRuntimeConfig.backendBaseUrl}api/books/delete/${id}`);
+        setResponseState(response); 
+        return router.push(router.asPath) 
+        } catch (error) { 
             console.log(error);
         }
 
@@ -56,10 +58,13 @@ export default function AllBooks(props) {
 
 
 export async function getServerSideProps(context) {
+
+    const baseUrl = process.env.BACKEND_BASE_URL; 
+    
     let res: any;
 
     try { 
-     res = await axios.get(`${baseUrl}/api/allBooks`);       
+     res = await axios.get(`${baseUrl}api/allBooks`);       
     } catch (error) {
         console.log(error);
     }   

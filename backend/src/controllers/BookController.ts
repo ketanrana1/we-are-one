@@ -3,7 +3,7 @@ import { JsonController, Put, Controller, UseBefore, UseAfter, Body, Get, Post, 
 import Joi from 'joi';
 import multer from 'multer';
 var path = require('path');
-const {v4 : uuidv4} = require('uuid')
+const {v4 : uuidv4} = require('uuid') 
 
   
 const fileUploadOptions = ( ) => ({
@@ -228,7 +228,7 @@ export class BookController {
           book_download:1,
           book_image_name: {
             $concat: [process.env.IMAGES_BASE_PATH, "$book_image_name"]
-          }
+          },bookId:1
         }
       }
     ]);
