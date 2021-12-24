@@ -108,7 +108,7 @@ export default function AddBook() {
 
     return (
             <div className="admin-cmmn-frm addBook-form">
-                <h3 className="mb-3">Add New Book</h3>
+                <h3 className="mb-3">Add New Book</h3>       
                 <div className="response-cont">
                     <h6>{responseState?.data?.message}</h6> 
                 </div>

@@ -13,7 +13,7 @@ const initialResponseState: any = [];
 const schema = {
 
     art_name: Joi.string().required(),
-   slug: Joi.string().required(),
+    slug: Joi.string().required(),
     art_description: Joi.string().required(),
     art_image_1: Joi.any(),
     art_image_2: Joi.any(),

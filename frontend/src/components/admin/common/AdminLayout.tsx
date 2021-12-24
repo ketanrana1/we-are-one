@@ -111,6 +111,20 @@ const AdminLayout = ({children}) => {
                                 </nav>
                             </div>
 
+                            <a className="nav-link collpse-menu collapsed" href="#" aria-expanded="false" aria-haspopup="true" data-toggle="collapse" aria-controls="collapseLayouts" data-target="#collapseLayouts15">
+                                <div className="sb-nav-link-icon"><i className="fas fa-users"></i></div>
+                                Contact Entries 
+                                <div className="sb-sidenav-collapse-arrow"><i className="fas fa-angle-down"></i></div>
+                            </a>
+                            <div className="collapse" id="collapseLayouts15" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
+                                <nav className="sb-sidenav-menu-nested nav">
+                                    <Link href='/admin/contacts/allContacts'>
+                                        <a className='nav-link'>All Entries</a>
+                                    </Link>
+                                    
+                                </nav>
+                            </div>
+
                             <div className="sb-sidenav-menu-heading">CONTENT</div>
                            
 
@@ -172,12 +186,10 @@ const AdminLayout = ({children}) => {
                                 <div className="sb-sidenav-collapse-arrow"><i className="fas fa-angle-down"></i></div>
                             </a>
                             <div className="collapse" id="collapseLayouts9" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
-                                <nav className="sb-sidenav-menu-nested nav">
-                                  
+                                <nav className="sb-sidenav-menu-nested nav">                                
                                     <Link href='/admin/pagecontent/privacyPolicy'>
                                         <a className='nav-link'>Add Content</a>
-                                    </Link>
-                                  
+                                    </Link>                               
                                 </nav>
                             </div>
 
@@ -188,12 +200,10 @@ const AdminLayout = ({children}) => {
                                 <div className="sb-sidenav-collapse-arrow"><i className="fas fa-angle-down"></i></div>
                             </a>
                             <div className="collapse" id="collapseLayouts10" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
-                                <nav className="sb-sidenav-menu-nested nav">
-                                  
+                                <nav className="sb-sidenav-menu-nested nav">                                
                                     <Link href='/admin/pagecontent/termsAndConditions'>
                                         <a className='nav-link'>Add Content</a>
-                                    </Link>
-                                  
+                                    </Link>                              
                                 </nav>
                             </div>
 
@@ -204,17 +214,12 @@ const AdminLayout = ({children}) => {
                                 <div className="sb-sidenav-collapse-arrow"><i className="fas fa-angle-down"></i></div>
                             </a>
                             <div className="collapse" id="collapseLayouts11" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
-                                <nav className="sb-sidenav-menu-nested nav">
-                                  
+                                <nav className="sb-sidenav-menu-nested nav">                                 
                                     <Link href='/admin/pagecontent/shipping'>
                                         <a className='nav-link'>Add Content</a>
-                                    </Link>
-                                  
+                                    </Link>                                
                                 </nav>
                             </div>
-
-
-
                         </div>
                     </div>
                     <div className="sb-sidenav-footer">

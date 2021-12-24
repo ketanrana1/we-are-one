@@ -80,6 +80,7 @@ import { TestController } from 'controllers/TestController'
 import { ArtprintsController } from 'controllers/ArtprintsController'
 import { PagecontentController } from 'controllers/PagecontentController'
 import { CheckoutController } from 'controllers/CheckoutController'
+import { ContactController } from 'controllers/ContactContoller'
 import SubscribeController from 'controllers/SubscribeController'
 import PaymentController from "controllers/PaymentController"
 import './database/mongoose';
@@ -100,7 +101,7 @@ app.use(urlencodedBodyParser({ extended: true }));
 useExpressServer(app, 
   {
     cors: true,
-    controllers: [RegisterController, CardController, BookController, PuzzleListController, OrderController, ContentController, PayController, TestController, ArtprintsController, PagecontentController, CheckoutController, PaymentController, SubscribeController ],
+    controllers: [RegisterController, CardController, BookController, PuzzleListController, OrderController, ContentController, PayController, TestController, ArtprintsController, PagecontentController, CheckoutController, PaymentController, SubscribeController, ContactController ],
   }
 )
 

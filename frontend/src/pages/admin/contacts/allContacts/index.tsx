@@ -7,42 +7,32 @@ const { publicRuntimeConfig } = getConfig()
 
 const initialResponseState: any = [];
 
-export default function AllBooks(props) {
+export default function AllContacts(props) {
   
     const router = useRouter();
-    const { AllBooks } = props;
+    const { AllContacts } = props;
 
     const [responseState, setResponseState] = useState(initialResponseState);
 
-    async function handleDeleteClick(id: any) {
-
-        try { 
-        const response = await axios.post(`${publicRuntimeConfig.backendBaseUrl}api/books/delete/${id}`);
-        setResponseState(response); 
-        return router.push(router.asPath) 
-        } catch (error) { 
-            console.log(error);
-        }
-
-    }
-
-
     return (      
         <div className="all-books-cont">
-            <h3 className="mb-3">All Books</h3>
+            <h3 className="mb-3">All Contacts</h3>
             <div className="response-cont">
                 <h6>{responseState?.data?.message}</h6>  
             </div>
             <div className="row py-3">
-                {AllBooks.map( (data:any, index) => {                       
+                {AllContacts.map( (data:any, index) => {                       
                     return (
                         <div className="col-12 each-book" key={index}>
                             <h6>{data.book_name}</h6>
                             <div className="d-flex">
                                 <p className="link-items">
-                                    <span><a href={"/admin/books/editBook/?id=" + data.bookId}>Edit</a></span>                                  
-                                    <span><a target="_blank" href={`/product/${data.slug}`}>View</a></span>
-                                    <span className="link-item-red"><a onClick={() => handleDeleteClick(data.bookId)}>Delete</a></span>
+                                    <ul className="each-contact-entry-item">
+                                        <li><strong>First Name:</strong> { data.first_name }</li>
+                                        <li><strong>Last Name:</strong> { data.last_name }</li>
+                                        <li><strong>Email:</strong> { data.email }</li>
+                                        <li><strong>Enquiry:</strong> { data.enquiry }</li>
+                                    </ul>
                                 </p>
                             </div>
                         </div>
@@ -59,28 +49,27 @@ export default function AllBooks(props) {
 
 export async function getServerSideProps(context) {
 
-    const baseUrl = process.env.BACKEND_BASE_URL; 
-    
+    const baseUrl = process.env.BACKEND_BASE_URL;
     let res: any;
 
     try { 
-     res = await axios.get(`${baseUrl}api/allBooks`);       
+     res = await axios.get(`${baseUrl}api/allContacts`);       
     } catch (error) {
         console.log(error);
     }   
     return {
       props: {
           //@ts-ignore
-          AllBooks : res.data.response
+          AllContacts : res.data.response
       }, 
     }
   }
   
 
-AllBooks.getLayout = function getLayout(page: any) {
+AllContacts.getLayout = function getLayout(page: any) {
     return (
-      <AdminLayout>
+        <AdminLayout>
             {page}
-      </AdminLayout>
+        </AdminLayout>
     )
-  }
+}

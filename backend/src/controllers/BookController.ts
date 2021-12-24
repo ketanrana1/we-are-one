@@ -41,7 +41,6 @@ export class BookController {
   async postBook( @Body() body: any, 
     @UploadedFile("book_image", { options: fileUploadOptions() }) file : any ) {
 
-    console.log("file", file)
 
     const bookSchema = Joi.object({
      
@@ -310,7 +309,7 @@ export class BookController {
   //  @Post('/book/delete?test=:check')
   //   async removeBook(@QueryParam('test') test: any) {
 
-  //     console.log("id",test)
+  //     
 
   //   // const bookDeleted = await Book.deleteOne({ bookId : id });
 

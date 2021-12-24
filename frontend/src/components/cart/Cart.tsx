@@ -86,7 +86,7 @@ return (
             </div>
 
             <div className="no-cart-value" style={{display: noProducts}}>
-                <h2 className="mb-4" style={{textAlign:"center"}}>There are not items in your cart.</h2>
+                <h2 className="mb-4" style={{textAlign:"center"}}>There are no items in your cart.</h2>
                 <div className="buttons">
                     <div className="center"><a href="/books" className="button">Go to Shop Page</a></div>
                 </div>

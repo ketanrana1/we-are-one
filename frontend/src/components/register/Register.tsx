@@ -2,25 +2,20 @@ import React, { useState } from 'react'
 import Joi from "joi-browser"
 import axios from 'axios';
 import InputField from "./InputField"
+import getConfig from 'next/config'
+const { publicRuntimeConfig } = getConfig()
 
-const initialDataState = { firstName: "", lastName: "", email: "", telephone: "", fax: "", company: "", companyId: "", address_1: "", address_2: "", city: "", post_code: "", country: "", state: "", password: "" };
+const initialDataState = { firstName: "", lastName: "", email: "", password: "" };
+// const initialDataState = { firstName: "", lastName: "", email: "", telephone: "", fax: "", company: "", companyId: "", address_1: "", address_2: "", city: "", post_code: "", country: "", state: "", password: "" };
 const initialResponseState: any = [];
+
+const baseUrl = process.env.BACKEND_BASE_URL; 
 
 const schema = {
 
     firstName: Joi.string().required(),
     lastName: Joi.string().required(),
-    email: Joi.string().email({ minDomainSegments: 2, tlds: { allow: ['com', 'net'] } }).required(),
-    telephone: Joi.number().required(),
-    fax: Joi.number().optional().allow(""),
-    company: Joi.string().optional().allow(""),
-    companyId: Joi.string().optional().allow(""),
-    address_1: Joi.string().required(),
-    address_2: Joi.string().optional().allow(""),
-    city: Joi.string().required(),
-    post_code: Joi.string().optional().allow(""),
-    country: Joi.string().required(),
-    state: Joi.string().required(),
+    email: Joi.string().email().required(),
     password: Joi.string().required()
 
 };
@@ -53,22 +48,13 @@ const Register = () => {
         form.append('firstName', dataState.firstName);
         form.append('lastName', dataState.lastName);
         form.append('email', dataState.email);
-        form.append('fax', dataState.fax);
-        form.append('company', dataState.company);
-        form.append('companyId', dataState.companyId);
-        form.append('address_1', dataState.address_1);
-        form.append('address_2', dataState.address_2);
-        form.append('city', dataState.city);
-        form.append('post_code', dataState.post_code);
-        form.append('country', dataState.country);
-        form.append('state', dataState.state);
         form.append('password', dataState.password);
 
-        // if(typeof validate() === 'undefined') {
+        if(typeof validate() === 'undefined') {
             try {
                 const request : any = await axios({ 
                 method: 'post',    
-                url: 'http://localhost:4000/api/register',
+                url: `${publicRuntimeConfig.backendBaseUrl}api/register`,
                 data: form,
                 headers: {
                     'Content-Type': 'multipart/form-data'
@@ -79,9 +65,9 @@ const Register = () => {
                 console.log(request);
     
             } catch (error) {
-                console.log(error)
+                console.log(error)  
             }
-        // }       
+        }       
       };
 
       const validateField = (name, value) => {
@@ -160,6 +146,14 @@ const Register = () => {
                                         />
                                         <InputField 
                                             required="*"
+                                            label="Password" 
+                                            type="password" 
+                                            name="password"onChange={handleChange}
+                                            value={dataState.password}
+                                            error={errors && <small>{errors.password}</small>} 
+                                        />
+                                        {/* <InputField 
+                                            required="*"
                                             label="Telephone" 
                                             type="text" 
                                             name="telephone"
@@ -174,11 +168,11 @@ const Register = () => {
                                             onChange={handleChange}
                                             value={dataState.fax}
                                             error={errors && <small>{errors.fax}</small>} 
-                                        />
+                                        /> */}
                                     </div>
                                 </div>
 
-
+{/* 
                                 <div className="col-md-12">
                                     <div className="row">
                                         <div className="col-md-12">
@@ -290,7 +284,7 @@ const Register = () => {
                                             </div>
                                         </div>
                                     </div>
-                                </div>                          
+                                </div>                           */}
                                 {/* <div className="col-md-12">
                                     I have read and agree to the <a className="colorbox cboxElement" href="" ><b>Privacy Policy</b></a>                            
                                     <input type="checkbox" name="agree" value="1" />
