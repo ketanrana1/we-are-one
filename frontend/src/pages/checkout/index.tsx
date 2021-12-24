@@ -228,14 +228,14 @@ export default function Checkout() {
                             <div className="row d-flex justify-content-between">
                             <h2 className="mb-4">Your Billing Details</h2>
                                 <div className="col-12 col-md-6 mb-3">
-                                <span className="required">*</span> First Name:<br/>
-                                <input onChange={handleShippingChange} type="text" name="billing_firstname" value={shippingState.billing_firstname} className="large-field" />
-                                {errors && <small>{errors.billing_firstname}</small>}
+                                    <span className="required">*</span> First Name:<br/>
+                                    <input onChange={handleShippingChange} type="text" name="billing_firstname" value={shippingState.billing_firstname} className="large-field" />
+                                    {errors && <small>{errors.billing_firstname}</small>}
                                 </div>
                                 <div className="col-12 col-md-6 mb-3">
-                                <span className="required">*</span> Last Name:<br/>
-                                <input onChange={handleShippingChange} type="text" name="billing_lastname" value={shippingState.billing_lastname} className="large-field" />
-                                {errors && <small>{errors.billing_lastname}</small>}
+                                    <span className="required">*</span> Last Name:<br/>
+                                    <input onChange={handleShippingChange} type="text" name="billing_lastname" value={shippingState.billing_lastname} className="large-field" />
+                                    {errors && <small>{errors.billing_lastname}</small>}
                                 </div>
                                 <div className="col-12 mb-3">
                                     <span className="required">*</span> Address Line 1:<br/>

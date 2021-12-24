@@ -110,10 +110,6 @@ export class CheckoutController {
       };
     }
 
-
-
-
-
   }
 
 }

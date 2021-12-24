@@ -140,7 +140,8 @@ export class BookController {
       }  
     } else {
       let bookBody = body; 
-      bookBody.book_image_name = file.filename;    
+      bookBody.book_image_name = file.filename; 
+         
       const response = await Book.findOneAndUpdate({ "bookId": id }, { 
       book_name: bookBody.book_name,
       slug: body.slug,

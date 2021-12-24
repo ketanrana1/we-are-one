@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import AdminLayout from 'components/admin/common/AdminLayout'
 import Joi from "joi-browser";
 import axios from 'axios';
-import getConfig from 'next/config'
+import getConfig from 'next/config' 
 const { publicRuntimeConfig } = getConfig()
 
 const baseUrl = process.env.BACKEND_BASE_URL;

@@ -2,7 +2,8 @@ import React, { useState, useEffect } from 'react'
 import AdminLayout from 'components/admin/common/AdminLayout'
 import Joi from "joi-browser";
 import axios from 'axios';
-const baseUrl = process.env.BASE_URL;
+import getConfig from 'next/config'
+const { publicRuntimeConfig } = getConfig() 
 
 export async function getServerSideProps(context) {
 
@@ -10,7 +11,7 @@ export async function getServerSideProps(context) {
     const { id } = context.query;
 
     try { 
-     res = await axios.get(`${baseUrl}/api/artprints/singleArtprint/?id=${id}`);       
+     res = await axios.get(`${publicRuntimeConfig.backendBaseUrl}api/artprints/singleArtprint/?id=${id}`);       
     } catch (error) {
         console.log(error);
     }   
@@ -32,15 +33,8 @@ const initialResponseState: any = [];
 const schema = {
 
     art_name: Joi.string().required(),
+    slug: Joi.string().required(),
     art_description: Joi.string().required(),
-    art_image_1: Joi.any(),
-    art_image_2: Joi.any(),
-    art_image_3: Joi.any(),
-    art_image_4: Joi.any(),
-    art_image_1_name: Joi.any(),
-    art_image_2_name: Joi.any(),
-    art_image_3_name: Joi.any(),
-    art_image_4_name: Joi.any(),
     size_small_price: Joi.number().required(),
     size_large_price: Joi.number().required(),
     size_xlarge_price: Joi.number().required()
@@ -51,44 +45,47 @@ export default function AddArtprint(props) {
 
     const { singleArtprint, ID } = props
 
-    const initialState = { art_name: singleArtprint[0].art_name, art_description: singleArtprint[0].art_description, art_image_1: "", art_image_2: "", art_image_3: "", art_image_4: "", art_image_1_name: singleArtprint[0].art_image_1_name, art_image_2_name: singleArtprint[0].art_image_2_name, art_image_3_name: singleArtprint[0].art_image_3_name, art_image_4_name: singleArtprint[0].art_image_4_name, size_small_price: singleArtprint[0].size_small_price, size_large_price: singleArtprint[0].size_large_price, size_xlarge_price: singleArtprint[0].size_xlarge_price};
+    const initialState = { art_name: singleArtprint[0].art_name, slug: singleArtprint[0].slug, art_description: singleArtprint[0].art_description, size_small_price: singleArtprint[0].size_small_price, size_large_price: singleArtprint[0].size_large_price, size_xlarge_price: singleArtprint[0].size_xlarge_price, art_image_1_name: singleArtprint[0].art_image_1_name, art_image_2_name: singleArtprint[0].art_image_2_name, art_image_3_name: singleArtprint[0].art_image_3_name, art_image_4_name: singleArtprint[0].art_image_4_name};
+
+
+    // const initialState = { art_name: singleArtprint[0].art_name, slug: singleArtprint[0].slug, art_description: singleArtprint[0].art_description, art_image_1: "", art_image_2: "", art_image_3: "", art_image_4: "", art_image_1_name: singleArtprint[0].art_image_1_name, art_image_2_name: singleArtprint[0].art_image_2_name, art_image_3_name: singleArtprint[0].art_image_3_name, art_image_4_name: singleArtprint[0].art_image_4_name, size_small_price: singleArtprint[0].size_small_price, size_large_price: singleArtprint[0].size_large_price, size_xlarge_price: singleArtprint[0].size_xlarge_price};
 
     const [state, setState] = useState(initialState);
     const [errors, setErrors] = useState(null);
     const [responseState, setResponseState] = useState(initialResponseState);
 
 
-    const [fileOne, setFileOne] = useState();
-    const [fileOneName, setFileOneName] = useState("");
+    // const [fileOne, setFileOne] = useState();
+    // const [fileOneName, setFileOneName] = useState("");
 
-    const saveFileOne = (e) => {
-    setFileOne(e.target.files[0]);
-    setFileOneName(e.target.files[0].name);
-    };
+    // const saveFileOne = (e) => {
+    // setFileOne(e.target.files[0]);
+    // setFileOneName(e.target.files[0].name);
+    // };
 
-    const [fileTwo, setFileTwo] = useState();
-    const [fileTwoName, setFileTwoName] = useState("");
+    // const [fileTwo, setFileTwo] = useState();
+    // const [fileTwoName, setFileTwoName] = useState("");
  
-    const saveFileTwo = (e) => {
-    setFileTwo(e.target.files[0]);
-    setFileTwoName(e.target.files[0].name);
-    };
+    // const saveFileTwo = (e) => {
+    // setFileTwo(e.target.files[0]);
+    // setFileTwoName(e.target.files[0].name);
+    // };
 
-    const [fileThree, setFileThree] = useState();
-    const [fileThreeName, setFileThreeName] = useState("");
+    // const [fileThree, setFileThree] = useState();
+    // const [fileThreeName, setFileThreeName] = useState("");
  
-    const saveFileThree = (e) => {
-    setFileThree(e.target.files[0]);
-    setFileThreeName(e.target.files[0].name);
-    };
+    // const saveFileThree = (e) => {
+    // setFileThree(e.target.files[0]);
+    // setFileThreeName(e.target.files[0].name);
+    // };
 
-    const [fileFour, setFileFour] = useState();
-    const [fileFourName, setFileFourName] = useState("");
+    // const [fileFour, setFileFour] = useState();
+    // const [fileFourName, setFileFourName] = useState("");
  
-    const saveFileFour = (e) => {
-    setFileFour(e.target.files[0]);
-    setFileFourName(e.target.files[0].name);
-    };
+    // const saveFileFour = (e) => {
+    // setFileFour(e.target.files[0]);
+    // setFileFourName(e.target.files[0].name);
+    // };
 
     //RESPONSE
 
@@ -113,27 +110,27 @@ export default function AddArtprint(props) {
         let form = new FormData();
 
         form.append('art_name', state.art_name);
+        form.append('slug', state.slug);
         form.append('art_description', state.art_description);
         form.append('size_small_price', state.size_small_price);
-        form.append('size_large_price', state.size_small_price);
-        form.append('size_xlarge_price', state.size_small_price);
+        form.append('size_large_price', state.size_large_price);
+        form.append('size_xlarge_price', state.size_xlarge_price);
 
-        form.append('art_image_1', fileOne);
-        form.append('art_image_1_name',fileOneName);
-        form.append('art_image_2', fileTwo);
-        form.append('art_image_2_name',fileTwoName);
-        form.append('art_image_3', fileThree);
-        form.append('art_image_3_name',fileThreeName);
-        form.append('art_image_4', fileFour);
-        form.append('art_image_4_name',fileFourName);
+        // form.append('art_image_1', fileOne);
+        // form.append('art_image_1_name',fileOneName);
+        // form.append('art_image_2', fileTwo);
+        // form.append('art_image_2_name',fileTwoName);
+        // form.append('art_image_3', fileThree);
+        // form.append('art_image_3_name',fileThreeName);
+        // form.append('art_image_4', fileFour);
+        // form.append('art_image_4_name',fileFourName);
 
-
-        if(typeof validate() === 'undefined') {
+        // if(typeof validate() === 'undefined') {
 
         try {
             const request : any = await axios({
             method: 'post',    
-            url: 'http://localhost:4000/api/artprints/addArtprint',
+            url: `${publicRuntimeConfig.backendBaseUrl}api/artprints/editArtprint/?id=${ID}`,
             data: form,
             headers: {
                 'Content-Type': 'multipart/form-data'
@@ -144,7 +141,7 @@ export default function AddArtprint(props) {
             console.log(error)
         }
 
-    }
+    // }
       };
 
       const validateField = (name, value) => {
@@ -161,7 +158,6 @@ export default function AddArtprint(props) {
         setErrors({ ...errors, [name]: validateField(name, value) });
       };
 
-      console.log("STATE", state)
 
 
     return (
@@ -179,6 +175,12 @@ export default function AddArtprint(props) {
                     </div>
 
                     <div className="form-group">
+                        <label >Slug</label>
+                        <input name="slug" type="text" className="form-control" onChange={handleChange} value={state.slug} />
+                        {errors && <small>{errors.slug}</small>}
+                    </div>
+
+                    <div className="form-group">
                         Current Image One<br/>
                         <img src={ state.art_image_1_name } style={{ maxWidth: "200px"}} />
                     </div>
@@ -189,11 +191,11 @@ export default function AddArtprint(props) {
 
                     
 
-                    <div className="form-group">
+                    {/* <div className="form-group">
                         <label>Update ArtPrint Image One</label>
                         <input name="art_image_1" type="file" className="form-control-file" id="exampleFormControlFile1" onChange={saveFileOne} />
                         {errors && <small>{errors.art_image_1}</small>}
-                    </div>
+                    </div> */}
 
                     <div className="form-group">
                         Current Image Two<br/>
@@ -201,11 +203,11 @@ export default function AddArtprint(props) {
                     </div>
 
 
-                    <div className="form-group">
+                    {/* <div className="form-group">
                         <label>Update ArtPrint Image Two</label>
                         <input name="art_image_1" type="file" className="form-control-file" id="exampleFormControlFile1" onChange={saveFileTwo} />
                         {errors && <small>{errors.art_image_1}</small>}
-                    </div>
+                    </div> */}
 
                     <div className="form-group">
                         Current Image Three<br/>
@@ -213,21 +215,21 @@ export default function AddArtprint(props) {
                     </div>
 
 
-                    <div className="form-group">
+                    {/* <div className="form-group">
                         <label>Update ArtPrint Image Three</label>
                         <input name="art_image_1" type="file" className="form-control-file" id="exampleFormControlFile1" onChange={saveFileThree} />
                         {errors && <small>{errors.art_image_1}</small>}
-                    </div>
+                    </div> */}
 
                     <div className="form-group">
                         Current Image Four<br/>
                         <img src={ state.art_image_4_name } style={{ maxWidth: "200px"}} />
                     </div>
-                    <div className="form-group">
+                    {/* <div className="form-group">
                         <label>Update ArtPrint Image Four</label>
                         <input name="art_image_1" type="file" className="form-control-file" id="exampleFormControlFile1" onChange={saveFileFour} />
                         {errors && <small>{errors.art_image_1}</small>}
-                    </div>
+                    </div> */}
 
                     <div className="form-group">
                         <label >Price for size Small</label> 

@@ -36,7 +36,6 @@ const Product = ({ product, relatedProducts  }) => {
       id: product[0]?.bookId,
       quantity: counter
     }
-   console.log(`jaado`,product[0]?.book_image_name)
 
     const handleAtc = () => {
         dispatch(addToCart(item));

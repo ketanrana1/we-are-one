@@ -3,19 +3,16 @@ import LoginLayout from 'components/admin/LoginLayout'
 import Joi from "joi-browser";
 import axios from 'axios';
 
-const initialDataState = { email: "", password: ""};
+const baseUrl = process.env.BACKEND_BASE_URL; 
 
+const initialDataState = { email: "", password: ""};
 
 const initialResponseState: any = [];
 
 const schema = {
-
-    email: Joi.string().required(),
-    password: Joi.string().required(),
-
+  email: Joi.string().required(),
+  password: Joi.string().required(),
 };
-
-
 
 
 export default function Login() {
@@ -23,7 +20,6 @@ export default function Login() {
     const [dataState, setDataState] = useState(initialDataState);
     const [errors, setErrors] = useState(null);
     const [responseState, setResponseState] = useState(initialResponseState);
-
 
     const validate = () => {
         const options = { abortEarly: false };
@@ -36,29 +32,23 @@ export default function Login() {
         }
         return errorsObj;
       };
-      
-
-
+        
       const handleSubmit = async (e) => {
         e.preventDefault();
         setErrors(validate());
 
         if(typeof validate() === 'undefined') {
-
             try {
-                const request : any = await axios({
-                method: 'post',    
-                url: 'http://localhost:4000/api/login',
-                data: dataState,
-                }); 
-                setResponseState(request);
-    
+              const request : any = await axios({
+              method: 'post',    
+              url: `${baseUrl}api/login`,
+              data: dataState,
+              }); 
+              setResponseState(request);
             } catch (error) {
                 console.log(error)
             }
-
-        }
-    
+        }    
       };
 
       const validateField = (name, value) => {
@@ -74,9 +64,6 @@ export default function Login() {
         setDataState({ ...dataState, [name]: value });
         setErrors({ ...errors, [name]: validateField(name, value) });
       };
-
-      console.log("STATE", dataState)
-
 
     return (
         <div className="login-form-cont px-5 pb-5 pt-3">
