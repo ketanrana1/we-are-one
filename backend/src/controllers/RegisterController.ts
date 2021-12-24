@@ -58,7 +58,7 @@ export class RegisterController {
         message: 'This action returns user profile details',
         errror: "false",
         is_paid: "true",
-    };
+    }; 
   }
 
   @Post('/register')
@@ -68,7 +68,7 @@ export class RegisterController {
 
       firstName: Joi.string().required().label('First Name'),
       lastName: Joi.string().required().label('Last Name'),
-      email: Joi.string().email({ minDomainSegments: 2, tlds: { allow: ['com', 'net'] } }).required().label('Email'),
+      email: Joi.string().email().required().label('Email'),
       telephone: Joi.number().label('Telephone'),
       fax: Joi.number().label('Fax'),
       company: Joi.string().label('Company'),
@@ -79,7 +79,8 @@ export class RegisterController {
       post_code: Joi.string().label('Post Code'),
       country: Joi.string().label('Country'),
       state: Joi.string().label('Region/State'),
-      password: Joi.string().pattern(new RegExp('^[a-zA-Z0-9]{3,30}$')).label('Password'),
+      password: Joi.string().required().label('Password'),
+      // password: Joi.string().pattern(new RegExp('^[a-zA-Z0-9]{3,30}$')).label('Password'),
     });
 
     const validate = userSchema.validate(body);
@@ -100,7 +101,11 @@ export class RegisterController {
         success: "false"
       }
 
-    const newUser = new User(body);
+      const newBody = body
+
+    newBody.role = "user"
+
+    const newUser = new User(newBody);
     const response = await newUser.save();
     
     if(response) {

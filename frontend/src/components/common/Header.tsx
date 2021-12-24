@@ -1,8 +1,11 @@
 import Link from 'next/link';
 import headerStyles from '../styles/header.module.css';
 import React, {useState} from 'react'
+import { useRouter } from "next/router";
 
 const Header = () => { 
+
+    const router = useRouter();
 
     const [navCollapsed, setNavCollapsed] = useState(true);
 
@@ -23,28 +26,29 @@ const Header = () => {
 
             <div className={`${navCollapsed ? 'ktr navbar-collapse collapse' : 'ktr-rna navbar-collapse collapse'}`} id="navbarSupportedContent">
                 <ul className="navbar-nav ml-auto">
-                    <li className="nav-item">
+
+                    <li className={router.pathname == "/" ? "nav-item active" : "nav-item"}>
                         <Link href='/'>
-                            <a className='nav-link active' onClick={handleNavCollapse}>Home</a>
+                            <a className='nav-link' onClick={handleNavCollapse}>Home</a>
                         </Link>
                     </li>
 
-                    <li className="nav-item">
+                    <li className={router.pathname == "/about" ? "nav-item active" : "nav-item"}>
                         <Link href='/about'>
                             <a className='nav-link' onClick={handleNavCollapse}>About</a>
                         </Link>
                     </li>
-                    <li className="nav-item">
+                    <li className={router.pathname == "/books" ? "nav-item active" : "nav-item"}>
                         <Link href='/books'>
                             <a className='nav-link' onClick={handleNavCollapse}>Books</a>
                         </Link>
                     </li>
-                    <li className="nav-item">
+                    <li className={router.pathname == "/artprints" ? "nav-item active" : "nav-item"}>
                         <Link href='/artprints'>
                             <a className='nav-link' onClick={handleNavCollapse}>ArtPrints</a>
                         </Link>
                     </li>
-                    <li className="nav-item">
+                    <li className={router.pathname == "/application" ? "nav-item active" : "nav-item"}>
                         <Link href='/application'>
                             <a className='nav-link' onClick={handleNavCollapse}>App</a>
                         </Link>
@@ -54,17 +58,17 @@ const Header = () => {
                             <a className='nav-link' onClick={handleNavCollapse}>Shop</a>
                         </Link>
                     </li> */}
-                    <li className="nav-item">
+                    <li className={router.pathname == "/printables" ? "nav-item active" : "nav-item"}>
                         <Link href='/printables'>
                             <a className='nav-link' onClick={handleNavCollapse}>Colouring</a>
                         </Link>
                     </li>
-                    <li className="nav-item">
+                    <li className={router.pathname == "/channel" ? "nav-item active" : "nav-item"}>
                         <Link href='/channel'>
                             <a className='nav-link' onClick={handleNavCollapse}>Shows</a>
                         </Link>
                     </li>
-                    <li className="nav-item">
+                    <li className={router.pathname == "/contact" ? "nav-item active" : "nav-item"}>
                         <Link href='/contact'>
                             <a className='nav-link' onClick={handleNavCollapse}>Contact</a>
                         </Link>
@@ -86,7 +90,7 @@ const Header = () => {
                         </div>
                     </li> */}
                    <div className="inline-wrap-menu">
-                    <li className="nav-item">
+                        <li className="nav-item">
                             <Link href='/cart'>
                                 <a className='nav-link' onClick={handleNavCollapse}>
                                 <img src="/assets/images/cart.png" className="nav-item-image" />
@@ -96,7 +100,7 @@ const Header = () => {
                         <li className="nav-item">
                             <Link href='/login'>
                                 <a className='nav-link' onClick={handleNavCollapse}>
-                                <img src="/assets/images/account.png" className="nav-item-image" />
+                                    <img src="/assets/images/account.png" className="nav-item-image" />
                                 </a>
                             </Link>
                         </li>
