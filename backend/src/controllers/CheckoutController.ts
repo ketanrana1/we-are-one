@@ -1,9 +1,10 @@
-import { JsonController, UploadedFile, Param, Body, Req, Get, Post, Put, Delete, Res } from 'routing-controllers';
+import { JsonController, UploadedFile, Param, Body, Req, Get, Post, Put, Delete, Res, UseBefore } from 'routing-controllers';
 import Content from '../models/content';
 import Joi from 'joi'
 import Order from '../models/order';
 import PayPal from 'services/paypal';
 import Transaction from 'models/transaction';
+import AuthMiddleware from 'middlewares/AuthMiddleware';
 
 
 
@@ -11,6 +12,7 @@ import Transaction from 'models/transaction';
 
 
 @JsonController('/api') 
+@UseBefore(AuthMiddleware)
 export class CheckoutController {  
 @Post('/checkout')
   async doCheckout(@Body() body: any, @Req() request: any, @Res() response: any,  @UploadedFile("", { }) file: any) {
@@ -105,7 +107,7 @@ export class CheckoutController {
         data: {
           orderId: newOrder.orderId,
           // billingName: `${newOrder.billingAddress.name} ${newOrder.billingAddress.name}`,
-          approvalUrl,
+          approvalUrl ,
         },
       };
     }

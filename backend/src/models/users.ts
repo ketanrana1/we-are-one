@@ -25,7 +25,7 @@ const userSchema = new Schema({
   post_code: String,
   country:String,
   state: String,
-  is_paid: String
+  is_paid: String,
   }, 
   {timestamps: true}
   );

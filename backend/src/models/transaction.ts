@@ -11,6 +11,6 @@ const transactionSchema = new Schema({
   },
    status: String,
    info: [Object],
-  });
+  }, {timestamps: true},);
   
 export default mongoose.model('Transaction', transactionSchema);

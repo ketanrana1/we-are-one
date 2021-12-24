@@ -103,19 +103,27 @@ export default function Checkout() {
       
 
         if( (typeof validate() === 'undefined') ) {
+            const headers = {
+                'Content-Type': 'application/json',
+                'Authorization': `${sessionStorage.getItem('token')}`
+              }
 
         try {
             const response : any = await axios({
             method: 'post',    
             url: 'http://localhost:4000/api/checkout',
             data: formBody,
+            headers
             // headers: {
             //     // 'Content-Type': 'multipart/form-data'
             //     }            
             });
-            if (response.data.data.approvalUrl) {
+            if (response?.data?.data?.approvalUrl) {
                 window.location.href = response.data.data.approvalUrl;
             } 
+            else {
+                window.location.href = "http://localhost:3000/login"
+            }
         } catch (error) {
             console.log(error)  
         }

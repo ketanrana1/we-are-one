@@ -8,7 +8,7 @@ import Transaction from 'models/transaction';
 
 // import Transaction, { TransactionStatus } from 'app/entity/Transaction';
 // import shippingEasy from 'app/services/ShippingEasy';
-// import { getTemplate, sendEmail } from 'services/mailer';
+import { getTemplate, sendEmail } from 'services/mailer';
 // import commonService from 'app/services/Common';
 // import logger from 'app/services/Logger';
 // import { sendToSales, sendToCsrDeclines } from 'app/services/Slack';
@@ -36,6 +36,23 @@ export default class PaymentController {
             transaction.info = payment
             await order.save();
             await transaction.save();
+            const emailContent = await getTemplate('emails/order-received.ejs', { order, transaction});
+            console.log(order, "yo se order")
+            console.log(transaction, "yo se transaction");
+            sendEmail({
+              to: "testmail8196@gmail.com",
+              cc: 'naveen.kumar@geeky.dev',
+              subject: `Order ${order.orderId} Receipt from worldofweareone.com`,
+              html: emailContent,
+            });
+
+            const orderContent = await getTemplate('emails/order-details.ejs', { order, transaction});
+            sendEmail({
+              to: "testmail8196@gmail.com",
+              cc: 'naveen.kumar@geeky.dev',
+              subject: `Order ${order.orderId} Receipt from worldofweareone.com`,
+              html: orderContent,
+            });
             response.redirect(`http://localhost:3000/success`);
             return response;
           }

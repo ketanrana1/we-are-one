@@ -207,6 +207,7 @@ export class RegisterController {
             userId: user.userId,
             email: user.email,
             fullName: user.fullName,
+            user: user
           },
           
           

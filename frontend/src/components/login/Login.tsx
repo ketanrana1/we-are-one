@@ -77,7 +77,11 @@ const Login = () => {
                 data: form,
                 });
                 setResponseState(request);
-                if (typeof window !== "undefined") sessionStorage.setItem("token",request.data.response.token)
+                console.log(request)
+                if (typeof window !== "undefined") {
+                    sessionStorage.setItem("token",request.data.response.token) 
+                    sessionStorage.setItem("user", request.data.user )
+                 } 
                 router.push('/account')
                         
             } catch (error) {

@@ -46,6 +46,7 @@ const orderSchema = new Schema({
    total_amount: Number,
    shipping_cost: Number,
    sub_amount: Number,
-  });
+   
+  },{timestamps: true},);
   
 export default mongoose.model('Order', orderSchema);
