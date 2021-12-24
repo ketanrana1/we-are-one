@@ -77,12 +77,6 @@ export default function Index() {
             <ArtPrints imgUrl="/assets/images/Art Print Web Page Banner.png" heading="art prints" btnUrl="/artprints" btnText="Browse Now" />
             <ChildBooks
             topHead="Favorites for every childs bookshelf!"
-            firstImgUrl="/assets/images/We Are one book.png" 
-            firstBtnLnkUrl="/books"
-            secondImgUrl="/assets/images/WALbookcover.png" 
-            secondBtnLnkUrl="/books"
-            thirdImgUrl="/assets/images/2xbooksfree.png" 
-            thirdBtnLnkUrl="/books"
             btmHead="BUY YOURS HERE"
             />
             <VideoSec videoUrl="/assets/videos/video.mp4" />
@@ -104,7 +98,7 @@ export default function Index() {
             <Video 
             btnURL=""
             btnImgURL="/assets/images/youtube-banner.png"
-            />                  */}
+            /> */}
         </div>
     )
 }

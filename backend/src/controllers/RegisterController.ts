@@ -98,13 +98,12 @@ export class RegisterController {
         message: "Email already exists",
         error: "true",
         success: "false"
-    }
+      }
 
     const newUser = new User(body);
     const response = await newUser.save();
     
     if(response) {
-
         var token = jwt.sign({
           id: newUser.id
         }, process.env.API_SECRET, {
@@ -119,7 +118,6 @@ export class RegisterController {
             is_paid: "false"
           },         
       };  
-
     }
   }
 
@@ -217,4 +215,83 @@ export class RegisterController {
       console.log("ERROR", error)
     }
   }
+
+
+
+  @Post('/admin-login')
+  async adminLogin(@Body() body: any, @UploadedFile("", { }) file: any ):Promise<any> {
+
+
+    const loginUserSchema = Joi.object({
+      email: Joi.string().email().label('Email'),
+      password: Joi.string().label('Password'),
+    });
+
+    const validate = loginUserSchema.validate(body);
+    if (validate.error) {
+      return {
+        message: 'Request data is invalid',
+        error: validate.error.details.map((d) => d.message),
+        success: false,
+      };
+    }
+
+    try {
+      const user = await User.findOne({
+        email: body.email,
+        role: "admin"
+      })
+
+      if(!user) {
+        return {
+          message: "User does not exist!",
+          error: "true",
+          success: "false"
+        }
+      }
+
+      var passwordIsValid = bcrypt.compareSync(
+        body.password,
+        user.password
+      );
+
+      if (!passwordIsValid) {
+      return {
+          accessToken: null,
+          message: "Invalid Password!",
+          error: "true",
+          success: "false"
+        };
+      }
+
+      var token = jwt.sign({
+        id: user.id
+      }, process.env.API_SECRET, {
+        expiresIn: 86400
+      });
+
+      return {
+
+          message: "Login successfully",
+          success: "true",
+          response: {
+            token: token,
+            is_paid: "false"
+          },
+
+          user: {
+            userId: user.userId,
+            email: user.email,
+            fullName: user.fullName,
+          },
+          
+          
+      };      
+    } catch (error) {
+      console.log("ERROR", error)
+    }
+  }
+
+
+
 }

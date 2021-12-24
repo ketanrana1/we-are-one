@@ -14,8 +14,8 @@ export default function AllBooks(props) {
         setrespone(data.response)
     }
 
-    useEffect(() => {
-        API();
+    useEffect(() => {   
+        API(); 
     },[]);
 
     return (

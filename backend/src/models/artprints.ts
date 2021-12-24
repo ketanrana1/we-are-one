@@ -10,6 +10,7 @@ const artprintSchema = new Schema({
     default: uuidv4
   },
   art_name: String,
+  slug: String,
   art_description: String,
   art_image_1: String,
   art_image_2: String,

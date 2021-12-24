@@ -117,7 +117,7 @@ $p-text-color: #1f429b;
                 color: #353535;
             }
         }
-        input[type=submit]
+        input[type=submit], .button-sbmt-artPrint
         {
             color: rgba(255, 255, 255, 0.8);
             border-color: rgba(255, 255, 255, 0.4);
@@ -137,7 +137,14 @@ $p-text-color: #1f429b;
                 font-size:17px;
                 line-height: 24px;
             }
-        }     
+        }
+        .btn-artprnts {
+            background: #3aabe8;
+            border: none;
+            color: white;
+            padding: 13px;
+            margin-left: 10px;
+        }   
     }
 }
 /*Art Prints*/

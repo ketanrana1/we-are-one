@@ -2,9 +2,10 @@ import React, { useState, useEffect } from 'react'
 import AdminLayout from 'components/admin/common/AdminLayout'
 import Joi from "joi-browser";
 import axios from 'axios';
- 
+import getConfig from 'next/config'
+const { publicRuntimeConfig } = getConfig() 
 
-const initialState = { art_name: "", art_description: "", art_image_1: "", art_image_2: "", art_image_3: "", art_image_4: "", art_image_1_name: "", art_image_2_name: "", art_image_3_name: "", art_image_4_name: "", size_small_price: "", size_large_price: "", size_xlarge_price: ""};
+const initialState = { art_name: "", slug: "", art_description: "", art_image_1: "", art_image_2: "", art_image_3: "", art_image_4: "", art_image_1_name: "", art_image_2_name: "", art_image_3_name: "", art_image_4_name: "", size_small_price: "", size_large_price: "", size_xlarge_price: ""};
 
 
 const initialResponseState: any = [];
@@ -12,6 +13,7 @@ const initialResponseState: any = [];
 const schema = {
 
     art_name: Joi.string().required(),
+   slug: Joi.string().required(),
     art_description: Joi.string().required(),
     art_image_1: Joi.any(),
     art_image_2: Joi.any(),
@@ -89,6 +91,7 @@ export default function AddArtprint() {
         let form = new FormData();
 
         form.append('art_name', state.art_name);
+        form.append('slug', state.slug);
         form.append('art_description', state.art_description);
         form.append('size_small_price', state.size_small_price);
         form.append('size_large_price', state.size_large_price);
@@ -109,7 +112,7 @@ export default function AddArtprint() {
         try {
             const request : any = await axios({
             method: 'post',    
-            url: 'http://localhost:4000/api/artprints/addArtprint',
+            url: `${publicRuntimeConfig.backendBaseUrl}api/artprints/addArtprint`,
             data: form,
             headers: {
                 'Content-Type': 'multipart/form-data'
@@ -152,6 +155,12 @@ export default function AddArtprint() {
                         <label >Art Name</label>
                         <input name="art_name" type="text" className="form-control" onChange={handleChange} value={state.art_name} />
                         {errors && <small>{errors.art_name}</small>}
+                    </div>
+
+                    <div className="form-group">
+                        <label >Slug</label>
+                        <input name="slug" type="text" className="form-control" onChange={handleChange} value={state.slug} />
+                        {errors && <small>{errors.slug}</small>}
                     </div>
 
                     <div className="form-group">
