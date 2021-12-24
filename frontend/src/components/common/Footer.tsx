@@ -1,6 +1,12 @@
 import Link from 'next/link';
+import { useState } from 'react';
+
 
 const Header = () => {
+ const [mail, setMail] = useState("")
+ const handleClick = () => {
+     console.log(`dcjdknvc0`,mail);
+ }
   return (
     <footer className="mainFooter" >
         <div className="footer-container">
@@ -11,11 +17,12 @@ const Header = () => {
                     <div className="wao-ft-form_wrapper">
                         <div className="selectmain">
                             <label>Email Address</label>
-                            <input id="email" name="email" type="text" placeholder="Enter your email address." /><br />
+                            <input id="email" name="email" type="email" placeholder="Enter your email address." value={mail} onChange={(e)=> {setMail(e.target.value)
+                            }} /><br />
                             <div id="newsletter_msg"></div>
                         </div>
                         
-                        <div className="mobi_go"><a ><input type="image" src="/assets/images/go-rainbow-btn.png" value="" /></a></div>
+                        <div onClick={handleClick} className="mobi_go"><a  ><input type="image" src="/assets/images/go-rainbow-btn.png" value="" /></a></div>
                     </div>
                 </div>
             </div>

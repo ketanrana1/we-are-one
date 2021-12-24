@@ -70,11 +70,11 @@ export default function Checkout() {
 
        const formBody = {
             items: cart.map((item: any) => ({
-                productId: item.productId,
-                variant: item.variant ? item.variant : null,
+                id: item.id,
+                product_price: item.product_price,
                 quantity: item.quantity,
-                orderRepeat: item.orderRepeat,
-                orderRepeatValue: item.orderRepeatValue,
+                product_name: item.product_name,
+                product_image_name: item.product_image_name,
     
             })),
             shipping_firstname:shippingState.shipping_firstname,

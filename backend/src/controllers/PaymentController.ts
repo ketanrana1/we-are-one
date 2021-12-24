@@ -36,7 +36,7 @@ export default class PaymentController {
             transaction.info = payment
             await order.save();
             await transaction.save();
-            response.redirect(`http://localhost:3000/checkout/success`);
+            response.redirect(`http://localhost:3000/success`);
             return response;
           }
        

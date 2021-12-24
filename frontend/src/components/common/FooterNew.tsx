@@ -1,6 +1,29 @@
 import Link from 'next/link';
+import { useState } from 'react';
+import axios from 'axios';
 
 const FooterNew = () => {
+    const [mail, setMail] = useState("")
+    const handleClick = async() => {
+        const data = {email: mail}
+        try {
+            const response : any = await axios({
+            method: 'post',    
+            url: 'http://localhost:4000/subscribe',
+            data: data,
+            // headers: {
+            //     // 'Content-Type': 'multipart/form-data'
+            //     }            
+            });
+            if (response.data.data.approvalUrl) {
+                window.location.href = response.data.data.approvalUrl;
+            } 
+        } catch (error) {
+            console.log(error)  
+        }
+    }
+
+
   return (
     <>
     <div className="child-image-cont">
@@ -15,10 +38,12 @@ const FooterNew = () => {
                         <div className="wao-ft-form_wrapper">
                             <div className="selectmain">
                                 <label>Email Address</label>
-                                <input id="email" name="email" type="text" placeholder="Enter your email address." /><br />
+                                <input type="email" id="email" name="email" placeholder="Enter your email address." value={mail} onChange={(e) => {
+                                    setMail(e.target.value)
+                                }}/><br />
                                 <div id="newsletter_msg"></div>
                             </div>                            
-                           <div className="mobi_go"><a ><input type="image" src="/assets/images/go-rainbow-btn.png" value="" /></a></div>
+                           <div className="mobi_go"><a onClick={handleClick} ><input type="image" src="/assets/images/go-rainbow-btn.png" value="" /></a></div>
                         </div>
                     </div>
                 </div>

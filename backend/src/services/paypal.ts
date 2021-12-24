@@ -15,9 +15,10 @@ class PayPalService {
     const environment = process.env.PAYPAL_ENV === 'prod' ? new paypal.core.LiveEnvironment(clientId, clientSecret) : new paypal.core.SandboxEnvironment(clientId, clientSecret);
     this.client = new paypal.core.PayPalHttpClient(environment);
   }
-
-  async createPayment(order:typeof Order,  return_url: string, cancel_url: string) {
-    console.log(`djfwkfl`,order);
+  
+  async createPayment(order:any,  return_url: string, cancel_url: string) {
+  console.log(order)
+    // let shipping_cost = 20;
     const request = new paypal.orders.OrdersCreateRequest();
     // const orderItems = await this.filterOrderItems(order.items);
     request.requestBody({
@@ -30,15 +31,15 @@ class PayPalService {
         {
           amount: {
             currency_code: 'USD',
-            value: '25',
+            value: order.total_amount,
             breakdown: {
               item_total: {
                 currency_code: 'USD',
-                value: '25',
+                value: order.sub_amount,
               },
               shipping: {
                 currency_code: 'USD',
-                value: '0',
+                value: order.shipping_cost,
               },
               discount: {
                 currency_code: 'USD',

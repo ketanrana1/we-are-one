@@ -38,6 +38,12 @@ $p-color: #2caadf;
         display:block;
         margin:0 auto;
     }
+    .success-layout {
+        margin: auto;
+        width: 50%;
+        border: 3px solid green;
+        padding: 10px;
+    }
     .btn-cont {
         visibility:hidden;
         position: absolute;
@@ -715,7 +721,12 @@ ul.footer-social-list-wrapper, .wao-footer-wrapper .wao-ft-inspire-text {
     margin-bottom: 0;
 }
 
-
+.thankyou-message {
+    font-family: 'Nunito';
+}
+.thankyou-component {
+    margin: auto;width: 50%;border: 3px solid green;padding: 10px;
+}
 
 /*Footer New*/
 
@@ -1039,6 +1050,13 @@ display: inline-block;
     }
     .mainFooter.footer-new .social-text-cont h3 {
         padding-right: 8px;
+    }
+    .thankyou-message {
+        font-size: 23px !important;
+        font-family: "Nunito";
+    }
+    .success-container {
+        display:  block !important;
     }
 }
 

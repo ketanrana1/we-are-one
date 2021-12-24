@@ -41,7 +41,18 @@ export class CheckoutController {
       billing_zip: Joi.string().required().label('Zip Code'),
       billing_country: Joi.string().required().label('Country'),
       billing_telephone: Joi.number().required().label('Phone Number'),
-      billing_email: Joi.string().required().label('Email')
+      billing_email: Joi.string().required().label('Email'),
+      items: Joi.array().items(Joi.object({
+        id: Joi.string().label('Id'),
+        quantity: Joi.number().label('Item Quantity'),
+        product_name: Joi.string().min(0).allow(null).allow('')
+          .label('Variant'),
+        product_price: Joi.number().min(0).allow(null).allow('')
+          .label('Order Repeat'),
+        product_image_name: Joi.string().min(0).allow(null).allow('')
+          .label('Order Repeat Value'),
+        
+      })),
 
     });
   
@@ -57,12 +68,24 @@ export class CheckoutController {
 
     const newOrder = new Order(body);
     const transaction = new Transaction();
+    newOrder.ordered_items = body.items;
+    let shippingCost = 20;
+    let totalAmount = 0; 
+      for (let i =0 ; i < newOrder.ordered_items.length ; i ++) {
+        totalAmount = totalAmount + newOrder.ordered_items[i].product_price * newOrder.ordered_items[i].quantity;
+        if(newOrder.ordered_items[i].id == "ad2f14df-5c92-4c66-8fd2-1fad1ca6c28f") {
+          shippingCost = 0;
+        }
+      }
+      
     newOrder.status = 'Created';
+    newOrder.total_amount = totalAmount + shippingCost;
+      newOrder.shipping_cost = shippingCost;
+      newOrder.sub_amount = totalAmount;
     transaction.status = "Redirecting to Gateway";
     await transaction.save();
     newOrder.transactionId =  transaction.transactionId;
     const result = await newOrder.save();
-    newOrder.total_amount = "25";
     const url = `${request.protocol}://${request.get('host')}`;
     console.log(url)
     let approvalUrl = "";
