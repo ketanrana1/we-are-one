@@ -6,7 +6,6 @@ import { useRouter } from "next/router";
 
 const Header = (props) => { 
 
-    const cart = [];
 
     const router = useRouter();
     const [check, setCheck] = useState(false);
@@ -14,8 +13,9 @@ const Header = (props) => {
     function handleRadioChange() {
         setCheck(true);
     }
+    const cart = useSelector((state: any) => state.cart);
 
-    
+
 
     const [navCollapsed, setNavCollapsed] = useState(true);
 
@@ -103,7 +103,7 @@ const Header = (props) => {
                         <li className="nav-item">
                             <Link href='/cart'>
                                 <a className='nav-link cart-image_number' onClick={handleNavCollapse}>
-                                <img src="/assets/images/cart.png" className="nav-item-image" /><div className="number-on-cart">{cart.length}</div>
+                                <img src="/assets/images/cart.png" className="nav-item-image"/><div className="number-on-cart">{cart.length}</div>
                                 </a>
                             </Link>
                         </li>
