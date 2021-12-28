@@ -12,9 +12,9 @@ import AuthMiddleware from 'middlewares/AuthMiddleware';
 export class CheckoutController {  
 @Post('/checkout')
   async doCheckout(@Body() body: any, @Req() request: any, @Res() response: any,  @UploadedFile("", { }) file: any) {
-
+    console.log(`qsdjkndsa`,body)
     const orderSchema = Joi.object({ 
-
+      userID: Joi.any(),
       shipping_firstname: Joi.string().required().label('First Name'),
       shipping_lastname: Joi.string().required().label('Last Name'),
       shipping_address_1: Joi.string().required().label('Shipping Adress 1'),
@@ -56,10 +56,12 @@ export class CheckoutController {
         error: validate.error.details.map((d) => d.message),  
       };
     }
+    
 
     const newOrder = new Order(body);
     const transaction = new Transaction();
     newOrder.ordered_items = body.items;
+    newOrder.userId = body.userID;
     let shippingCost = 20;
     let totalAmount = 0; 
     for (let i =0 ; i < newOrder.ordered_items.length ; i ++) {

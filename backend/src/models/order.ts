@@ -6,10 +6,7 @@ const { Schema } = mongoose;
 const orderSchema = new Schema({
     order_amount: String,
     email: String,
-    userId: [{
-      type: String,
-      ref: 'User'
-   }],
+    userId: String,
    transactionId:{
      type: String,
      ref: 'Transaction'

@@ -1,6 +1,6 @@
 import React from 'react'
 import Index from '../../components/register/Index'
-import Layout from 'components/common/Layout'
+import LayoutNew from 'components/common/LayoutNew'
 
 export default function Register() {
     return (
@@ -12,8 +12,8 @@ export default function Register() {
 
 Register.getLayout = function getLayout(page) {
     return (
-      <Layout>
+      <LayoutNew>
             {page}
-      </Layout>
+      </LayoutNew>
     )
   } 

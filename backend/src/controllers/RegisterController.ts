@@ -1,5 +1,6 @@
-import { JsonController, Param, UploadedFile, Body, Get, Post, Put, Delete, Req, Res, Controller } from 'routing-controllers';
+import { JsonController, Param, UploadedFile, Body, Get, Post, QueryParam, Put, Delete, Req, Res, Controller } from 'routing-controllers';
 import User from '../models/users';
+import Order from '../models/order'
 import Joi from 'joi';
 import { Mongoose } from 'mongoose';
 const bcrypt = require('bcryptjs');
@@ -61,6 +62,52 @@ export class RegisterController {
     }; 
   }
 
+
+
+  @Get('/account')
+  async getAccountDetails(@QueryParam('id') id: string, @Body() body: any, @UploadedFile("", { }) file: any) {
+ 
+  //  const userSchema = Joi.object({
+  //    id: Joi.string().required().label('User Id')
+  //  });
+ 
+  //  const validate = userSchema.validate(body);
+  //  if (validate.error) {
+  //    return {
+  //      success: false,
+  //      message: 'Request data is invalid',
+  //      error: validate.error.details.map((d) => d.message),
+  //    };
+  //  }  
+ 
+     const allOrderDetails = await Order.aggregate([
+      {
+        '$match': {
+          'userId': id
+        }
+      }, {
+        '$project': {
+          '_id': 0,
+          'orderId': 1, 
+          'total_amount': 1, 
+          'ordered_items': 1, 
+          'shipping_cost': 1
+        }
+      }
+    ]);
+     return {
+
+      allOrderDetails,
+      message: 'This action returns all orders for a single user'
+         
+     }; 
+   }
+
+  //  b22fc520-88df-49bc-958f-895c398c7638
+
+
+
+
   @Post('/register')
   async post(@Body() body: any,  @UploadedFile("", { }) file: any) {
 
@@ -92,7 +139,7 @@ export class RegisterController {
       };
     }
 
-    const userData = await User.findOne({ email:body.email });
+    const userData = await User.findOne({ email:body.email } );
 
     if(userData)
       return { 

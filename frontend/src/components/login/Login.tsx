@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import Joi from "joi-browser";
 import axios from 'axios';
 import { useRouter } from 'next/router'
+import userLogin from 'services/userLogin';
 
 const baseUrl = process.env.BACKEND_BASE_URL; 
 const initialDataState = { email: "", password: ""};
@@ -73,12 +74,14 @@ const Login = () => {
                 data: form,
                 });
                 setResponseState(request);
-                console.log(request)
                 if (typeof window !== "undefined") {
                     sessionStorage.setItem("token",request.data.response.token) 
-                    sessionStorage.setItem("user", request.data.user )
-                 } 
-                router.push('/account')
+                    sessionStorage.setItem("firstName", request.data.user.firstName )
+                    sessionStorage.setItem("lastName", request.data.user.lastName )
+                    sessionStorage.setItem("email", request.data.user.email )
+                    sessionStorage.setItem("userId", request.data.user.userId )
+                } 
+                router.push('/account') 
                         
             } catch (error) {
                 console.log(error)
@@ -103,7 +106,7 @@ const Login = () => {
 
 
 
-
+      if(userLogin() && typeof window !== "undefined") router.push('/account')
     return (
         <div className="login-page"> 
             <div className="container">

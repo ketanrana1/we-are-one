@@ -1,4 +1,4 @@
-import React, { useState} from 'react'
+import React, { useEffect, useState} from 'react'
 import LayoutNew from 'components/common/LayoutNew'
 import Joi from "joi-browser";
 import axios from 'axios';   
@@ -41,12 +41,17 @@ const schema = {
 
 export default function Checkout() {
     const cart = useSelector((state: any) => state.cart);
+    const [userid, setUserid] = useState("")
 
     const router = useRouter();
-
+    useEffect(() => {
+        setUserid(sessionStorage.getItem("userId")); 
+    }, [])
     const [shippingState, setShippingState] = useState(initialShippingState);
     const [errors, setErrors] = useState(null);
     const [responseState, setResponseState] = useState(initialResponseState);
+   
+
 
     const validate = () => {
         const options = { abortEarly: false };
@@ -59,7 +64,7 @@ export default function Checkout() {
         }
         return errorsObj;
       }; 
-
+     
       const handleSubmit = async (e) => {
 
         e.preventDefault();
@@ -76,6 +81,7 @@ export default function Checkout() {
                 product_image_name: item.product_image_name,
     
             })),
+            userID : userid, 
             shipping_firstname:shippingState.shipping_firstname,
             shipping_lastname : shippingState.shipping_lastname,
             shipping_address_1 : shippingState.shipping_address_1,
@@ -120,6 +126,7 @@ export default function Checkout() {
             if (response?.data?.data?.approvalUrl) {
                 window.location.href = response.data.data.approvalUrl;
             } 
+
             else {
                 window.location.href = "http://localhost:3000/login"
             }
