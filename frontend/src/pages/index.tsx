@@ -4,6 +4,7 @@ import Layout from '../components/common/Layout'
 import LayoutNew from 'components/common/LayoutNew';
 
 
+
 export default function Home() {
     return (
         <>

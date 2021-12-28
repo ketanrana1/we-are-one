@@ -1,17 +1,27 @@
+import React, { useState } from 'react'
+import { useSelector, useDispatch } from 'react-redux';
 import Link from 'next/link';
 import headerStyles from '../styles/header.module.css';
-import React, {useState} from 'react'
 import { useRouter } from "next/router";
 
-const Header = () => { 
+const Header = (props) => { 
+
+    const cart = [];
 
     const router = useRouter();
+    const [check, setCheck] = useState(false);
+
+    function handleRadioChange() {
+        setCheck(true);
+    }
+
+    
 
     const [navCollapsed, setNavCollapsed] = useState(true);
 
     const handleNavCollapse = () => setNavCollapsed(false);
     const handleNavCollapseTwo = () => setNavCollapsed(true);
-
+    
 
   return (
     <header className="headerMain">
@@ -92,8 +102,8 @@ const Header = () => {
                    <div className="inline-wrap-menu">
                         <li className="nav-item">
                             <Link href='/cart'>
-                                <a className='nav-link' onClick={handleNavCollapse}>
-                                <img src="/assets/images/cart.png" className="nav-item-image" />
+                                <a className='nav-link cart-image_number' onClick={handleNavCollapse}>
+                                <img src="/assets/images/cart.png" className="nav-item-image" /><div className="number-on-cart">{cart.length}</div>
                                 </a>
                             </Link>
                         </li>

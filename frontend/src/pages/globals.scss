@@ -1080,5 +1080,34 @@ margin: 0 auto;
 
 
 .each-contact-entry-item {
-    
+
+}
+
+
+.nav-link.cart-image_number {
+    position: relative;
+}
+
+.number-on-cart {
+    position: absolute;
+    top: 8px;
+    right: -7px;
+    display: inline-block;
+    background: #38B0E3;
+    color: white;
+    border-radius: 50%;
+    font-size: 13px;
+    padding: 2px 4px;
+}
+
+
+
+
+@media only screen and (max-width:991px) {
+    .headerMain .navbar-nav .nav-item.active a.nav-link {
+        background: none;
+    }
+    .number-on-cart {
+        top: -8px;
+    }
 }

@@ -19,6 +19,7 @@ import LayoutNew from 'components/common/LayoutNew';
 
 export default function Index() {
 
+
     const weAreOneData = [                
         {id: 1465, name: "‘The light that shines with our hearts"},
         {id: 22458, name: "is the love that makes us care,"},

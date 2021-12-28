@@ -147,7 +147,27 @@ export class RegisterController {
    }
 
 
+   @Post('/admin-logout')
+   async adminLogout( @Body() body: any, @Req() req: any, @Res() res: any ) {
+ 
+     return {
+       message: "Response"
+     }
+ 
+   //   var sess = req.session.token;
+ 
+   //   if(sess){
+   //     req.session.token = null;
+   //     return {'success': true, "message": "user logout successfully"};
+   // }
+ 
+   // return {'success': true, "message": "user logout successfully"};
+ 
+ 
+    }
 
+
+   
   @Post('/login')
   async login(@Body() body: any, @UploadedFile("", { }) file: any ):Promise<any> {
 
@@ -211,11 +231,9 @@ export class RegisterController {
           user: {
             userId: user.userId,
             email: user.email,
-            fullName: user.fullName,
-            user: user
-          },
-          
-          
+            firstName: user.firstName,
+            lastName: user.lastName
+          },      
       };      
     } catch (error) {
       console.log("ERROR", error)
@@ -279,20 +297,13 @@ export class RegisterController {
       return {
 
           message: "Login successfully",
-          success: "true",
-          response: {
-            token: token,
-            is_paid: "false"
-          },
-
-          user: {
-            userId: user.userId,
-            email: user.email,
-            fullName: user.fullName,
-          },
-          
-          
-      };      
+          token: token,
+          userId: user.userId,
+          email: user.email,
+          role: user.role       
+      }; 
+      
+      
     } catch (error) {
       console.log("ERROR", error)
     }

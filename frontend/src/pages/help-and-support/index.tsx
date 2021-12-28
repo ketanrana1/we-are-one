@@ -3,28 +3,25 @@ import axios from 'axios';
 import getConfig from 'next/config'
 const { publicRuntimeConfig } = getConfig()
 
-
 import LayoutNew from 'components/common/LayoutNew'
 
-export default function WholesaleAndDistribution() {
+export default function HelpAndSupport() {
 
   const [response, setrespone] = useState([])
 
-    const API = async () => {
-        const { data } = await axios.get(`${publicRuntimeConfig.backendBaseUrl}api/pagecontent/wholesale/`); 
-        setrespone(data.response);
-    }
+  const API = async () => {
+      const { data } = await axios.get(`${publicRuntimeConfig.backendBaseUrl}api/pagecontent/helpAndSupport/`); 
+      setrespone(data.response);
+  }
 
-    useEffect(() => {   
-        API(); 
-    },[]);
-
-
+  useEffect(() => {   
+      API(); 
+  },[]);
 
 
     return (
         <div className="container p-md-5">
-        <h1>Wholesale and Distribution</h1>
+        <h1>Help and Support</h1>
         <div className="">
         {
                     response?.map( (data:any, index) => {                       
@@ -41,7 +38,7 @@ export default function WholesaleAndDistribution() {
     )
 }
 
-WholesaleAndDistribution.getLayout = function getLayout(page) {
+HelpAndSupport.getLayout = function getLayout(page) {
     return (
       <LayoutNew>
             {page}

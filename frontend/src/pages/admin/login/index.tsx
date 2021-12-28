@@ -2,6 +2,7 @@ import React, { useState} from 'react'
 import LoginLayout from 'components/admin/LoginLayout'
 import Joi from "joi-browser";
 import axios from 'axios';
+import { useRouter } from 'next/router'
 
 const baseUrl = process.env.BACKEND_BASE_URL; 
 
@@ -16,6 +17,8 @@ const schema = {
 
 
 export default function Login() {
+
+  const router = useRouter()
 
     const [dataState, setDataState] = useState(initialDataState);
     const [errors, setErrors] = useState(null);
@@ -41,10 +44,13 @@ export default function Login() {
             try {
               const request : any = await axios({
               method: 'post',    
-              url: `${baseUrl}api/login`,
+              url: 'http://localhost:4000/api/admin-login',
               data: dataState,
               }); 
               setResponseState(request);
+              sessionStorage.setItem("token", request.data.token)
+              sessionStorage.setItem("role", request.data.role)
+              router.push('/admin/')
             } catch (error) {
                 console.log(error)
             }

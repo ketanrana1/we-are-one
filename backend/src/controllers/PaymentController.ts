@@ -39,6 +39,7 @@ export default class PaymentController {
             const emailContent = await getTemplate('emails/order-received.ejs', { order, transaction});
             console.log(order, "yo se order")
             console.log(transaction, "yo se transaction");
+            
             sendEmail({
               to: "testmail8196@gmail.com",
               cc: 'naveen.kumar@geeky.dev',

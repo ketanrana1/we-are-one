@@ -16,25 +16,24 @@ const schema = {
     shipping_firstname: Joi.string().required(),
     shipping_lastname: Joi.string().required(),
     shipping_address_1: Joi.string().required(),
-    shipping_address_2: Joi.string(),
+    shipping_address_2: Joi.any(),
     shipping_city: Joi.string().required(),
     shipping_state: Joi.string().required(),
     shipping_zip: Joi.string().required(),
     shipping_country: Joi.string().required(),
     shipping_telephone: Joi.number().required(),
-    shipping_email: Joi.string().required(),
+    shipping_email: Joi.string().email().required(),
 
     billing_firstname: Joi.string().required(),
     billing_lastname: Joi.string().required(),
     billing_address_1: Joi.string().required(),
-    billing_address_2: Joi.string(),
+    billing_address_2: Joi.any(),
     billing_city: Joi.string().required(),
     billing_state: Joi.string().required(),
     billing_zip: Joi.string().required(),
     billing_country: Joi.string().required(),
     billing_telephone: Joi.number().required(),
-    billing_email: Joi.string().required()
-
+    billing_email: Joi.string().email().required()
 };
 
 
@@ -299,11 +298,11 @@ export default function Checkout() {
                         <div className="payment-information">
                             <p>You will be redirected to PayPal to complete payment.</p>
                         </div>
-                        <div className="col-12 mb-3">
+                        {/* <div className="col-12 mb-3">
                             <div className="right">
                                 <input type="checkbox" name="agree" value="1" /> I have read and agree to the <a className="colorbox cboxElement" href=""><b>Terms & Conditions</b></a>
                             </div>
-                        </div>
+                        </div> */}
                         <div className="col-12 mb-3">
                             <div className="form-group">
                                 <button className="common-button" type="submit">Submit</button>

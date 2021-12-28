@@ -3,6 +3,7 @@ import sendgrid from '@sendgrid/mail';
 import dayjs from 'dayjs';
 import ejs from 'ejs';
 
+
 const sendEmail = async (message: {
   to: string;
   cc?: string;

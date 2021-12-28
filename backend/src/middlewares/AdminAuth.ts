@@ -5,7 +5,6 @@ import userModel from '../models/users';
 async function AuthMiddleware(request: Request, response: Response, next: NextFunction) {
 
   const session = request.headers.authorization;
-  console.log('jqhdkljf',session)
   if (session && session) {
     const secret = process.env.API_SECRET;
     try {

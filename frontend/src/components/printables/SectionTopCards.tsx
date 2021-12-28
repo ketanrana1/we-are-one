@@ -14,6 +14,7 @@ function SectionTopCards(props) {
                                     <Card 
                                     key={item.id}
                                     cardImgURL={item.cardImgURL}
+                                    btnLink={item.btnLink}
                                     />
                                 </div>
                             );

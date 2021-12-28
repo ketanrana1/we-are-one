@@ -1,8 +1,14 @@
 import Sidebar from "./Sidebar"
 import Link from 'next/link';
+import adminLogin from 'services/adminLogin'
+import { useRouter } from 'next/router'
+
 
 const AdminLayout = ({children}) => {
-  return (
+    const router = useRouter()
+
+    if(!adminLogin() && typeof window !== "undefined") router.push('/admin/login')
+  return ( 
     <body className="sb-nav-fixed"> 
         <nav className="sb-topnav navbar navbar-expand navbar-dark bg-dark">
             
@@ -40,7 +46,6 @@ const AdminLayout = ({children}) => {
                                 Dashboard
                             </a>
                             <div className="sb-sidenav-menu-heading">PRODUCTS</div>
-
                             <a className="nav-link collpse-menu collapsed" href="#" aria-expanded="false" aria-haspopup="true" data-toggle="collapse" aria-controls="collapseLayouts" data-target="#collapseLayouts">
                                 <div className="sb-nav-link-icon"><i className="fas fa-book-open"></i></div>
                                 Books
@@ -220,6 +225,13 @@ const AdminLayout = ({children}) => {
                                     </Link>                                
                                 </nav>
                             </div>
+
+                                <nav className="sb-sidenav-menu-nested nav">                                 
+                                    <Link href='/admin/logout'>
+                                        <a className='nav-link'>Logout</a>
+                                    </Link>                                
+                                </nav>
+
                         </div>
                     </div>
                     <div className="sb-sidenav-footer">

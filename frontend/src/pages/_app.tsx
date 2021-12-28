@@ -40,7 +40,9 @@ type AppPropsWithLayout = AppProps & {
   
 
 export default function App({ Component, pageProps }: AppPropsWithLayout) {
+
   const getLayout = Component.getLayout ?? ((page) => page)
+  
   return getLayout(
     <Provider store={store}>
       <PersistGate loading={null} persistor={persistor}>
@@ -48,5 +50,6 @@ export default function App({ Component, pageProps }: AppPropsWithLayout) {
       </PersistGate>
     </Provider>   
     )
+
 }
 

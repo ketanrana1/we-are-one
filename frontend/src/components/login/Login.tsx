@@ -3,11 +3,8 @@ import Joi from "joi-browser";
 import axios from 'axios';
 import { useRouter } from 'next/router'
 
-
-
-
+const baseUrl = process.env.BACKEND_BASE_URL; 
 const initialDataState = { email: "", password: ""};
-
 
 const initialResponseState: any = [];
 
@@ -18,10 +15,9 @@ const schema = {
 
 };
 
-const Login = () => { 
+const Login = () => {    
 
     const router = useRouter()
-
     const [dataState, setDataState] = useState(initialDataState);
     const [errors, setErrors] = useState(null);
     const [responseState, setResponseState] = useState(initialResponseState);

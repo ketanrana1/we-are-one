@@ -7,10 +7,7 @@ const {v4 : uuidv4} = require('uuid')
 
 
 const userSchema = new Schema({
-  userId: {
-    type: String,
-    default: uuidv4
-  },
+  userId: String,
   firstName: String,
   lastName: String,
   email:String,

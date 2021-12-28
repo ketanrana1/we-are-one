@@ -6,13 +6,14 @@ const { publicRuntimeConfig } = getConfig()
 
 import LayoutNew from 'components/common/LayoutNew'
 
-export default function WholesaleAndDistribution() {
+export default function Shipping() {
 
   const [response, setrespone] = useState([])
 
     const API = async () => {
-        const { data } = await axios.get(`${publicRuntimeConfig.backendBaseUrl}api/pagecontent/wholesale/`); 
+        const { data } = await axios.get(`${publicRuntimeConfig.backendBaseUrl}api/pagecontent/shipping/`); 
         setrespone(data.response);
+
     }
 
     useEffect(() => {   
@@ -20,11 +21,9 @@ export default function WholesaleAndDistribution() {
     },[]);
 
 
-
-
     return (
         <div className="container p-md-5">
-        <h1>Wholesale and Distribution</h1>
+        <h1>Shipping</h1>
         <div className="">
         {
                     response?.map( (data:any, index) => {                       
@@ -36,12 +35,13 @@ export default function WholesaleAndDistribution() {
                         })
                     }
         </div>
+
         </div>
         
     )
 }
 
-WholesaleAndDistribution.getLayout = function getLayout(page) {
+Shipping.getLayout = function getLayout(page) {
     return (
       <LayoutNew>
             {page}

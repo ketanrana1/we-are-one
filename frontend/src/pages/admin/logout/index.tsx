@@ -1,6 +1,5 @@
 import React from 'react'
-import Index from '../../components/about/Index';
-import LayoutNew from 'components/common/LayoutNew';
+import AdminLayout from 'components/admin/common/AdminLayout'
 import axios from 'axios';
 import { useRouter } from 'next/router'
 
@@ -10,27 +9,26 @@ export default function Account() {
 
     const router = useRouter()
     const handleLogout = async (e) => {
-        if (typeof window !== "undefined") sessionStorage.removeItem("token")
+        if (typeof window !== "undefined") {
+            sessionStorage.removeItem("token") 
+            sessionStorage.removeItem("role")
+        }
         
         try {
             const request : any = await axios({
             method: 'post',    
-            url: `${baseUrl}api/logout`
+            url: `${baseUrl}api/admin-logout`
             });                                           
         } catch (error) {
             console.log(error)
         }
-        router.push('/login')
+        router.push('/admin/login')
       }
-
-      const token = sessionStorage.getItem("token");
 
     return (
         <>
             <div className="container p-md-5">
-                <h1>{token}</h1>
-                <h2 style={{textAlign: "center"}}>You are successfully Logged in.</h2>
-                <button className="common-button mt-3" onClick={handleLogout}>Logout</button>
+                <button className="mt-3" onClick={handleLogout}>Logout</button>
             </div>        
         </>       
     )
@@ -39,8 +37,8 @@ export default function Account() {
 
 Account.getLayout = function getLayout(page) {
     return (
-        <LayoutNew>
+        <AdminLayout>
             {page}
-        </LayoutNew>
+        </AdminLayout>
     )
 }  

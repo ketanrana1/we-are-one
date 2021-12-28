@@ -3,29 +3,26 @@ import axios from 'axios';
 import getConfig from 'next/config'
 const { publicRuntimeConfig } = getConfig()
 
-
 import LayoutNew from 'components/common/LayoutNew'
 
-export default function WholesaleAndDistribution() {
+export default function PrivacyPolicy() {
 
   const [response, setrespone] = useState([])
 
-    const API = async () => {
-        const { data } = await axios.get(`${publicRuntimeConfig.backendBaseUrl}api/pagecontent/wholesale/`); 
-        setrespone(data.response);
-    }
+  const API = async () => {
+      const { data } = await axios.get(`${publicRuntimeConfig.backendBaseUrl}api/pagecontent/privacyPolicy/`); 
+      setrespone(data.response);
 
-    useEffect(() => {   
-        API(); 
-    },[]);
+  }
 
-
+  useEffect(() => {   
+      API(); 
+  },[]);
 
 
     return (
         <div className="container p-md-5">
-        <h1>Wholesale and Distribution</h1>
-        <div className="">
+        <h1>Privacy Policy</h1><div className="">
         {
                     response?.map( (data:any, index) => {                       
                             return (
@@ -41,7 +38,7 @@ export default function WholesaleAndDistribution() {
     )
 }
 
-WholesaleAndDistribution.getLayout = function getLayout(page) {
+PrivacyPolicy.getLayout = function getLayout(page) {
     return (
       <LayoutNew>
             {page}

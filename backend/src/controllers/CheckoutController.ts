@@ -78,7 +78,6 @@ export class CheckoutController {
     newOrder.transactionId =  transaction.transactionId;
     const result = await newOrder.save();
     const url = `${request.protocol}://${request.get('host')}`;
-    console.log(url)
     let approvalUrl = "";
     const returnUrl = `${url}/payment/paypal/success?orderId=${result.orderId}&transactionId=${transaction.transactionId}`;
     const cancelUrl = `${url}/payment/paypal/cancel?orderId=${result.orderId}&transactionId=${transaction.transactionId}`;
@@ -96,11 +95,9 @@ export class CheckoutController {
         data: {
           orderId: newOrder.orderId,
           // billingName: `${newOrder.billingAddress.name} ${newOrder.billingAddress.name}`,
-          approvalUrl ,
+          approvalUrl,
         },
       };
     }
-
   }
-
 }

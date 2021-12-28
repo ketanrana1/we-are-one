@@ -95,11 +95,11 @@ const FooterNew = () => {
                 <div className="col-12 col-lg-4 menu-new-links">
                     <h2 className="title-hd">More things of interest</h2>
                     <ul>
-                        <li><a href="">Wholesale & Distribution </a></li>
-                        <li><a href="">  Help & Support</a></li>
-                        <li><a href="">Privacy Policy</a></li>
-                        <li><a href="">Terms & Conditions</a></li>
-                        <li><a href="">Shipping</a></li>
+                        <li><a href="/wholesale-and-distribution">Wholesale & Distribution </a></li>
+                        <li><a href="/help-and-support">  Help & Support</a></li>
+                        <li><a href="/privacy-policy">Privacy Policy</a></li>
+                        <li><a href="/terms-and-conditions">Terms & Conditions</a></li>
+                        <li><a href="/shipping">Shipping</a></li>
                     </ul>
                 </div>              
             </div>

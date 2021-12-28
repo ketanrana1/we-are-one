@@ -91,3 +91,12 @@
 .last-img-cont img {
     width:55%;
 }
+
+
+.btmCont a {
+    color: white;
+    &:hover {
+        text-decoration: none;
+    }
+}
+

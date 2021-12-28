@@ -1,11 +1,14 @@
 import React, {useState} from 'react'
 import { useSelector, useDispatch } from 'react-redux';
 import { cartReducer, removeFromCart } from 'redux/cart.slice';
+import userLogin from 'services/userLogin';
+import { useRouter } from 'next/router';
 
 let amount = 0
 
 const Cart = () => {
 
+    const router = useRouter()
     const dispatch = useDispatch();
     const [check, setCheck] = useState(false);
 
@@ -24,7 +27,7 @@ const Cart = () => {
         noProducts = "block"    
     }
 
-
+    if(!userLogin() && typeof window !== "undefined") router.push('/login')
 return (
     <div className="cart-page">
         <div id="content" className="container remove-gradient-bg cart-page-wrapper py-4 px-md-5">

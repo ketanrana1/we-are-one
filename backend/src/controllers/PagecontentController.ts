@@ -28,7 +28,7 @@ export class PagecontentController {
         error: validate.error.details.map((d) => d.message),
       };
     }
-
+     
 
     const _id = "61b8871a141babc372000419";
 
@@ -68,7 +68,6 @@ export class PagecontentController {
           }
         }
       ]);
-      console.log("RESPONSE", response)
 
     return {
       response,

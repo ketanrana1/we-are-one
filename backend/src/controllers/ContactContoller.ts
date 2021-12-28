@@ -4,7 +4,7 @@ import Joi from 'joi';
 import multer from 'multer';
 var path = require('path');
 const {v4 : uuidv4} = require('uuid') 
-
+import { getTemplate, sendEmail } from 'services/mailer';
 
 
 
@@ -39,6 +39,14 @@ export class ContactController {
     const result = await newContact.save();
     
     if(result) {
+
+      sendEmail({
+        to: "testmail8196@gmail.com",
+        subject: 'some Subject',
+        html: 'some content',
+      });
+
+
       return {
         success: true,
         message: "Your message has been sent successfully!"

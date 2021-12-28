@@ -13,13 +13,14 @@ function SectionTwoCards(props) {
                                     <Card 
                                     key={item.id}
                                     cardImgURL={item.cardImgURL}
+                                    btnLink={item.btnLink}
                                     />
                                 </div>
                             );
                         })
                     }
                     <div className="col-12 pt-5">
-                        <Card cardImgURL="/assets/images/printable-sec-2-img-1.png" />
+                        <Card cardImgURL="/assets/images/printable-sec-2-img-1.png" btnLink="/assets/images/printable-sec-2-img-1.png" />
                     </div>                
                 </div>
             </div>

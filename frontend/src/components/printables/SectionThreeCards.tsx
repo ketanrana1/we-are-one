@@ -12,7 +12,8 @@ function SectionThreeCards(props) {
                                 <div className="col-6 col-md-3 px-3 px-md-4 py-2 py-md-4">
                                     <Card 
                                     key={item.id}
-                                    cardImgURL={item.cardImgURL} 
+                                    cardImgURL={item.cardImgURL}
+                                    btnLink={item.btnLink}
                                     />
                                 </div>
                             );
