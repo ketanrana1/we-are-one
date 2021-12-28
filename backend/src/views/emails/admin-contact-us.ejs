@@ -16,13 +16,13 @@
             <td style="border-bottom: solid 1px #f55564;border-right: solid 1px #f55564; padding:10px 0 10px 60px;">
                 <span style="display: inline-block; color: #ff5564;font-weight: 600;margin: 0 10px 0 0;">Name</span>
                 <p style="display: inline-block; color: #252525;margin: 0;font-size: 14px;">
-                    <%= body.firstName %>
+                    <%= body.first_name +" " + body.last_name %>
                 </p>
             </td>
             <td style="border-bottom: solid 1px #f55564; padding: 10px;">
                 <span style="display: inline-block; color: #ff5564;font-weight: 600;margin: 0 10px 0 0;">Email</span>
                 <p style="display: inline-block; color: #252525;margin: 0;font-size: 14px;">
-                    <%= body.lastName %>
+                    <%= body.email %>
                 </p>
             </td>
         </tr>
@@ -31,7 +31,7 @@
         <td>
             <span style="display: inline-block; color: #ff5564;font-weight: 600;margin-bottom: 10px;font-size: 18px;">Message Body:</span>
             <p style="margin: 0 0 20px; font-size: 18px; margin-bottom: 40px; line-height: 24px; color: #252525;">
-                <%= body.message %>
+                <%= body.enquiry %>
             </p>
         </td>
     </tr>

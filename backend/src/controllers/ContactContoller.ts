@@ -40,11 +40,25 @@ export class ContactController {
     
     if(result) {
 
+      const contactContent = await getTemplate('emails/admin-contact-us.ejs', {body});
       sendEmail({
         to: "testmail8196@gmail.com",
-        subject: 'some Subject',
-        html: 'some content',
+        cc: 'naveen.kumar@geeky.dev',
+        subject: `Enquiry from ${body.email}`,
+        html: contactContent,
       });
+
+      const content = await getTemplate('emails/contact-us.ejs', {body});
+      sendEmail({
+        to: "testmail8196@gmail.com",
+        cc: 'naveen.kumar@geeky.dev',
+        subject: `Thank you for showing interest in We-are-one`,
+        html: content,
+      });
+
+      
+
+
 
 
       return {
