@@ -17,12 +17,12 @@ const userSchema = new Schema({
   role: String,
   company: String,
   companyId: String,
-  addrees_1: String,
-  addrees_2: String,
-  post_code: String,
-  country:String,
+  address_1: String,
+  address_2: String,
+  city: String,      
   state: String,
-  is_paid: String,
+  zip: String,
+  country: String,
   }, 
   {timestamps: true}
   );

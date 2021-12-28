@@ -56,7 +56,7 @@ export class CheckoutController {
         error: validate.error.details.map((d) => d.message),  
       };
     }
-
+    console.log('jajajajja', body)
     const newOrder = new Order(body);
     const transaction = new Transaction();
     newOrder.ordered_items = body.items;

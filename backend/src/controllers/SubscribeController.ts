@@ -3,11 +3,11 @@ import {
     Post, Controller, Req, Res,Body
   } from 'routing-controllers';
   import { OpenAPI } from 'routing-controllers-openapi';
+import { subscribe } from 'superagent';
  const client = require("@mailchimp/mailchimp_marketing");
- client.setConfig({
-  apiKey: "403a8f597225fe3bd5394f02dd2c4ea6-us20",
-  server: "us20",
-});
+
+ const md5 = require("md5")
+
   
   @Controller('/subscribe')
   export default class SubscribeController {
@@ -17,14 +17,43 @@ import {
     @OpenAPI({
       description: 'signup for subscribers',
     })
-    async signup(@Body() body: any, @Res() response: any) {
-      console.log(client)
-      const responsee = await client.lists.addListMember("5001e653d7", {
-        email_address: body.email,
-        status: "subscriber",
-      });
-      console.log('dkjdlkj')
-      console.log(responsee);
-      return response
+    async signup(@Body() body: any, @Res() response: any) {  client.setConfig({
+      apiKey: "403a8f597225fe3bd5394f02dd2c4ea6-us20",
+      server: "us20",
+    });
+    const { email } = body
+    const tags: any = ["subscribe", "ok"];
+
+    const subscriberHash = md5(email.toLowerCase());
+    const listId = '5001e653d7';
+
+    const result = await client.lists.setListMember(
+      listId,
+      subscriberHash,
+      {
+        email_address: email,
+        status_if_new: 'subscribed',
+      }
+    );
+    console.log(result)
+    const existingTags = result?.tags?.map((tag: any) => tag.name);
+    const allUniqueTags = [...new Set([...existingTags, ...tags])];
+    const formattedTags = allUniqueTags.map((tag) => {
+        return {
+          name: tag,
+          status: 'active',
+        };
+    });
+    const updateSubscriberTags = await client.lists.updateListMemberTags(
+        listId,
+        subscriberHash,
+        {
+          body: {
+            tags: formattedTags,
+          },
+        }
+      );
+    console.log(updateSubscriberTags); // this should be 'null' if everything went smooth
+    return response.message = "sub"
   
   } }

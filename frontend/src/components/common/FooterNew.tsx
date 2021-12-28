@@ -15,9 +15,9 @@ const FooterNew = () => {
             //     // 'Content-Type': 'multipart/form-data'
             //     }            
             });
-            if (response.data.data.approvalUrl) {
-                window.location.href = response.data.data.approvalUrl;
-            } 
+            if(response) {
+                console.log(response.data)
+            }
         } catch (error) {
             console.log(error)  
         }
@@ -44,7 +44,7 @@ const FooterNew = () => {
                                 <div id="newsletter_msg"></div>
                             </div>                            
                            <div className="mobi_go"><a onClick={handleClick} ><input type="image" src="/assets/images/go-rainbow-btn.png" value="" /></a></div>
-                        </div>
+                        </div>     
                     </div>
                 </div>
                 <div className="col-12">
