@@ -5,10 +5,11 @@ import axios from 'axios';
 import getConfig from 'next/config' 
 const { publicRuntimeConfig } = getConfig()
 
+
 const baseUrl = process.env.BACKEND_BASE_URL;
 
 
-export async function getServerSideProps(context) {
+export async function getServerSideProps(context) {    
 
     const baseUrl = process.env.BACKEND_BASE_URL;
 
@@ -111,7 +112,8 @@ export default function AddBook(props) {
             url: `${publicRuntimeConfig.backendBaseUrl}api/books/editBook/?id=${ID}`,
             data: form,
             headers: {
-                'Content-Type': 'multipart/form-data'
+                'Content-Type': 'multipart/form-data',
+                'Authorization': `${sessionStorage.getItem('token')}`
             }            
             });
             setResponseState(request);
@@ -173,11 +175,6 @@ export default function AddBook(props) {
                         <input name="book_content" type="text" className="form-control" onChange={handleChange} value={state.book_content} />
                         {errors && <small>{errors.book_content}</small>}
                     </div>
-                    {/* <div className="form-group">
-                        <label >Book Image</label>
-                        <input name="book_image" type="text" className="form-control" onChange={handleChange} value={state.book_image} />
-                        {errors && <small>{errors.book_image}</small>}
-                    </div> */}
                     <div className="form-group">
                         Current Image <br/>
                         <img src={ state.book_image_name } style={{ maxWidth: "200px"}} />

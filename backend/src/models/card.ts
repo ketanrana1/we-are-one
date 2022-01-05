@@ -18,6 +18,6 @@ const cardSchema = new Schema({
     status: String
   },
   { timestamps: { createdAt: 'date_added', updatedAt: 'date_modified' } }
-  );
+  ); 
   
 export default mongoose.model('Card', cardSchema);

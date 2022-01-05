@@ -1,10 +1,10 @@
 import Artprint from '../models/artprints';
-import { JsonController, Put, Controller, UseBefore, UseAfter, Body, Get, Post,  Req, Res, BodyParam, UploadedFile, Delete, Param, QueryParam} from 'routing-controllers';
+import { Controller, UseBefore, Body, Get, Post,  Req, Res, UploadedFile, Param, QueryParam} from 'routing-controllers';
 import Joi from 'joi';
-var bodyParser = require('body-parser')
 import multer from 'multer';
 var path = require('path');
 const {v4 : uuidv4} = require('uuid')
+import AdminAuthMiddleware from 'middlewares/AdminAuthMiddleware';
 
 
 
@@ -32,7 +32,7 @@ const fileUploadOptions = ( ) => ({
 
 
   @Controller('/api')
-export class ArtprintsController {
+  export class ArtprintsController {
 
   @Post('/artprints/addArtprint') 
   @UseBefore(
@@ -41,7 +41,7 @@ export class ArtprintsController {
         { maxCount: 1, name: 'art_image_2' },
         { maxCount: 1, name: 'art_image_3' },
         { maxCount: 1, name: 'art_image_4' }
-    ]),
+    ]), AdminAuthMiddleware
  )
   async addArtprint(@Body() body: any, @Req() req: any, @Res() res: any ){
 
@@ -96,13 +96,12 @@ export class ArtprintsController {
         message: "ArtPrint is Added."
       };
     }
-
-
   }
 
 
 
   @Post('/artprints/editArtprint/')
+  @UseBefore(AdminAuthMiddleware)
   async editArtprint( @Body() body: any, @Req() req: any, @QueryParam('id') id: string, @UploadedFile("", { }) file : any ) {
   
    const artprintSchema = Joi.object({
@@ -125,7 +124,6 @@ export class ArtprintsController {
      };
    }
 
-   console.log("BODYYYYY", body)
 
    const response = await Artprint.findOneAndUpdate({ "artId": id }, { 
       art_description: body.art_description,
@@ -134,158 +132,12 @@ export class ArtprintsController {
       size_small_price: body.size_small_price,
       size_large_price: body.size_large_price,
       size_xlarge_price: body.size_xlarge_price,
-      });
+    });
 
-if(response){
-return { message: "ArtPrint is updated." };
-} 
+  if(response){
+  return { message: "ArtPrint is updated." };
+  } 
 
-
-
- //  let fileOne;
-  //  let fileTwo;
-  //  let fileThree;
-  //  let fileFour;
-  //   if( typeof req.files.art_image_1 !== "undefined") {
-  //       fileOne = req.files.art_image_1[0];
-  //     } else if ( typeof req.files.art_image_2 !== "undefined" ) {
-  //       fileTwo = req.files.art_image_2[0];
-  //     } else if ( typeof req.files.art_image_3 !== "undefined" ) {
-  //       fileThree = req.files.art_image_3[0];
-  //     } else if ( typeof req.files.art_image_4 !== "undefined" ) {
-  //       fileFour = req.files.art_image_4[0];
-  //     }
-
-
-  //  if ( fileFour === undefined || fileFour == null  || Object.keys(fileFour).length === 0 || fileThree === undefined || fileThree == null  || Object.keys(fileThree).length === 0 || fileTwo === undefined || fileTwo == null  || Object.keys(fileTwo).length === 0 ||fileOne === undefined || fileOne == null  || Object.keys(fileOne).length === 0 ) {
-  //   const response = await Artprint.findOneAndUpdate({ "artId": id }, { 
-  //     art_image_1_name: body.art_image_1_name,
-  //     art_image_2_name: body.art_image_2_name,
-  //     art_image_3_name: body.art_image_3_name,
-  //     art_image_4_name: body.art_image_4_name,
-  //     art_description: body.art_description,
-  //     art_name: body.art_name,
-  //     slug: body.slug,
-  //     size_small_price: body.size_small_price,
-  //     size_large_price: body.size_large_price,
-  //     size_xlarge_price: body.asize_xlarge_price,
-  //   });
-  
-  //   if(response){
-  //   return { message: "ArtPrint is updated." };
-  //   }
-  // }
-  //   else if ( fileOne === undefined || fileOne == null || Object.keys(fileOne).length === 0 ) { 
-      
-  //     let artprintBody = body;
-  //     artprintBody.art_image_2_name = req.files.art_image_2[0].filename;
-  //     artprintBody.art_image_3_name = req.files.art_image_3[0].filename;
-  //     artprintBody.art_image_4_name = req.files.art_image_4[0].filename;
-  //     const response = await Artprint.findOneAndUpdate({ "artId": id }, { 
-  //       art_image_1_name: artprintBody.art_image_1_name,
-  //       art_image_2_name: artprintBody.art_image_2_name,
-  //       art_image_3_name: artprintBody.art_image_3_name,
-  //       art_image_4_name: artprintBody.art_image_4_name,
-  //       art_description: artprintBody.art_description,
-  //       art_name: artprintBody.art_name,
-  //       slug: artprintBody.slug,
-  //       size_small_price: artprintBody.size_small_price,
-  //       size_large_price: artprintBody.size_large_price,
-  //       size_xlarge_price: artprintBody.asize_xlarge_price,
-  //     });
-    
-  //     if(response){
-  //     return { message: "ArtPrint is updated." };
-  //     }  
-  //   }  else if ( fileTwo === undefined || fileTwo == null  || Object.keys(fileTwo).length === 0 ) {
-  //     let artprintBody = body;
-  //     artprintBody.art_image_1_name = req.files.art_image_1[0].filename;
-  //     artprintBody.art_image_3_name = req.files.art_image_3[0].filename;
-  //     artprintBody.art_image_4_name = req.files.art_image_4[0].filename;
-  //     const response = await Artprint.findOneAndUpdate({ "artId": id }, { 
-  //       art_image_1_name: artprintBody.art_image_1_name,
-  //       art_image_2_name: artprintBody.art_image_2_name,
-  //       art_image_3_name: artprintBody.art_image_3_name,
-  //       art_image_4_name: artprintBody.art_image_4_name,
-  //       art_description: artprintBody.art_description,
-  //       art_name: artprintBody.art_name,
-  //       slug: artprintBody.slug,
-  //       size_small_price: artprintBody.size_small_price,
-  //       size_large_price: artprintBody.size_large_price,
-  //       size_xlarge_price: artprintBody.asize_xlarge_price,
-  //     });
-    
-  //     if(response){
-  //     return { message: "ArtPrint is updated." };
-  //     }
-  //   } else if ( fileThree === undefined || fileThree == null  || Object.keys(fileThree).length === 0 ) {
-  //     let artprintBody = body;
-  //     artprintBody.art_image_1_name = req.files.art_image_1[0].filename;
-  //     artprintBody.art_image_2_name = req.files.art_image_2[0].filename;
-  //     artprintBody.art_image_4_name = req.files.art_image_4[0].filename;
-  //     const response = await Artprint.findOneAndUpdate({ "artId": id }, { 
-  //       art_image_1_name: artprintBody.art_image_1_name,
-  //       art_image_2_name: artprintBody.art_image_2_name,
-  //       art_image_3_name: artprintBody.art_image_3_name,
-  //       art_image_4_name: artprintBody.art_image_4_name,
-  //       art_description: artprintBody.art_description,
-  //       art_name: artprintBody.art_name,
-  //       slug: artprintBody.slug,
-  //       size_small_price: artprintBody.size_small_price,
-  //       size_large_price: artprintBody.size_large_price,
-  //       size_xlarge_price: artprintBody.asize_xlarge_price,
-  //     });
-    
-  //     if(response){
-  //     return { message: "ArtPrint is updated." };
-  //     }
-  //   } else if ( fileFour === undefined || fileFour == null  || Object.keys(fileFour).length === 0 ) {
-  //     let artprintBody = body;
-  //     artprintBody.art_image_1_name = req.files.art_image_1[0].filename;
-  //     artprintBody.art_image_2_name = req.files.art_image_2[0].filename;
-  //     artprintBody.art_image_3_name = req.files.art_image_3[0].filename;
-  //     const response = await Artprint.findOneAndUpdate({ "artId": id }, { 
-  //       art_image_1_name: artprintBody.art_image_1_name,
-  //       art_image_2_name: artprintBody.art_image_2_name,
-  //       art_image_3_name: artprintBody.art_image_3_name,
-  //       art_image_4_name: artprintBody.art_image_4_name,
-  //       art_description: artprintBody.art_description,
-  //       art_name: artprintBody.art_name,
-  //       slug: artprintBody.slug,
-  //       size_small_price: artprintBody.size_small_price,
-  //       size_large_price: artprintBody.size_large_price,
-  //       size_xlarge_price: artprintBody.asize_xlarge_price,
-  //     });
-    
-  //     if(response){
-  //     return { message: "ArtPrint is updated." };
-  //     }
-  //   } 
-  //   else {
-
-
-  //     let artprintBody = body;
-  //     artprintBody.art_image_1_name = req.files.art_image_1[0].filename;
-  //     artprintBody.art_image_2_name = req.files.art_image_2[0].filename;
-  //     artprintBody.art_image_3_name = req.files.art_image_3[0].filename;
-  //     artprintBody.art_image_4_name = req.files.art_image_4[0].filename;
-  //     const response = await Artprint.findOneAndUpdate({ "artId": id }, { 
-  //       art_image_1_name: body.art_image_1_name,
-  //       art_image_2_name: body.art_image_2_name,
-  //       art_image_3_name: body.art_image_3_name,
-  //       art_image_4_name: body.art_image_4_name,
-  //       art_description: body.art_description,
-  //       art_name: body.art_name,
-  //       slug: artprintBody.slug,
-  //       size_small_price: body.size_small_price,
-  //       size_large_price: body.size_large_price,
-  //       size_xlarge_price: body.asize_xlarge_price,
-  //     });
-    
-  //     if(response){
-  //     return { message: "ArtPrint is updated." };
-  //     }     
-  //   }
 }
 
 
@@ -405,6 +257,7 @@ return { message: "ArtPrint is updated." };
      }
 
    @Post('/artprint/delete/:id')
+   @UseBefore(AdminAuthMiddleware)
    public async deleteArtprint(@Param('id') id: string) {
 
 
@@ -424,14 +277,5 @@ return { message: "ArtPrint is updated." };
 
 
    }
-
-
-   
-
-
-
-
- 
-
 
 }

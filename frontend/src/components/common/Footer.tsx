@@ -5,7 +5,7 @@ import { useState } from 'react';
 const Header = () => {
  const [mail, setMail] = useState("")
  const handleClick = () => {
-     console.log(`dcjdknvc0`,mail);
+    //  console.log(`dcjdknvc0`,mail);
  }
   return (
     <footer className="mainFooter" >

@@ -22,10 +22,8 @@ const sendEmail = async (message: {
     html: message.html,
   }).then(() => {
       console.log("mail sent", message.to)
-    // logger.info(`[Email Sent] to ${message.to} with Subject: ${message.subject}`);
   }, (error) => {
       console.log("mail not send", error)
-    // logger.info(`[Email Failed] ${error.message}`);
     if (error.response) {
       console.error(error.response.body);
     }

@@ -1,8 +1,7 @@
-import { JsonController, Param, UploadedFile, Body, Get, Post, QueryParam, Put, Delete, Req, Res, Controller } from 'routing-controllers';
+import { UploadedFile, Body, Get, Post, QueryParam, Req, Res, Controller } from 'routing-controllers';
 import User from '../models/users';
 import Order from '../models/order'
 import Joi from 'joi';
-import { Mongoose } from 'mongoose';
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 
@@ -24,7 +23,7 @@ export class RegisterController {
     };
   }
 
-  @Get('/profile')
+  @Post('/profile')
  async getUserProfile(@Body() body: any, @UploadedFile("", { }) file: any) {
 
   const userSchema = Joi.object({
@@ -54,12 +53,46 @@ export class RegisterController {
         }
       }
     ]);
-    return {
-         
+    return {     
         message: 'This action returns user profile details',
         errror: "false",
-        is_paid: "true",
+        is_paid: "false",
     }; 
+  }
+
+
+  @Get('/userDetails')
+ async getUserDetails(@QueryParam('id') id: string, @Body() body: any, @UploadedFile("", { }) file: any) {
+
+  const userDetails = await User.aggregate([
+    {
+      '$match': {
+        'userId': id
+      }
+    }, {
+      '$project': {
+        '_id': 0,
+        'firstName': 1, 
+        'lastName': 1, 
+        'email': 1, 
+        'telephone': 1, 
+        'address_1': 1, 
+        'address_2': 1, 
+        'city': 1, 
+        'zip': 1, 
+        'state': 1, 
+        'country': 1
+      }
+    }
+  ]);
+   return {
+
+    userDetails,
+    message: 'This action returns shipping details for the user saved.'
+       
+   }; 
+
+
   }
 
 
@@ -67,29 +100,17 @@ export class RegisterController {
   @Get('/account')
   async getAccountDetails(@QueryParam('id') id: string, @Body() body: any, @UploadedFile("", { }) file: any) {
  
-  //  const userSchema = Joi.object({
-  //    id: Joi.string().required().label('User Id')
-  //  });
- 
-  //  const validate = userSchema.validate(body);
-  //  if (validate.error) {
-  //    return {
-  //      success: false,
-  //      message: 'Request data is invalid',
-  //      error: validate.error.details.map((d) => d.message),
-  //    };
-  //  }  
- 
      const allOrderDetails = await Order.aggregate([
       {
         '$match': {
-          'userId': id
+          'userId': id,
+          'status': 'Completed'
         }
       }, {
         '$project': {
           '_id': 0,
           'orderId': 1, 
-          'total_amount': 1, 
+          'total_amount': 1,   
           'ordered_items': 1, 
           'shipping_cost': 1
         }
@@ -103,16 +124,11 @@ export class RegisterController {
      }; 
    }
 
-  //  b22fc520-88df-49bc-958f-895c398c7638
-
-
-
 
   @Post('/register')
   async post(@Body() body: any,  @UploadedFile("", { }) file: any) {
 
     const userSchema = Joi.object({
-
       firstName: Joi.string().required().label('First Name'),
       lastName: Joi.string().required().label('Last Name'),
       email: Joi.string().email().required().label('Email'),
@@ -127,7 +143,6 @@ export class RegisterController {
       country: Joi.string().label('Country'),
       state: Joi.string().label('Region/State'),
       password: Joi.string().required().label('Password'),
-      // password: Joi.string().pattern(new RegExp('^[a-zA-Z0-9]{3,30}$')).label('Password'),
     });
 
     const validate = userSchema.validate(body);
@@ -151,9 +166,12 @@ export class RegisterController {
       const newBody = body
 
     newBody.role = "user"
+    newBody.is_paid = "false"
 
     const newUser = new User(newBody);
     const response = await newUser.save();
+
+    const newUserData = await User.findOne({ email:body.email } );
     
     if(response) {
         var token = jwt.sign({
@@ -165,6 +183,11 @@ export class RegisterController {
         return {
           message: "Registration Completed",
           success: "true",
+          userId: newUserData.userId,
+          firstName: newUserData.firstName,
+          lastName: newUserData.lastName,
+          email: newUserData.email,
+          telephone: newUserData.telephone,
           response: {
             token: token,
             is_paid: "false"
@@ -181,16 +204,6 @@ export class RegisterController {
       message: "Response"
     }
 
-  //   var sess = req.session.token;
-
-  //   if(sess){
-  //     req.session.token = null;
-  //     return {'success': true, "message": "user logout successfully"};
-  // }
-
-  // return {'success': true, "message": "user logout successfully"};
-
-
    }
 
 
@@ -200,16 +213,7 @@ export class RegisterController {
      return {
        message: "Response"
      }
- 
-   //   var sess = req.session.token;
- 
-   //   if(sess){
-   //     req.session.token = null;
-   //     return {'success': true, "message": "user logout successfully"};
-   // }
- 
-   // return {'success': true, "message": "user logout successfully"};
- 
+
  
     }
 
@@ -336,7 +340,8 @@ export class RegisterController {
       }
 
       var token = jwt.sign({
-        id: user.id
+        id: user.userId,
+        role: "admin"
       }, process.env.API_SECRET, {
         expiresIn: 86400
       });

@@ -1,23 +1,18 @@
-import { JsonController, UploadedFile, Param, Body, Get, Post, Put, Delete } from 'routing-controllers';
+import { JsonController, UploadedFile, Body, Get, Post, UseBefore } from 'routing-controllers';
 import Content from '../models/content';
-import { Types } from "mongoose"
 import Joi from 'joi';
+import AdminAuthMiddleware from 'middlewares/AdminAuthMiddleware';
 
 @JsonController('/api') 
-
 export class ContentController {
-
-
   @Post('/addContent')
-
+  @UseBefore(AdminAuthMiddleware)
   async postContent( @Body() body: any, @UploadedFile("", { }) file: any ) {
 
     const contentSchema = Joi.object({
-
       about_us: Joi.string().required().label('About us'),
       contact_us: Joi.string().required().label('Contact us'),
-      privacy_policy: Joi.string().required().label('Privacy Policy')
-  
+      privacy_policy: Joi.string().required().label('Privacy Policy') 
     });
   
     const validate = contentSchema.validate(body);
@@ -41,19 +36,11 @@ export class ContentController {
      if(response){
       return {message: "Content Added"};
      }
-    
-    // const newContent = new Content(body);
-    // const response = await newContent.save();
-    
-    // if(response)
-    // return {message: "Saved"};
   }
 
   @Get('/content')
 
   async getContent(@Body() body: any) {
-
-
     const response = await Content.aggregate([
         {
           '$project': {
@@ -66,8 +53,6 @@ export class ContentController {
       response,
       message: 'This action returns site content details'
     };
-
   }
-
 }
 

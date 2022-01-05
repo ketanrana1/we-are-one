@@ -2,10 +2,10 @@ import React, { useState, useEffect } from 'react'
 import AdminLayout from 'components/admin/common/AdminLayout'
 import Joi from "joi-browser";
 import axios from 'axios';
+import getConfig from 'next/config'
+const { publicRuntimeConfig } = getConfig() 
  
-
 const initialState = { book_name: "", slug: "", book_description: "", book_price: "", book_status: "", book_content: "", book_image: {}, book_image_name:'', book_download: "", book_quantity: "" };
-
 
 const initialResponseState: any = [];
 
@@ -71,22 +71,25 @@ export default function AddBook() {
         form.append('book_image', file);
         form.append('book_image_name',fileName)
         form.append('book_download', state.book_download);
-        form.append('book_quantity', state.book_quantity);
+        form.append('book_quantity', state.book_quantity); 
 
         if(typeof validate() === 'undefined') {
 
         try {
+          
             const request : any = await axios({
             method: 'post',    
-            url: 'http://localhost:4000/api/addBook',
+            url: `${publicRuntimeConfig.backendBaseUrl}api/addBook`,
             data: form,
             headers: {
-                'Content-Type': 'multipart/form-data'
+                'Content-Type': 'multipart/form-data',
+                'Authorization': `${sessionStorage.getItem('token')}`
+
             }            
             });
-            setResponseState(request);
+            setResponseState(request); 
         } catch (error) {
-            console.log(error)
+            console.log(error)  
         }
 
     }
@@ -143,11 +146,6 @@ export default function AddBook() {
                         <input name="book_content" type="text" className="form-control" onChange={handleChange} value={state.book_content} />
                         {errors && <small>{errors.book_content}</small>}
                     </div>
-                    {/* <div className="form-group">
-                        <label >Book Image</label>
-                        <input name="book_image" type="text" className="form-control" onChange={handleChange} value={state.book_image} />
-                        {errors && <small>{errors.book_image}</small>}
-                    </div> */}
                     <div className="form-group">
                         <label>Book Image</label>
                         <input name="book_image" type="file" className="form-control-file" id="exampleFormControlFile1" onChange={saveFile} />

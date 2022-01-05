@@ -63,11 +63,6 @@ const Header = (props) => {
                             <a className='nav-link' onClick={handleNavCollapse}>App</a>
                         </Link>
                     </li>
-                    {/* <li className="nav-item">
-                        <Link href='/shop'>
-                            <a className='nav-link' onClick={handleNavCollapse}>Shop</a>
-                        </Link>
-                    </li> */}
                     <li className={router.pathname == "/printables" ? "nav-item active" : "nav-item"}>
                         <Link href='/printables'>
                             <a className='nav-link' onClick={handleNavCollapse}>Colouring</a>
@@ -83,22 +78,6 @@ const Header = (props) => {
                             <a className='nav-link' onClick={handleNavCollapse}>Contact</a>
                         </Link>
                     </li>
-                    {/* <li className="nav-item dropdown">
-                        <a className="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        Hi! it's <span style={{fontStyle: "italic"}}>Jennifer!</span>
-                        </a>
-                        <div className="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <Link href='/about'>
-                                <a className='dropdown-item' onClick={handleNavCollapse}>About Me</a>
-                            </Link>
-                            <Link href='/awards'>
-                                <a className='dropdown-item' onClick={handleNavCollapse}>Awards</a>
-                            </Link>
-                            <Link href='/contact'>
-                                <a className='dropdown-item' onClick={handleNavCollapse}>Contact</a>
-                            </Link>
-                        </div>
-                    </li> */}
                    <div className="inline-wrap-menu">
                         <li className="nav-item">
                             <Link href='/cart'>

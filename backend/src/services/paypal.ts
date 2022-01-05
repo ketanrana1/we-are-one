@@ -1,7 +1,5 @@
 // @ts-ignore
 import paypal from '@paypal/checkout-server-sdk';
-// import Order from '../entity/Order';
-// import Transaction from '../entity/Transaction';
 import Order from 'models/order';
 
 class PayPalService {
@@ -17,10 +15,8 @@ class PayPalService {
   }
   
   async createPayment(order:any,  return_url: string, cancel_url: string) {
-  console.log(order)
-    // let shipping_cost = 20;
+  // console.log(order)
     const request = new paypal.orders.OrdersCreateRequest();
-    // const orderItems = await this.filterOrderItems(order.items);
     request.requestBody({
       intent: 'CAPTURE',
       application_context: {
@@ -59,17 +55,6 @@ class PayPalService {
     request.requestBody({});
     return this.client.execute(request);
   }
-
-  // async refundOrder(transaction: Transaction , amount: any) {
-  //   const request = new paypal.payments.CapturesRefundRequest(transaction.gatewayId);
-  //   request.requestBody({
-  //     amount: {
-  //       currency_code: transaction.currency,
-  //       value: parseFloat(String(amount)).toFixed(2)
-  //     }
-  //   });
-  //   return this.client.execute(request);
-  // }
 
   async filterOrderItems(items: any) {
     return items.map((item: any) => ({

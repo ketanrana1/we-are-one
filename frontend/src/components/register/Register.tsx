@@ -6,7 +6,6 @@ import getConfig from 'next/config'
 const { publicRuntimeConfig } = getConfig()
 
 const initialDataState = { firstName: "", lastName: "", email: "", password: "" };
-// const initialDataState = { firstName: "", lastName: "", email: "", telephone: "", fax: "", company: "", companyId: "", address_1: "", address_2: "", city: "", post_code: "", country: "", state: "", password: "" };
 const initialResponseState: any = [];
 
 const baseUrl = process.env.BACKEND_BASE_URL; 
@@ -62,7 +61,7 @@ const Register = () => {
                 });
 
                 setResponseState(request);
-                console.log(request);
+                // console.log(request);
     
             } catch (error) {
                 console.log(error)  
@@ -84,7 +83,7 @@ const Register = () => {
         setErrors({ ...errors, [name]: validateField(name, value) });
       };
 
-      console.log("STATE", dataState);
+    //   console.log("STATE", dataState);
 
 
     return (
@@ -152,143 +151,10 @@ const Register = () => {
                                             value={dataState.password}
                                             error={errors && <small>{errors.password}</small>} 
                                         />
-                                        {/* <InputField 
-                                            required="*"
-                                            label="Telephone" 
-                                            type="text" 
-                                            name="telephone"
-                                            onChange={handleChange}
-                                            value={dataState.telephone}
-                                            error={errors && <small>{errors.telephone}</small>}
-                                        />
-                                        <InputField 
-                                            label="Fax" 
-                                            type="text" 
-                                            name="fax"
-                                            onChange={handleChange}
-                                            value={dataState.fax}
-                                            error={errors && <small>{errors.fax}</small>} 
-                                        /> */}
-                                    </div>
-                                </div>
-
-{/* 
-                                <div className="col-md-12">
-                                    <div className="row">
-                                        <div className="col-md-12">
-                                            <h2 className="sec-sub-title">Your Address</h2>
-                                        </div>
-                                        <InputField 
-                                            label="Company" 
-                                            type="text" 
-                                            name="company"                                           
-                                            onChange={handleChange}
-                                            value={dataState.company}
-                                            error={errors && <small>{errors.company}</small>}
-                                        />
-                                        <InputField 
-                                            label="Company ID" 
-                                            type="text" 
-                                            name="companyId"
-                                            onChange={handleChange}
-                                            value={dataState.companyId}
-                                            error={errors && <small>{errors.companyId}</small>}
-                                        />
-                                        <InputField 
-                                            required="*"
-                                            label="Address 1" 
-                                            type="text" 
-                                            name="address_1"
-                                            onChange={handleChange}
-                                            value={dataState.address_1}
-                                            error={errors && <small>{errors.address_1}</small>} 
-                                        />
-                                        <InputField 
-                                            label="Address 2" 
-                                            type="text" 
-                                            name="address_2"
-                                            onChange={handleChange}
-                                            value={dataState.address_2}
-                                            error={errors && <small>{errors.address_2}</small>} 
-                                        />
-                                        <InputField 
-                                            required="*"
-                                            label="City" 
-                                            type="text" 
-                                            name="city"
-                                            onChange={handleChange}
-                                            value={dataState.city}
-                                            error={errors && <small>{errors.city}</small>}
-                                        />
-                                        <InputField 
-                                            label="Post Code:" 
-                                            type="text" 
-                                            name="post_code"
-                                            onChange={handleChange}
-                                            value={dataState.post_code}
-                                            error={errors && <small>{errors.post_code}</small>} 
-                                        />
-                                        <InputField 
-                                            required="*"
-                                            label="Country:" 
-                                            type="text" 
-                                            name="country"
-                                            onChange={handleChange}
-                                            value={dataState.country}
-                                            error={errors && <small>{errors.country}</small>} 
-                                        />
-                                        <InputField 
-                                            required="*"
-                                            label="State/Region:" 
-                                            type="text" 
-                                            name="state"
-                                            onChange={handleChange}
-                                            value={dataState.state}
-                                            error={errors && <small>{errors.state}</small>} 
-                                        />
                                     </div>
                                 </div>
 
 
-                                <div className="col-md-12">
-                                    <div className="row">
-                                        <div className="col-md-12">
-                                            <h2 className="sec-sub-title">Your Password</h2>
-                                        </div>
-                                        <InputField 
-                                            required="*"
-                                            label="Password" 
-                                            type="password" 
-                                            name="password"onChange={handleChange}
-                                            value={dataState.password}
-                                            error={errors && <small>{errors.password}</small>} 
-                                        />
-                                    </div>
-                                </div>
-
-
-                                <div className="col-md-12">
-                                    <div className="row">
-                                        <div className="col-md-12">
-                                            <h2 className="sec-sub-title">Newsletter</h2>
-                                        </div>
-                                        <div className="col-md-12">
-                                            <div className="common-input-field-wrapper">
-                                                <label>Subscribe:</label>
-                                                <div className="common-input-radio-field-wrapper">
-                                                    <input type="radio" name="newsletter" value="1" />
-                                                    <p className="radio-text">Yes</p>
-                                                    <input type="radio" name="newsletter" value="0" />
-                                                    <p className="radio-text">No</p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>                           */}
-                                {/* <div className="col-md-12">
-                                    I have read and agree to the <a className="colorbox cboxElement" href="" ><b>Privacy Policy</b></a>                            
-                                    <input type="checkbox" name="agree" value="1" />
-                                </div> */}
                                 <div className="col-md-12">
                                     <div className="submit-input-field-wrapper mt-4">
                                         <input type="submit" value="Continue" className="button" />

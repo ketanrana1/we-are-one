@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react'
 import AdminLayout from 'components/admin/common/AdminLayout'
 import Joi from "joi-browser";
 const axios = require('axios');
+import getConfig from 'next/config'
+const { publicRuntimeConfig } = getConfig() 
 
 const initialState = { card_image_file: {}, card_content: "", card_image: "", type: "", cardType: "", mode: "", status: "", video_file: "", file_video: {} };
 
@@ -14,9 +16,8 @@ const schema = {
     card_image: Joi.any(),
     file_video: Joi.any(),
     video_file: Joi.any(),
-    card_content: Joi.string().required(),
+    card_content: Joi.any(),
     type: Joi.string().required(),
-    // cardType: Joi.string().required(),
     mode: Joi.string().required(),
     status: Joi.string().required(),
 };
@@ -73,27 +74,24 @@ export default function AddCard() {
         form.append('video_file',videoFileName);
         form.append('card_content', state.card_content);
         form.append('type', state.type);
-        // form.append('cardType', state.cardType);
         form.append('mode', state.mode);
         form.append('status', state.status);
-
-        // if(typeof validate() === 'undefined') {
 
         try {
             const request : any = await axios({
             method: 'post',    
-            url: 'http://localhost:4000/api/card/addCard',
+            url: `${publicRuntimeConfig.backendBaseUrl}api/card/addCard`,
             data: form,
             headers: {
-                'Content-Type': 'multipart/form-data'
+                'Content-Type': 'multipart/form-data',
+                'Authorization': `${sessionStorage.getItem('token')}`
             }
-            
+             
             });
             setResponseState(request); 
         } catch (error) {
             console.log(error)
         }
-      // }
       };
 
       const validateField = (name: string | number, value: any) => {
@@ -110,18 +108,10 @@ export default function AddCard() {
         setErrors({ ...errors, [name]: validateField(name, value) });
       };
 
-      console.log("STATE", state);
-
       function handleType(e) {
-
         state.type = e.target.value;
-
       }
 
-      // function handleCardType(e) {
-      //   state.cardType = e.target.value;
-
-      // }
 
 
     return (
@@ -151,8 +141,8 @@ export default function AddCard() {
               <label >Paid or Free</label><br/>
               <select onChange={handleType}>
                   <option hidden>Select</option>
-                  <option value="Paid">Paid</option>
-                  <option value="Free">Free</option>
+                  <option value="paid">Paid</option>
+                  <option value="free">Free</option>
               </select><br/>
               {errors && <small>{errors.type}</small>}
           </div>

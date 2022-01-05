@@ -1,23 +1,18 @@
-import { JsonController, UploadedFile, Param, Body, Get, Post, Put, Delete } from 'routing-controllers';
-import Content from '../models/content';
-import { Types } from "mongoose"
+import { JsonController, UploadedFile, Body, Get, Post, UseBefore } from 'routing-controllers';
 import Joi from 'joi';
 import Pagecontent from '../models/pagecontent'; 
 import mongoose from 'mongoose';
+import AdminAuthMiddleware from 'middlewares/AdminAuthMiddleware';
 
 @JsonController('/api') 
-
 export class PagecontentController {
- 
-
   @Post('/addContent/wholesale')
+  @UseBefore(AdminAuthMiddleware)
   async addWholesaleContent( @Body() body: any, @UploadedFile("", { }) file: any ) {
 
     const contentSchema = Joi.object({
-
       page_name: Joi.string().required(),
       content: Joi.string().required().label('Content'),
-  
     });
   
     const validate = contentSchema.validate(body);
@@ -28,8 +23,7 @@ export class PagecontentController {
         error: validate.error.details.map((d) => d.message),
       };
     }
-     
-
+    
     const _id = "61b8871a141babc372000419";
 
     const response = await Pagecontent.findByIdAndUpdate(_id, { 
@@ -39,18 +33,6 @@ export class PagecontentController {
      if(response){
       return {message: "Wholesale Content Added"};
      }
-
-    // const newPagecontent = new Pagecontent(body);
-    // const result = await newPagecontent.save();
-    
-    // if(result) {
-    //   return {
-    //     success: true,
-    //     message: "Wholesale content is added."
-    //   };
-    // }
-
-
   }
 
   @Get('/pagecontent/wholesale/')
@@ -78,13 +60,12 @@ export class PagecontentController {
 
 
   @Post('/addContent/privacyPolicy')
+  @UseBefore(AdminAuthMiddleware)
   async addPrivacyPolicyContent( @Body() body: any, @UploadedFile("", { }) file: any ) {
 
     const contentSchema = Joi.object({
-
       page_name: Joi.string().required(),
       content: Joi.string().required().label('Content'),
-  
     });
   
     const validate = contentSchema.validate(body);
@@ -123,7 +104,6 @@ async getPrivacyPolicyContent(@Body() body: any) {
         }
       }
     ]);
-    console.log("RESPONSE", response)
 
   return {
     response,
@@ -134,6 +114,7 @@ async getPrivacyPolicyContent(@Body() body: any) {
 
 
 @Post('/addContent/termsAndConditions')
+@UseBefore(AdminAuthMiddleware)
 async addHelpContent( @Body() body: any, @UploadedFile("", { }) file: any ) {
 
   const contentSchema = Joi.object({
@@ -180,7 +161,6 @@ async getTermsAndConditionsContent(@Body() body: any) {
         }
       }
     ]);
-    console.log("RESPONSE", response)
 
   return {
     response,
@@ -189,6 +169,7 @@ async getTermsAndConditionsContent(@Body() body: any) {
 }
 
 @Post('/addContent/shipping')
+@UseBefore(AdminAuthMiddleware)
 async addShippingContent( @Body() body: any, @UploadedFile("", { }) file: any ) {
 
   const contentSchema = Joi.object({
@@ -234,7 +215,6 @@ async getShippingContent(@Body() body: any) {
         }
       }
     ]);
-    console.log("RESPONSE", response)
 
   return {
     response,
@@ -243,6 +223,7 @@ async getShippingContent(@Body() body: any) {
 }
 
 @Post('/addContent/HelpAndSupport')
+@UseBefore(AdminAuthMiddleware)
 async addTermsAndConditionsContent( @Body() body: any, @UploadedFile("", { }) file: any ) {
 
   const contentSchema = Joi.object({
@@ -288,7 +269,6 @@ async getHelpAndSupportContent(@Body() body: any) {
         }
       }
     ]);
-    console.log("RESPONSE", response)
 
   return {
     response,

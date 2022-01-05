@@ -7,9 +7,9 @@ const bookSchema = new Schema({
 
   bookId: {   
     type: String,
-    default: uuidv4
+    default: uuidv4 
   },
-  book_name: String,
+  book_name: String, 
   slug: String,
   book_description: String,
   book_quantity: Number,

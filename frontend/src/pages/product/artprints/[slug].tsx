@@ -1,7 +1,5 @@
 import React, { useState } from 'react'
 import LayoutNew from 'components/common/LayoutNew'
-import ProductNew from 'components/product/ProductNew'
-import ProductNewImage from 'components/product/common/ProductNewImage'
 import Router from 'next/router';
 import { useRouter } from 'next/router'
 import { useDispatch } from 'react-redux'
@@ -99,14 +97,6 @@ const Product = ({ product, relatedProducts  }) => {
   </div>
 
 
-
-    {/* <div className="quantity-selector">
-    <p>Qty:</p>
-        <input type="number" id="quantitySelector" className="slectr-qty" placeholder="1" />
-    </div>
-    <input type="submit" value="ADD TO CART" /> */}
-
-
 </form>
 <div className="product-details-content-cont">
     <h4>Description:</h4>
@@ -127,7 +117,7 @@ export async function getServerSideProps({ query }) {
 
   const baseUrl = process.env.BACKEND_BASE_URL; 
   const res = await axios.get(`${baseUrl}api/artprints/singleArtprintDetails/?id=${query.slug}`)
-  console.log(res.data.singleArtprint)
+  // console.log(res.data.singleArtprint)
   return { props: { product: res.data.singleArtprint } }
 
 }

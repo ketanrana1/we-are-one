@@ -14,9 +14,6 @@ function ImageCard(props) {
                     {props.head} <br />
                         <span>{props.spanHd}</span>
                     </h3>
-                    {/* <a href={props.btnLnkURL} className="btnImgLnk">
-                        <img src={props.btnImgURL} alt="" />
-                    </a> */}
                     <a href={props.btnLnkURL} className="button-common">
                         BUY NOW
                     </a>

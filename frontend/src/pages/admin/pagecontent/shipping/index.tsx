@@ -2,7 +2,8 @@ import React, { useState, useEffect } from 'react'
 import AdminLayout from 'components/admin/common/AdminLayout'
 import Joi from "joi-browser";
 import axios from 'axios';
- 
+import getConfig from 'next/config'
+const { publicRuntimeConfig } = getConfig() 
 
 const initialState = { content: "" };
 
@@ -51,7 +52,7 @@ export default function AddShippingContent() {
         try {
             const request : any = await axios({
             method: 'post',    
-            url: 'http://localhost:4000/api/addContent/shipping/',
+            url: `${publicRuntimeConfig.backendBaseUrl}api/addContent/shipping/`,
             data: form,
             headers: {
                 'Content-Type': 'multipart/form-data'
@@ -59,7 +60,7 @@ export default function AddShippingContent() {
             });
             setResponseState(request);
         } catch (error) {
-            // console.log(error)
+            console.log(error)
         }
 
     }

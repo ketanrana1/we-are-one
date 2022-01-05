@@ -3,11 +3,6 @@ import { useRouter } from 'next/router'
 import { useDispatch } from 'react-redux'
 import { addToCart, incrementQuantity, removeFromCart } from 'redux/cart.slice'
 
-
-
-
-
-
 const Product = () => {
 
 const [counter, setCounter] = useState(0) 
@@ -41,21 +36,6 @@ const [counter, setCounter] = useState(0)
         router.push('/cart')
 
     }
-
-    // const handleQuantityChange = (e) => {
-
-    //    console.log(e)
-    //    dispatch(incrementQuantity(item.id))
-
-    //    setQuantityState( e.target.value);
-
-
-
-    // }
-
-
-
-
     return (
         <div className="single-product p-3 p-md-5" >
             <div id="content" className="container pt-3"> 

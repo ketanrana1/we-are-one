@@ -7,7 +7,10 @@ const {v4 : uuidv4} = require('uuid')
 
 
 const userSchema = new Schema({
-  userId: String,
+  userId: {   
+    type: String,
+    default: uuidv4
+  },
   firstName: String,
   lastName: String,
   email:String,
@@ -23,6 +26,7 @@ const userSchema = new Schema({
   state: String,
   zip: String,
   country: String,
+  is_paid: String
   }, 
   {timestamps: true}
   );

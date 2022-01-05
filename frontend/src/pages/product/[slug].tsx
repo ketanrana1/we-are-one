@@ -90,7 +90,7 @@ export async function getServerSideProps({ query }) {
 
   const baseUrl = process.env.BACKEND_BASE_URL; 
   const res = await axios.get(`${baseUrl}api/books/singleBookDetails/?id=${query.slug}`)
-  console.log(res.data.singleBook)
+  // console.log(res.data.singleBook)
   return { props: { product: res.data.singleBook } }
 
 }

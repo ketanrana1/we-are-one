@@ -1,17 +1,16 @@
 import Card from '../models/card';
-
-import { JsonController, Put, Controller, UseBefore, UseAfter, Body, Get, Post,  Req, Res, BodyParam, UploadedFile, Delete, Param, QueryParam} from 'routing-controllers';
+import { Controller, UseBefore, Body, Get, Post,  Req, Res, Param} from 'routing-controllers';
 import Joi from 'joi';
-var bodyParser = require('body-parser')
 import multer from 'multer';
 var path = require('path');
 const {v4 : uuidv4} = require('uuid')
+import AdminAuthMiddleware from 'middlewares/AdminAuthMiddleware';
   
 
 const fileUploadOptions = ( ) => ({
   storage: multer.diskStorage({
     destination: function (req, file, cb) {
-      cb(null, path.join(__dirname,  "../../src/public/uploads/images"))
+      cb(null, path.join(__dirname,  "../../src/public/uploads/videos"))
     },
     
     filename: function (req: any, file: any, cb: any) {
@@ -37,7 +36,8 @@ const fileUploadOptions = ( ) => ({
 @Controller('/api')
 export class CardController {
 
-  @Post('/card/addCard') 
+  @Post('/card/addCard')
+  @UseBefore(AdminAuthMiddleware)
   @UseBefore(
     multer( fileUploadOptions() ).fields([
         { maxCount: 1, name: 'card_image_file' },
@@ -48,17 +48,14 @@ export class CardController {
 
     const fileOne = req.files.card_image_file[0];
     const fileTwo = req.files.file_video[0];
-    // console.log(fileOne);
-    // console.log(fileTwo);
 
-  
-   const cardSchema = Joi.object({
+    const cardSchema = Joi.object({
 
     card_image_file: Joi.any().label('Image'),
     card_image: Joi.any(),
     file_video: Joi.any().label('Video'),
     video_file: Joi.any(),
-    card_content: Joi.string().required().label('Content'),
+    card_content: Joi.any().label('Content'),
     type: Joi.string().required().label('Type'),
     mode: Joi.string().required().label('Mode'),
     status: Joi.string().required().label('String'),
@@ -79,11 +76,6 @@ export class CardController {
     cardBody.card_image = req.files.card_image_file[0].filename;
     cardBody.video_file = req.files.file_video[0].filename;
 
-    // cardBody.card_image = file.filename;
-    // cardBody.video_file = "http://192.168.10.196:4000/videos/video.mp4";
-
-
-    
     const newCard = new Card(cardBody);
     const result = await newCard.save();
     
@@ -93,7 +85,6 @@ export class CardController {
         message: "Card is Added."
       };
     }
-
 
   }
 
@@ -131,7 +122,7 @@ export class CardController {
     }
 
     let newBody = body;
-    newBody.video_file = "http://192.168.10.196:4000/videos/video.mp4";
+    newBody.video_file = `${process.env.IMAGES_BASE_PATH}videos/video.mp4`;
      
      const newCard = new Card(newBody);
      const response = await newCard.save();
@@ -147,7 +138,7 @@ export class CardController {
      const response = await Card.aggregate([
       {
         '$match': {
-          'type': 'Paid'
+          'type': 'paid'
         }
       }, {
         '$project': {
@@ -156,7 +147,7 @@ export class CardController {
             $concat: [process.env.IMAGES_BASE_PATH, "$card_image"]
           },
           video_file: {
-            $concat: [process.env.IMAGES_BASE_PATH, "$video_file"]
+            $concat: [process.env.VIDEOS_BASE_PATH, "$video_file"]
           },
           card_content: 1,
           type: 1,
@@ -170,7 +161,7 @@ export class CardController {
     ]);
      return {
          response,
-         message: 'This action returns all paid cards'
+         message: 'This action returns all the paid cards'
      };
    }
 
@@ -180,7 +171,7 @@ export class CardController {
      const response = await Card.aggregate([
       {
         '$match': {
-          'type': 'Free'
+          'type': 'free'
         }
       }, {
         '$project': {
@@ -189,7 +180,7 @@ export class CardController {
             $concat: [process.env.IMAGES_BASE_PATH, "$card_image"]
           },
           video_file: {
-            $concat: [process.env.IMAGES_BASE_PATH, "$video_file"]
+            $concat: [process.env.VIDEOS_BASE_PATH, "$video_file"]
           },
           card_content: 1,
           type: 1,
@@ -226,11 +217,10 @@ export class CardController {
  
 
     @Post('/card/delete/:id')
+    @UseBefore(AdminAuthMiddleware)
     public async deleteCard(@Param('id') id: string) {
- 
- 
      const bookDeleted = await Card.deleteOne({ id : id });
- 
+
      if(bookDeleted) {
        return {
          success: true,
@@ -242,10 +232,6 @@ export class CardController {
          message: 'Could not delete the Card',
        }
      }
- 
- 
     }
- 
-
 }
 

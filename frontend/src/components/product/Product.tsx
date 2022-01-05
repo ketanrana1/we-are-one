@@ -1,11 +1,6 @@
 import React, { useState } from 'react'
 import { useRouter } from 'next/router'
 
-
-
-
-
-
 const Product = () => {
     
     const router = useRouter()
@@ -23,10 +18,6 @@ const Product = () => {
         const productsInCart = { "quantity": quantityState, "id": bookId }
 
         if (typeof window !== "undefined") sessionStorage.setItem("productInfo", JSON.stringify(productsInCart))
-
-
-        //router.push('/account')
-
         const test = JSON.parse(sessionStorage.getItem("productInfo"));
 
     }
@@ -35,11 +26,6 @@ const Product = () => {
     return (
         <div className="single-product p-3 p-md-5" >
             <div id="content" className="container pt-3"> 
-                {/* <div className="breadcrumb wao-breadcrumb px-0 mb-0">
-                    <a href="/">Home</a>
-                    » <a href="/shop">Books</a>
-                    » <a href="/">We Are One book (Hardcover)</a>
-                </div> */}
                 <h1>We Are One book (Hardcover)</h1>
                 <div className="product-info row">
                     <div className="left col-12 col-md-6">

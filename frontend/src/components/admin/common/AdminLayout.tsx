@@ -41,7 +41,7 @@ const AdminLayout = ({children}) => {
                     <div className="sb-sidenav-menu">
                         <div className="nav">
                             <div className="sb-sidenav-menu-heading">Core</div>
-                            <a className="nav-link" href="localhost:3000/admin">
+                            <a className="nav-link" href="/admin">
                                 <div className="sb-nav-link-icon"><i className="fas fa-tachometer-alt"></i></div>
                                 Dashboard
                             </a>
@@ -87,14 +87,8 @@ const AdminLayout = ({children}) => {
                             </a>
                             <div className="collapse" id="collapseLayouts3" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
                                 <nav className="sb-sidenav-menu-nested nav">
-                                    <Link href='/admin/puzzles/allPuzzles'>
-                                        <a className='nav-link'>All Puzzles</a>
-                                    </Link>
                                     <Link href='/admin/puzzles/addPuzzle'>
                                         <a className='nav-link'>Add Puzzle</a>
-                                    </Link>
-                                    <Link href='/admin/puzzles/addFourTypePuzzle'>
-                                        <a className='nav-link'>Add Puzzle with Four Parts</a>
                                     </Link>
                                 </nav>
                             </div>
@@ -259,19 +253,6 @@ const AdminLayout = ({children}) => {
             </div>
         </div>
     </body>
-
-    // <div className="admin-page-cont">
-    //   <div className="row">
-    //     <div className="col-12 col-sm-3 pr-0">
-    //         <Sidebar />
-    //     </div>
-    //     <div className="col-12 col-sm-9 py-5 px-5 admin-content-cont">
-    //       <main>
-    //       {children}
-    //       </main>
-    //     </div>
-    //   </div>    
-    // </div>
   )
 } 
 

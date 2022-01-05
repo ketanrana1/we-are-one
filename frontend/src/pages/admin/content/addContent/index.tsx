@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react'
 import AdminLayout from 'components/admin/common/AdminLayout'
 import Joi from "joi-browser";
 import axios from 'axios';
+import getConfig from 'next/config'
+const { publicRuntimeConfig } = getConfig() 
  
 
 const initialState = {about_us: "", contact_us: "", privacy_policy: "" };
@@ -56,9 +58,9 @@ export default function AddContent() {
         try {
             const request : any = await axios({
             method: 'post',    
-            url: 'http://localhost:4000/api/addContent',
+            url: `${publicRuntimeConfig.backendBaseUrl}api/addContent`,
             data: form,
-            headers: {
+            headers: { 
                 'Content-Type': 'multipart/form-data'
             }            
             });

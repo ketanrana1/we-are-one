@@ -15,7 +15,6 @@ function TextCard(props) {
                             />
                         ); 
                     })}
-                    {/* <a className="btnImg" href={props.btnURL} ><img src={props.btnImgURL} alt="" /></a> */}
                     <a href={props.btnLnkURL} className="button-common">
                         SHOP NOW
                     </a>

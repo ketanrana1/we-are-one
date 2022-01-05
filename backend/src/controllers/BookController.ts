@@ -1,9 +1,10 @@
 import Book from '../models/book';
-import { JsonController, Put, Controller, UseBefore, UseAfter, Body, Get, Post,  Req, Res, BodyParam, UploadedFile, Delete, Param, QueryParam} from 'routing-controllers';
+import { Controller, Body, Get, Post,  Req,  UploadedFile, Param, QueryParam, UseBefore} from 'routing-controllers';
 import Joi from 'joi';
 import multer from 'multer';
 var path = require('path');
-const {v4 : uuidv4} = require('uuid') 
+const {v4 : uuidv4} = require('uuid')
+import AdminAuthMiddleware from 'middlewares/AdminAuthMiddleware';
 
   
 const fileUploadOptions = ( ) => ({
@@ -26,18 +27,20 @@ const fileUploadOptions = ( ) => ({
         cb(new Error("Image uploaded is not of type jpg/jpeg or png"),false);
       }
     },
-  limits: {
+  limits: { 
       fieldNameSize: 255,
-      fileSize: 1024 * 1024 * 2
+      fileSize: 1024 * 1024 * 2  
   }
 });
   
 
 
 @Controller('/api')
+
 export class BookController {
 
   @Post('/addBook')
+  @UseBefore(AdminAuthMiddleware)
   async postBook( @Body() body: any, 
     @UploadedFile("book_image", { options: fileUploadOptions() }) file : any ) {
 
@@ -55,7 +58,7 @@ export class BookController {
       book_download: Joi.string().required().label('Book Download'),
       book_quantity: Joi.number().required().label('Book quantity')
 
-    });
+    });  
   
     const validate = bookSchema.validate(body);
 
@@ -82,17 +85,8 @@ export class BookController {
 
   }
 
-
-
-
-
-
-
-
-
-
-
   @Post('/books/editBook/')
+  @UseBefore(AdminAuthMiddleware)
   async editBook( @Body() body: any, @Req() request: any, @QueryParam('id') id: string,
   @UploadedFile("book_image", { options: fileUploadOptions() }) file : any ) {
 
@@ -118,7 +112,7 @@ export class BookController {
         message: 'Request data is invalid',
         error: validate.error.details.map((d) => d.message),  
       };
-    }
+    }     
 
       
 
@@ -157,19 +151,6 @@ export class BookController {
       }   
     }
 }
-
-
-
-
- 
-
-
-
-
-
-
-
-
 
 
   @Get('/books/singleBook/')
@@ -237,17 +218,8 @@ export class BookController {
       singleBook,
       message: 'This action returns single book details'
   };
-  }
-
-
-  // @Get('/books/singleBook/')
-  // async getAdfdsfllBooks() {
-  //    return {
   
-  //        message: 'This gffdgfdg action returns all the books'
-  //    };
-  //  }
-
+  }
   
 
   @Get('/allBooks')
@@ -273,22 +245,16 @@ export class BookController {
     ]);
      return {
          response, 
-        //  book,
          message: 'This action returns all the books'
      };
    }
 
 
-  //  @Post('/book/delete')
-  //  async removeBook(@Body() body: any) {
 
-  //  return {
-  //    "test": "werwerer"
-  //  }
 
    @Post('/books/delete/:id')
+   @UseBefore(AdminAuthMiddleware)
    public async removeBook(@Param('id') id: string) {
-
 
     const bookDeleted = await Book.deleteOne({ bookId : id });
 
@@ -304,32 +270,5 @@ export class BookController {
       }
     }
    }
-
-
-  //  @Post('/book/delete?test=:check')
-  //   async removeBook(@QueryParam('test') test: any) {
-
-  //     
-
-  //   // const bookDeleted = await Book.deleteOne({ bookId : id });
-
-  //   return {
-  //     "test": test
-  //   } 
-
-    // if(bookDeleted) {
-    //   return {
-    //     success: true,
-    //     message: 'Book is deleted',
-    //   }
-    // } else {
-    //   return {
-    //     success: false,
-    //     message: 'Could not delete the book',
-    //   }
-    // }
-
-      // return userRepository.removeById(id);
-    // }
 }
 

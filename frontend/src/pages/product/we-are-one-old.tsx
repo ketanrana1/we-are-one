@@ -1,29 +1,3 @@
-// import React from 'react'
-// import Index from '../../components/product/Index'
-// import LayoutNew from 'components/common/LayoutNew'
-
-// import Product from 'components/product/Product'
-
-// export default function WeAreOne () {
-//     return (
-//         <>
-//             <Product />
-//         </>
-//     )
-// }
-
-// WeAreOne.getLayout = function getLayout(page) {
-//     return (
-//       <LayoutNew>
-//             {page}
-//       </LayoutNew>
-//     )
-//   }  
-
-
-
-
-
 
 import React, { useState } from 'react'
 import { useRouter } from 'next/router'
@@ -68,20 +42,6 @@ const [counter, setCounter] = useState(1)
         router.push('/cart')
 
     }
-
-    // const handleQuantityChange = (e) => {
-
-    //    console.log(e)
-    //    dispatch(incrementQuantity(item.id))
-
-    //    setQuantityState( e.target.value);
-
-
-
-    // }
-
-
-
 
     return (
         <div className="single-product p-3 p-md-5" >

@@ -1,12 +1,7 @@
 import Contact from '../models/contact';
-import { JsonController, Put, Controller, UseBefore, UseAfter, Body, Get, Post,  Req, Res, BodyParam, UploadedFile, Delete, Param, QueryParam} from 'routing-controllers';
+import { Controller, Body, Get, Post, UploadedFile} from 'routing-controllers';
 import Joi from 'joi';
-import multer from 'multer';
-var path = require('path');
-const {v4 : uuidv4} = require('uuid') 
 import { getTemplate, sendEmail } from 'services/mailer';
-
-
 
 
 @Controller('/api')
@@ -43,23 +38,18 @@ export class ContactController {
       const contactContent = await getTemplate('emails/admin-contact-us.ejs', {body});
       sendEmail({
         to: "testmail8196@gmail.com",
-        cc: 'naveen.kumar@geeky.dev',
+        cc: 'testmail8196@gmail.com',
         subject: `Enquiry from ${body.email}`,
         html: contactContent,
       });
 
       const content = await getTemplate('emails/contact-us.ejs', {body});
       sendEmail({
-        to: "testmail8196@gmail.com",
-        cc: 'naveen.kumar@geeky.dev',
+        to: `${body.email}`,
+        cc: 'testmail8196@gmail.com',
         subject: `Thank you for showing interest in We-are-one`,
         html: content,
       });
-
-      
-
-
-
 
       return {
         success: true,
@@ -85,12 +75,9 @@ export class ContactController {
     ]);
      return {
          response, 
-        //  book,
          message: 'This action returns all the contact entries.'
      };
    }
-
-
 
 }
 

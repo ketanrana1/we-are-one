@@ -1,9 +1,7 @@
-
 import {
-    Post, Controller, Req, Res,Body
+    Post, Controller, Res,Body
   } from 'routing-controllers';
   import { OpenAPI } from 'routing-controllers-openapi';
-import { subscribe } from 'superagent';
  const client = require("@mailchimp/mailchimp_marketing");
 
  const md5 = require("md5")
@@ -35,8 +33,8 @@ import { subscribe } from 'superagent';
         status_if_new: 'subscribed',
       }
     );
-    console.log(result)
-    const existingTags = result?.tags?.map((tag: any) => tag.name);
+
+    const existingTags = result.tags.map((tag: any) => tag.name);
     const allUniqueTags = [...new Set([...existingTags, ...tags])];
     const formattedTags = allUniqueTags.map((tag) => {
         return {
@@ -53,7 +51,6 @@ import { subscribe } from 'superagent';
           },
         }
       );
-    console.log(updateSubscriberTags); // this should be 'null' if everything went smooth
-    return response.message = "sub"
+    return response.message = "Thanks for subscribing!"
   
   } }

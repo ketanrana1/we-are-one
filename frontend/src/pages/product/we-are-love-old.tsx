@@ -42,20 +42,6 @@ const [counter, setCounter] = useState(1)
 
     }
 
-    // const handleQuantityChange = (e) => {
-
-    //    console.log(e)
-    //    dispatch(incrementQuantity(item.id))
-
-    //    setQuantityState( e.target.value);
-
-
-
-    // }
-
-
-
-
     return (
         <div className="single-product p-3 p-md-5" >
             <div id="content" className="container pt-3"> 

@@ -2,7 +2,8 @@ import React, { useState, useEffect } from 'react'
 import AdminLayout from 'components/admin/common/AdminLayout'
 import Joi from "joi-browser";
 import axios from 'axios';
-
+import getConfig from 'next/config'
+const { publicRuntimeConfig } = getConfig() 
 
 const initialState = { puzzle_image_file: "", puzzle_image:"", paid_status: "", type:"", pp_one_image_file: {}, pp_one_image: "", pp_one_mode: "", pp_one_direction: "", pp_one_sort_order: "",
 pp_two_image_file: {}, pp_two_image: "", pp_two_mode: "", pp_two_direction: "", pp_two_sort_order: "",
@@ -94,7 +95,7 @@ export default function AddFourTypePuzzle() {
             try {
                     const request : any = await axios({
                     method: 'post',    
-                    url: 'http://localhost:4000/api/addTypeFourPuzzle',
+                    url: `${publicRuntimeConfig.backendBaseUrl}api/addTypeFourPuzzle`,
                     data: form,
                     headers: {
                         'Content-Type': 'multipart/form-data'
@@ -121,7 +122,7 @@ export default function AddFourTypePuzzle() {
         setErrors({ ...errors, [name]: validateField(name, value) });
       };
 
-      console.log("STATE", state)
+    //   console.log("STATE", state)
 
       function handlePuzzleType(e) {
 

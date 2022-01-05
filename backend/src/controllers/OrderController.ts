@@ -1,4 +1,4 @@
-import { JsonController, Param, Body, Get, Post, Put, Delete, Res } from 'routing-controllers';
+import { JsonController, Body, Get, Post } from 'routing-controllers';
 import User from '../models/users';
 import Joi from 'joi';
 import Order from '../models/order';
@@ -7,17 +7,15 @@ import Order from '../models/order';
 @JsonController('/api')
 export class OrderController {
 
-
   @Post('/addOrder')
   async post(@Body() body: any, user: any) {
+    
 
     const orderSchema = Joi.object({
-
       order_amount: Joi.string().required().label('Order Amount'),
       email: Joi.string().email({ minDomainSegments: 2, tlds: { allow: ['com', 'net'] } }).required().label('Email'),
       userId: Joi.string().required().label('User ID'),
       books: Joi.string().label('Book'),
-      // books: Joi.string().label('Book'),
       quantity: Joi.number().label('Quantity'),
       orderStatus: Joi.string(),
       
@@ -41,12 +39,11 @@ export class OrderController {
     return {message: "Saved"};
   }
 
-  @Get('/order')
 
+  @Get('/order')
   async getsingleOrder(@Body() body: any) {
 
     const singleOrderSchema = Joi.object({
-
       id: Joi.string().required().label('Book ID'),
     });
 
@@ -58,7 +55,6 @@ export class OrderController {
         error: validate.error.details.map((d) => d.message),
       };
     }
-
 
     const { id } = body;
     const singleOrder = await Order.aggregate([

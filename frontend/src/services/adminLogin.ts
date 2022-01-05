@@ -1,5 +1,3 @@
-
-
 const adminLogin = () => {
     if(typeof window !== "undefined")
         return sessionStorage.getItem("token") && sessionStorage.getItem("role") === "admin"

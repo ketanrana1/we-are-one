@@ -16,7 +16,7 @@ const orderSchema = new Schema({
      default: uuidv4
    },
   
-   orderStatus: String,
+   status: String,
    shipping_firstname: String,
    shipping_lastname: String,
    shipping_address_1: String,

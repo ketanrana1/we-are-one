@@ -1,10 +1,5 @@
 import React from 'react'
-import Banner from './Banner';
-import WeAreOne from './WeAreOne'
-import WeAreLove from './WeAreLove';
-import DownloadAppVideo from './DownloadAppVideo';
 import FreeColor from './FreeColor';
-import Video from './Video';
 import Follow from './Follow';
 import NewBanner from './NewBanner';
 import RainbowText from './RainbowText';
@@ -92,14 +87,6 @@ export default function Index() {
             imgURL="/assets/images/join-us-bg.png"
             socialData={followData}
             />
-            {/* <Banner imgURL="/assets/images/Jen-Web-banne-2r-min.jpg"/> 
-            <WeAreOne loopData={weAreOneData} />
-            <WeAreLove loopData={weAreLoveData} />
-            <DownloadAppVideo loopData={downloadAppVideoData} />        
-            <Video 
-            btnURL=""
-            btnImgURL="/assets/images/youtube-banner.png"
-            /> */}
         </div>
     )
 }

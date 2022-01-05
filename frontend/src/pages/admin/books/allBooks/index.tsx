@@ -11,19 +11,31 @@ export default function AllBooks(props) {
   
     const router = useRouter();
     const { AllBooks } = props;
-
     const [responseState, setResponseState] = useState(initialResponseState);
 
     async function handleDeleteClick(id: any) {
 
         try { 
-        const response = await axios.post(`${publicRuntimeConfig.backendBaseUrl}api/books/delete/${id}`);
-        setResponseState(response); 
-        return router.push(router.asPath) 
+
+
+            // const response = await axios.post(`${publicRuntimeConfig.backendBaseUrl}api/books/delete/${id}`);
+            // setResponseState(response); 
+            // return router.push(router.asPath) 
+
+            const response : any = await axios({
+                method: 'post',    
+                url: `${publicRuntimeConfig.backendBaseUrl}api/books/delete/${id}`,
+                headers: {
+                    'Authorization': `${sessionStorage.getItem('token')}`
+                }            
+                });
+    
+                setResponseState(response);
+                return router.push(router.asPath) 
+                
         } catch (error) { 
             console.log(error);
         }
-
     }
 
 

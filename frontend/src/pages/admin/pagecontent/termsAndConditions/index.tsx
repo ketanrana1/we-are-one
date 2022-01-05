@@ -2,11 +2,11 @@ import React, { useState, useEffect } from 'react'
 import AdminLayout from 'components/admin/common/AdminLayout'
 import Joi from "joi-browser";
 import axios from 'axios';
+import getConfig from 'next/config'
+const { publicRuntimeConfig } = getConfig() 
  
 
 const initialState = { content: "" };
-
-// const initialResponseState = { success: "", message: ""};
 
 const initialResponseState: any = [];
 
@@ -52,7 +52,7 @@ export default function AddTermsContent() {
         try {
             const request : any = await axios({
             method: 'post',    
-            url: 'http://localhost:4000/api/addContent/termsAndConditions/',
+            url: `${publicRuntimeConfig.backendBaseUrl}api/addContent/termsAndConditions/`,
             data: form,
             headers: {
                 'Content-Type': 'multipart/form-data'
@@ -60,7 +60,7 @@ export default function AddTermsContent() {
             });
             setResponseState(request);
         } catch (error) {
-            // console.log(error)
+            console.log(error)
         }
 
     }

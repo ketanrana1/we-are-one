@@ -4,9 +4,11 @@ import Joi from "joi-browser";
 import axios from 'axios';   
 import { useRouter } from 'next/router';
 import { useSelector } from 'react-redux';
-import { cartReducer } from 'redux/cart.slice';
 
-const initialShippingState = { shipping_firstname: "", shipping_lastname: "", shipping_address_1: "", shipping_address_2: "", shipping_city: "", shipping_state: "", shipping_zip: "", shipping_country:'', shipping_telephone: "", shipping_email: "", billing_firstname: "", billing_lastname: "", billing_address_1: "", billing_address_2: "", billing_city: "", billing_state: "", billing_zip: "", billing_country:'', billing_telephone: "", billing_email: "" };
+import getConfig from 'next/config' 
+const { publicRuntimeConfig } = getConfig()
+
+const baseUrl = process.env.BACKEND_BASE_URL;
 
 
 const initialResponseState: any = [];
@@ -36,10 +38,42 @@ const schema = {
     billing_email: Joi.string().email().required()
 };
 
+export default function Checkout(props) {
+
+    const id = sessionStorage.getItem("userId");
+    const [response, setResponse] = useState([])
+
+    const API = async () => {
+        const { data } = await axios.get(`${publicRuntimeConfig.backendBaseUrl}api/userDetails/?id=${id}`); 
+        setResponse(data.userDetails[0])
+        setShippingState({
+            ...shippingState,
+            shipping_firstname: data?.userDetails[0]?.firstName ? data?.userDetails[0]?.firstName : "",
+            shipping_lastname: data?.userDetails[0]?.lastName ? data?.userDetails[0]?.lastName : "",
+            shipping_address_1: data?.userDetails[0]?.address_1 ? data?.userDetails[0]?.address_1 : "",
+            shipping_address_2: data?.userDetails[0]?.address_2 ? data?.userDetails[0]?.address_2 : "",
+            shipping_city: data?.userDetails[0]?.city ? data?.userDetails[0]?.city : "",
+            shipping_state: data?.userDetails[0]?.state ? data?.userDetails[0]?.state : "",
+            shipping_zip: data?.userDetails[0]?.zip ? data?.userDetails[0]?.zip : "",
+            shipping_country: data?.userDetails[0]?.country ? data?.userDetails[0]?.country : "",
+            shipping_telephone: data?.userDetails[0]?.telephone ? data?.userDetails[0]?.telephone : "",
+            shipping_email: data?.userDetails[0]?.email ? data?.userDetails[0]?.email : "",
+        })   
+
+    }
+
+    useEffect(() => {     
+        API(); 
+    },[]);
+
+    const { userDetails, ID } = props
+
+
+//@ts-ignore
+    const initialShippingState = { shipping_firstname: '', shipping_lastname: "", shipping_address_1: "", shipping_address_2: "", shipping_city: "", shipping_state: "", shipping_zip:"", shipping_country:"", shipping_telephone: "", shipping_email: "", billing_firstname: "", billing_lastname: "", billing_address_1: "", billing_address_2: "", billing_city: "", billing_state: "", billing_zip: "", billing_country:'', billing_telephone: "", billing_email: "" };
 
 
 
-export default function Checkout() {
     const cart = useSelector((state: any) => state.cart);
     const [userid, setUserid] = useState("")
 
@@ -47,9 +81,9 @@ export default function Checkout() {
     useEffect(() => {
         setUserid(sessionStorage.getItem("userId")); 
     }, [])
-    const [shippingState, setShippingState] = useState(initialShippingState);
     const [errors, setErrors] = useState(null);
     const [responseState, setResponseState] = useState(initialResponseState);
+    const [shippingState, setShippingState] = useState(initialShippingState);
    
 
 
@@ -69,8 +103,6 @@ export default function Checkout() {
 
         e.preventDefault();
         setErrors(validate());
-
-        // let form = new FormData();
 
        const formBody = {
             items: cart.map((item: any) => ({
@@ -113,22 +145,20 @@ export default function Checkout() {
                 'Authorization': `${sessionStorage.getItem('token')}`
               }
 
-        try {
+        try {    
             const response : any = await axios({
             method: 'post',    
-            url: 'http://localhost:4000/api/checkout',
+            url: `${publicRuntimeConfig.backendBaseUrl}api/checkout`,
             data: formBody,
             headers
-            // headers: {
-            //     // 'Content-Type': 'multipart/form-data'
-            //     }            
+           
             });
             if (response?.data?.data?.approvalUrl) {
                 window.location.href = response.data.data.approvalUrl;
             } 
 
             else {
-                window.location.href = "http://localhost:3000/login"
+                window.location.href = `${publicRuntimeConfig.frontendBaseUrl}login`
             }
         } catch (error) {
             console.log(error)  
@@ -305,11 +335,6 @@ export default function Checkout() {
                         <div className="payment-information">
                             <p>You will be redirected to PayPal to complete payment.</p>
                         </div>
-                        {/* <div className="col-12 mb-3">
-                            <div className="right">
-                                <input type="checkbox" name="agree" value="1" /> I have read and agree to the <a className="colorbox cboxElement" href=""><b>Terms & Conditions</b></a>
-                            </div>
-                        </div> */}
                         <div className="col-12 mb-3">
                             <div className="form-group">
                                 <button className="common-button" type="submit">Submit</button>

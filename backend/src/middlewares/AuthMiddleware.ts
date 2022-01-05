@@ -13,24 +13,24 @@ async function AuthMiddleware(request: Request, response: Response, next: NextFu
     try {
       const verificationResponse = jwt.verify(session, secret) ;
 
-      console.log(verificationResponse)
+      // console.log(verificationResponse)
 
       const id = verificationResponse.id;
 
-      console.log(id)
+      // console.log(id)
       
       const user = await userModel.findById(id);
       if (user) {
         request.user = user;
         next();
       } else {
-        response.redirect(`http://localhost:3000`);
+        response.redirect(`${process.env.FRONTEND_BASE_URL}`);
       }
     } catch (error) {
-        response.redirect(`http://localhost:3000`);
+        response.redirect(`${process.env.BACKEND_BASE_URL}`);
     }
   } else {
-    response.redirect(`http://localhost:3000`);
+    response.redirect(`${process.env.BACKEND_BASE_URL}`);
     return {message: "do it"};
   }
 }

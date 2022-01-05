@@ -2,11 +2,13 @@ import React, { useState, useEffect } from 'react'
 import AdminLayout from 'components/admin/common/AdminLayout'
 import Joi from "joi-browser";
 import axios from 'axios';
+import getConfig from 'next/config'
+const { publicRuntimeConfig } = getConfig() 
 
 
-const initialState = { puzzle_image_file: "", puzzle_image:"", paid_status: "", type:"", puzzle_parts: "" };
+const initialState = { puzzle_image_file: "", puzzle_image:"", paid_status: "", puzzle_parts: "" };
 
-// const initialResponseState = { success: "", message: ""};
+
 
 const initialResponseState: any = [];
 
@@ -15,7 +17,6 @@ const schema = {
     puzzle_image_file: Joi.any(),
     puzzle_image: Joi.any(),
     paid_status: Joi.string().required(),
-    type: Joi.string().required(),
     puzzle_parts: Joi.any(),
 };
  
@@ -33,8 +34,6 @@ export default function AddPuzzle() {
         setFile(e.target.files[0]);
         setFileName(e.target.files[0].name);
       };
-
-    //RESPONSE
 
     const validate = () => {
         const options = { abortEarly: false };
@@ -58,25 +57,13 @@ export default function AddPuzzle() {
         form.append('puzzle_image_file', file);
         form.append('puzzle_image', fileName);
         form.append('paid_status', state.paid_status);
-        form.append('type', state.type);
-        //@ts-ignore
-        // form.append('puzzle_parts', new_puzzle_parts);
-
-        
-        // for (var x = 0; x < new_puzzle_parts.length; x++) {
-        //     form.append('puzzle_parts[]', new_puzzle_parts[x].image);
-        //     form.append('puzzle_parts[]', new_puzzle_parts[x].mode);
-        //     form.append('puzzle_parts[]', new_puzzle_parts[x].direction);
-        //     form.append('puzzle_parts[]', new_puzzle_parts[x].image);
-        // }
-
-
+  
         if(typeof validate() === 'undefined') {
 
         try {
             const request : any = await axios({
             method: 'post',    
-            url: 'http://localhost:4000/api/addPuzzle',
+            url: `${publicRuntimeConfig.backendBaseUrl}api/addPuzzle`,
             data: form,
             headers: {
                 'Content-Type': 'multipart/form-data'
@@ -103,14 +90,6 @@ export default function AddPuzzle() {
         setState({ ...state, [name]: value });
         setErrors({ ...errors, [name]: validateField(name, value) });
       };
-
-      console.log("STATE", state)
-
-      function handlePuzzleType(e) {
-
-        state.type = e.target.value;
-
-      }
 
       function handlePaidStatus(e) {
           state.paid_status = e.target.value;
@@ -140,41 +119,7 @@ export default function AddPuzzle() {
                             <option value="Free">Free</option>
                         </select><br/>
                         {errors && <small>{errors.paid_status}</small>}
-                    </div>
-
-                    
-
-                    <div className="form-group">
-                        <label >Type</label><br/>
-                        <select onChange={handlePuzzleType}>
-                            <option hidden>Select</option>
-                            <option value="4">4</option>
-                            <option value="8">8</option>
-                            <option value="16">16</option>
-                            <option value="32">32</option>
-                        </select><br/>
-                        {errors && <small>{errors.type}</small>}
-                    </div>
-
-
-
-                    {/* <div className="form-group">
-                        <label >Name</label>
-                        <input name="name" type="text" className="form-control" onChange={handleChange} value={state.name} />
-                        {errors && <small>{errors.name}</small>}
-                    </div>
-                    <div className="form-group">
-                        <label >Type</label>
-                        <input name="type" type="text" className="form-control" onChange={handleChange} value={state.type} />
-                        {errors && <small>{errors.type}</small>}
-                    </div>            
-                    <div className="form-group">
-                        <label>Puzzle Images</label>
-                        <input name="puzzleImages" type="file" className="form-control-file" id="exampleFormControlFile1" onChange={saveFile} multiple />
-                        {errors && <small>{errors.puzzleImages}</small>}
-                    </div> */}
-
-                
+                    </div>                
                     <div className="form-group">
                         <button className="btn btn-primary" type="submit">Submit</button>
                     </div> 

@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react'
-import Index from '../../components/about/Index';
 import LayoutNew from 'components/common/LayoutNew';
 import axios from 'axios';
 import { useRouter } from 'next/router'
@@ -66,13 +65,15 @@ export default function Account(props) {
                     <li><strong>Email: </strong>{email}</li>
                 </ul>
                 <hr />
-                <div className="all-orders">
-                <h2 className="pt-3">All Orders</h2>
+                <div className="all-orders"> 
+                <h2 className="pt-5">All Orders</h2>
                 {
                     response?.map( (data:any, index) => {                       
                         return (
-                            <div className="col-12 pl-0">
-                                <ul className="account-user-details">
+                            <div className="card my-5">
+                            
+                            <div className="col-12 card-body">
+                                <ul className="account-user-details order-details">
                                     <li><strong>Order ID: </strong>{data.orderId}</li>
                                     <li><strong>Amount Paid: $</strong>{data.total_amount}</li>
                                     <li><strong>Shipping Cost: $</strong>{data.shipping_cost}</li>
@@ -89,6 +90,7 @@ export default function Account(props) {
                                      </li>
                                 </ul>
                                 
+                            </div>
                             </div>
                         );
                     })

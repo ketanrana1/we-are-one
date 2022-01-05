@@ -13,14 +13,14 @@ export default function Newcart() {
     const updateItem = (itemID, amount) => {}
     const removeItem = (itemID) => {}
     
-    //this is called on component mount
+
     useEffect(() => {
-      //turn it into js
+
       localCart = JSON.parse(localCart);
-      //load persisted cart into state if it exists
+
       if (localCart) setCart(localCart)
       
-    }, []) //the empty array ensures useEffect only runs once
+    }, []) 
   
   
     

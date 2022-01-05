@@ -4,7 +4,6 @@ import axios from 'axios';
 import getConfig from 'next/config'
 const { publicRuntimeConfig } = getConfig()
 
-
 export default function AllBooks(props) {
 
     const [respone, setrespone] = useState([])

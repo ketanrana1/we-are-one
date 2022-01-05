@@ -1,6 +1,6 @@
 import React from 'react'
 import Index from '../../components/success/index'
-import Layout from 'components/common/Layout'
+import LayoutNew from 'components/common/LayoutNew'
 
 export default function success() {
     return (
@@ -10,8 +10,8 @@ export default function success() {
 
 success.getLayout = function getLayout(page) {
     return (
-      <Layout>
+      <LayoutNew>
             {page}
-      </Layout>
+      </LayoutNew>
     )
   } 

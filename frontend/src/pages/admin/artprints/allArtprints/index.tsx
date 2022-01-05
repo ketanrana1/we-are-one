@@ -10,22 +10,32 @@ const initialResponseState: any = [];
 export default function AllArtprints(props) {
 
     const router = useRouter();
-    const { AllArtprints } = props
+    const { AllArtprints } = props 
 
     const [responseState, setResponseState] = useState(initialResponseState);
 
-    //const baseUrl = process.env.BACKEND_BASE_URL; 
-
     async function handleDeleteClick(id: any) {
-
         try { 
-        const response = await axios.post(`${publicRuntimeConfig.backendBaseUrl}api/artprint/delete/${id}`);
-        setResponseState(response);
-        return router.push(router.asPath)
+
+
+        // const response = await axios.post(`${publicRuntimeConfig.backendBaseUrl}api/artprint/delete/${id}`);
+        // setResponseState(response);
+        // return router.push(router.asPath)
+
+        const response : any = await axios({
+            method: 'post',    
+            url: `${publicRuntimeConfig.backendBaseUrl}api/artprint/delete/${id}`,
+            headers: {
+                'Authorization': `${sessionStorage.getItem('token')}`
+            }            
+            });
+            setResponseState(response);
+            return router.push(router.asPath) 
+
+
         } catch (error) {
             console.log(error);
         }
-
     }
 
 

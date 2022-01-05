@@ -5,7 +5,6 @@ function Card(props) {
         <div className="cardCont">
             <img className="cardImg" src={props.cardImgURL} />
             <div className="btmCont">
-                {/* <button type="button" className="btmButton" data-toggle="modal" data-target="#exampleModal"> */}
                 <button type="button" className="btmButton">
                     <a href ={props.btnLink} target="_blank">Download </a>
                 </button>

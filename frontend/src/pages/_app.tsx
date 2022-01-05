@@ -21,6 +21,7 @@ import '../pages/books/books.scss'
 import '../pages/artprints/artprints.scss'
 import '../pages/application/application.scss'
 import '../pages/checkout/checkoutnew.scss'
+import '../pages/account/account.scss'
 import { AppProps } from 'next/dist/next-server/lib/router/router'
 import { NextPage } from 'next'
 import store from '../redux/store';

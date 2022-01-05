@@ -3,6 +3,8 @@ import Joi from "joi-browser";
 import axios from 'axios';
 import { useRouter } from 'next/router'
 import userLogin from 'services/userLogin';
+import getConfig from 'next/config'
+const { publicRuntimeConfig } = getConfig()
 
 const baseUrl = process.env.BACKEND_BASE_URL; 
 const initialDataState = { email: "", password: ""};
@@ -35,25 +37,6 @@ const Login = () => {
         }
         return errorsObj;
       };
-      
-
-    //   const handleLogout = async (e) => {
-
-
-    //     if (typeof window !== "undefined") sessionStorage.removeItem("token")
-
-
-    //     try {
-    //         const request : any = await axios({
-    //         method: 'post',    
-    //         url: 'http://localhost:4000/api/logout'
-    //         });                                           
-    //     } catch (error) {
-    //         console.log(error)
-    //     }
-
-    //   }
-
 
       const handleSubmit = async (e) => {
         e.preventDefault();
@@ -70,7 +53,7 @@ const Login = () => {
             try {
                 const request : any = await axios({
                 method: 'post',    
-                url: 'http://localhost:4000/api/login',
+                url: `${publicRuntimeConfig.backendBaseUrl}api/login`,
                 data: form,
                 });
                 setResponseState(request);

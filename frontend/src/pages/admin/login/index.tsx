@@ -3,6 +3,8 @@ import LoginLayout from 'components/admin/LoginLayout'
 import Joi from "joi-browser";
 import axios from 'axios';
 import { useRouter } from 'next/router'
+import getConfig from 'next/config'
+const { publicRuntimeConfig } = getConfig() 
 
 const baseUrl = process.env.BACKEND_BASE_URL; 
 
@@ -44,7 +46,7 @@ export default function Login() {
             try {
               const request : any = await axios({
               method: 'post',    
-              url: 'http://localhost:4000/api/admin-login',
+              url: `${publicRuntimeConfig.backendBaseUrl}api/admin-login`,
               data: dataState,
               }); 
               setResponseState(request);

@@ -1,13 +1,10 @@
 
 import React from 'react'
-import ImageBanner from 'components/common/ImageBanner'
-import CardWithHover from 'components/common/CardWithHover'
 import { useDispatch } from 'react-redux';
 import { resetCart } from 'redux/cart.slice';
 
 const Index = () => {
     const dispatch = useDispatch();
-    console.log("dhdjhdg")
     dispatch(resetCart());
     return (
         <div >

@@ -2,11 +2,11 @@ import React, { useState, useEffect } from 'react'
 import AdminLayout from 'components/admin/common/AdminLayout'
 import Joi from "joi-browser";
 import axios from 'axios';
+import getConfig from 'next/config'
+const { publicRuntimeConfig } = getConfig() 
  
 
 const initialState = { page_name: "Wholesale", content: "" };
-
-// const initialResponseState = { success: "", message: ""};
 
 const initialResponseState: any = [];
 
@@ -52,7 +52,7 @@ export default function AddWholesaleContent() {
         try {
             const request : any = await axios({
             method: 'post',    
-            url: 'http://localhost:4000/api/addContent/wholesale/',
+            url: `${publicRuntimeConfig.backendBaseUrl}api/addContent/wholesale/`,
             data: form,
             headers: {
                 'Content-Type': 'multipart/form-data'
@@ -60,7 +60,7 @@ export default function AddWholesaleContent() {
             });
             setResponseState(request);
         } catch (error) {
-            // console.log(error)
+            console.log(error)
         }
 
     }
