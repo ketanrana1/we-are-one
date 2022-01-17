@@ -1,6 +1,6 @@
 import type { ReactElement, ReactNode } from 'react'
 import 'bootstrap/dist/css/bootstrap.min.css'
-import 'react-toastify/dist/ReactToastify.css'
+// import 'react-toastify/dist/ReactToastify.css'
 import './_app.css'
 import '../pages/home/home.scss'
 import '../pages/printables/printables.scss'

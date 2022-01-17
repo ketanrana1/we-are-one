@@ -42,7 +42,7 @@ const userSchema = new Schema({
     }
   });
   
-  userSchema.methods.validatePassword = async function validatePassword(data) {
+  userSchema.methods.validatePassword = async function validatePassword(data:any) {
     return bcrypt.compare(data, this.password);
   };
   
